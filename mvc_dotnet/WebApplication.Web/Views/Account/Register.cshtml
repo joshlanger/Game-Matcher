@@ -9,19 +9,27 @@
 
 <form asp-controller="account" asp-action="register" method="post">
     <div class="form-group">
-        <label asp-for="Email"></label>
+        <label asp-for="Email">Email</label>
         <input type="email" asp-for="Email" />
         <span asp-validation-for="Email"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Password"></label>
+        <label asp-for="Password">Password</label>
         <input type="password" asp-for="Password" />
         <span asp-validation-for="Password"></span>
     </div>
     <div class="form-group">
-        <label asp-for="ConfirmPassword"></label>
+        <label asp-for="ConfirmPassword">Confirm Password</label>
         <input type="password" asp-for="ConfirmPassword" />
         <span asp-validation-for="ConfirmPassword"></span>
+    </div>
+    <div>
+        <label asp-for="Username">Username</label>
+        <input asp-for="Username" />
+    </div>
+    <div>
+        <label asp-for="Zipcode">Zip Code</label>
+        <input asp-for="Zipcode"/>
     </div>
 
     <input type="submit" value="Register" class="btn btn-default" />
