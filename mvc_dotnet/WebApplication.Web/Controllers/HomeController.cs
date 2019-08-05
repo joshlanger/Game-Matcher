@@ -4,12 +4,15 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication.Web.DAL;
 using WebApplication.Web.Models;
 
 namespace WebApplication.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private IUserDAL userDAO;
+
         public IActionResult Index()
         {            
             return View();
