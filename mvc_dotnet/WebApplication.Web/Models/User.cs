@@ -22,6 +22,12 @@ namespace WebApplication.Web.Models
         public string Username { get; set; }
 
         /// <summary>
+        /// The user's email address.
+        /// </summary>
+        [EmailAddress]
+        public string Email { get; set; }
+
+        /// <summary>
         /// The user's password.
         /// </summary>
         [Required]
@@ -37,5 +43,10 @@ namespace WebApplication.Web.Models
         /// The user's role.
         /// </summary>
         public string Role { get; set; }
+
+        /// <summary>
+        /// The user's zip code.
+        /// </summary>
+        public int ZipCode { get; set; }
     }
 }
