@@ -15,11 +15,10 @@ namespace WebApplication.Web.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// The user's username.
+        /// The user's email address.
         /// </summary>
-        [Required]
-        [MaxLength(50)]
-        public string Username { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
 
         /// <summary>
         /// The user's password.
@@ -37,5 +36,10 @@ namespace WebApplication.Web.Models
         /// The user's role.
         /// </summary>
         public string Role { get; set; }
+
+        /// <summary>
+        /// The user's zip code.
+        /// </summary>
+        public int ZipCode { get; set; }
     }
 }
