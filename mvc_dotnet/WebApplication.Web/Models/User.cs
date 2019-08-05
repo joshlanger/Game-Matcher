@@ -22,6 +22,12 @@ namespace WebApplication.Web.Models
         public string Username { get; set; }
 
         /// <summary>
+        /// The user's email address.
+        /// </summary>
+        [EmailAddress]
+        public string Email { get; set; }
+
+        /// <summary>
         /// The user's password.
         /// </summary>
         [Required]
