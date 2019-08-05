@@ -44,7 +44,7 @@ namespace WebApplication.Web
             });
 
             // Connection String
-            string connectionString = Configuration.GetConnectionString("Database");
+            string connectionString = Configuration.GetConnectionString("Default");
 
             // Dependency Injection
             // For Authentication
