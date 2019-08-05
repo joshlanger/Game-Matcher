@@ -27,7 +27,8 @@ namespace WebApplication.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@emailaddress, @password, @salt, @role, @zipcode);", conn);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@username, @emailaddress, @password, @salt, @role, @zipcode);", conn);
+                    cmd.Parameters.AddWithValue("@username", user.Username);
                     cmd.Parameters.AddWithValue("@emailaddress", user.Email);
                     cmd.Parameters.AddWithValue("@password", user.Password);
                     cmd.Parameters.AddWithValue("@salt", user.Salt);
@@ -135,6 +136,7 @@ namespace WebApplication.Web.DAL
             return new User()
             {
                 Id = Convert.ToInt32(reader["id"]),
+                Username = Convert.ToString(reader["username"]),
                 Email = Convert.ToString(reader["emailaddress"]),
                 Password = Convert.ToString(reader["password"]),
                 Salt = Convert.ToString(reader["salt"]),
