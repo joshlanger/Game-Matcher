@@ -35,3 +35,25 @@ body {
         display: none;
     }
 }
+#login-grid {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-column-gap: 7px;
+    grid-row-gap: 7px;
+    grid-template-areas:
+        ". header ."
+        ". login-info ."
+        ". footer ."
+}
+#title-login{
+    grid-area: header;
+    align-self: center;
+   
+
+}
+#user-login{
+    grid-area: login-info;
+    align-self: center;
+}
+
+
