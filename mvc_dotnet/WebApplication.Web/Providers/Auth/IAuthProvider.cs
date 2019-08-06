@@ -25,7 +25,7 @@ namespace WebApplication.Web.Providers.Auth
         /// </summary>
         /// <param name="user"></param>
         /// <returns>True if the user signed in.</returns>
-        bool SignIn(string username, string password);
+        bool SignIn(string email, string password);
 
         /// <summary>
         /// Logs the user off from the system.

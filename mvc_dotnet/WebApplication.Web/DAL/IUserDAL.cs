@@ -9,11 +9,11 @@ namespace WebApplication.Web.DAL
     public interface IUserDAL
     {
         /// <summary>
-        /// Retrieves a user from the system by username.
+        /// Retrieves a user from the system by email.
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="email"></param>
         /// <returns></returns>
-        User GetUser(string username);
+        User GetUser(string email);
 
         /// <summary>
         /// Creates a new user.

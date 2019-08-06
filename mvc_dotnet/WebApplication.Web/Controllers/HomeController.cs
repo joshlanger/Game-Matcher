@@ -11,7 +11,6 @@ namespace WebApplication.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IUserDAL userDAO;
 
         public IActionResult Index()
         {            
