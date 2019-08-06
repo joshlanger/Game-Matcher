@@ -3,6 +3,30 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2 id="header" class="h2">@Model.Username Home</h2>
 
-<p>Welcome @Model.Username</p>
+<div style="background-color:blue;height: 150px;" id="user-login">
+    <h3 style="color:white">Mini Profile</h3>
+</div>
+<div style="background-color:lightblue;height: 250px;" id="user-login">
+    <h3>Games</h3>
+</div>
+<div style="background-color:lightblue;height: 250px;" id="user-login">
+    <h3>Friends</h3>
+</div>
+<div style="background-color:lightblue;height: 250px;" id="user-login">
+    <h3>Matches</h3>
+</div>
+
+
+
+
+<style>
+    .h2 {
+        display: flex;
+        justify-content: center;
+        width: 50%;
+        color: red;
+    }
+</style>
+
