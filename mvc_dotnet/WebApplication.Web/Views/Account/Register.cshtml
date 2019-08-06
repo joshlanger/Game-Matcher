@@ -9,6 +9,10 @@
 
 <form asp-controller="account" asp-action="register" method="post">
     <div class="form-group">
+        <div>
+            <label asp-for="Username">Username</label>
+            <input asp-for="Username" />
+        </div>
         <label asp-for="Email">Email</label>
         <input type="email" asp-for="Email" />
         <span asp-validation-for="Email"></span>
@@ -24,12 +28,14 @@
         <span asp-validation-for="ConfirmPassword"></span>
     </div>
     <div>
-        <label asp-for="Username">Username</label>
-        <input asp-for="Username" />
+        <input type="hidden" asp-for="Salt" />
+    </div>
+    <div>
+        <input type="hidden" asp-for="Role" />
     </div>
     <div>
         <label asp-for="Zipcode">Zip Code</label>
-        <input asp-for="Zipcode"/>
+        <input asp-for="Zipcode" />
     </div>
 
     <input type="submit" value="Register" class="btn btn-default" />
