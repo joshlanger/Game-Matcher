@@ -35,3 +35,27 @@ body {
         display: none;
     }
 }
+
+#account-index {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-column-gap: 7px;
+    grid-row-gap: 7px;
+    grid-template-areas: 
+        "user games" 
+        "user friends" 
+        "user matches";
+
+.games-div{
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.friends-div {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.matches-div {
+    grid-area: 3 / 2 / 4 / 3;
+}
+}
