@@ -112,7 +112,7 @@ namespace WebApplication.Web.Providers.Auth
         /// <param name="password"></param>
         /// <param name="role"></param>
         /// <returns></returns>
-        public void Register(string email, string password, string username, int zipcode, string role)
+        public void Register(string username, string email, string password, string salt, int zipcode, string role)
         {
             var hashProvider = new HashProvider();
             var passwordHash = hashProvider.HashPassword(password);
