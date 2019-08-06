@@ -42,10 +42,10 @@ namespace WebApplication.Web.Providers.Auth
         public bool SignIn(string username, string password)
         {
             var user = userDAL.GetUser(username);
-            var hashProvider = new HashProvider();                        
-            
+            var hashProvider = new HashProvider();
+
             if (user != null && hashProvider.VerifyPasswordMatch(user.Password, password, user.Salt))
-            {                
+            {
                 Session.SetString(SessionKey, user.Username);
                 return true;
             }
@@ -68,10 +68,10 @@ namespace WebApplication.Web.Providers.Auth
         /// <param name="newPassword"></param>
         /// <returns></returns>
         public bool ChangePassword(string existingPassword, string newPassword)
-        {            
+        {
             var hashProvider = new HashProvider();
             var user = GetCurrentUser();
-            
+
             // Confirm existing password match
             if (user != null && hashProvider.VerifyPasswordMatch(user.Password, existingPassword, user.Salt))
             {
@@ -101,7 +101,7 @@ namespace WebApplication.Web.Providers.Auth
             {
                 return userDAL.GetUser(username);
             }
-            
+
             return null;
         }
 
@@ -128,7 +128,7 @@ namespace WebApplication.Web.Providers.Auth
             };
 
             userDAL.CreateUser(user);
-            Session.SetString(SessionKey, user.Username);            
+            Session.SetString(SessionKey, user.Username);
         }
 
         /// <summary>
@@ -137,9 +137,9 @@ namespace WebApplication.Web.Providers.Auth
         /// <param name="roles"></param>
         /// <returns></returns>
         public bool UserHasRole(string[] roles)
-        {            
+        {
             var user = GetCurrentUser();
-            return (user != null) && 
+            return (user != null) &&
                 roles.Any(r => r.ToLower() == user.Role.ToLower());
         }
     }
