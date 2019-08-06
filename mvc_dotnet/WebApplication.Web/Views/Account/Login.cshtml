@@ -4,9 +4,9 @@
     ViewData["Title"] = "Login";
 }
 
-<h2>Login</h2>
+<h2 id="header" class="h2">Login</h2>
 
-<form asp-controller="account" asp-action="login" method="post">
+<form id="user-login" asp-controller="account" asp-action="login" method="post">
 
     <div class="form-group">
         <label asp-for="Email"></label>
@@ -21,3 +21,11 @@
 
     <input type="submit" value="Login" class="btn btn-default" />
 </form>
+<style>
+    .h2{
+        display:flex;
+        justify-content: center;
+        width: 50%;
+        color: red;
+    }
+</style>
