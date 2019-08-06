@@ -29,10 +29,10 @@ namespace WebApplication.Web.Models.Account
 
         public string Salt { get; set; }
 
+        public string Role { get; set; }
+
         [Required]
         public int Zipcode { get; set; }
-
-        public string Role { get; set; }
 
     }
 }

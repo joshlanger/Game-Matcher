@@ -47,7 +47,7 @@ namespace WebApplication.Web.Providers.Auth
         /// <param name="password"></param>
         /// <param name="role"></param>
         /// <returns></returns>
-        void Register(string username, string email, string password,  string salt, int zipcode, string role);
+        void Register(string username, string email, string password, string salt, int zipcode, string role);
 
         /// <summary>
         /// Checks to see if a user has a given role.
@@ -57,3 +57,4 @@ namespace WebApplication.Web.Providers.Auth
         bool UserHasRole(string[] roles);
     }
 }
+
