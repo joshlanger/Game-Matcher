@@ -26,10 +26,11 @@ namespace WebApplication.Web.DAL
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
+                    //changed emailadress to email in sql statement and param
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@username, @emailaddress, @password, @salt, @role, @zipcode);", conn);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@username, @email, @password, @salt, @role, @zipcode);", conn);
                     cmd.Parameters.AddWithValue("@username", user.Username);
-                    cmd.Parameters.AddWithValue("@emailaddress", user.Email);
+                    cmd.Parameters.AddWithValue("@email", user.Email);
                     cmd.Parameters.AddWithValue("@password", user.Password);
                     cmd.Parameters.AddWithValue("@salt", user.Salt);
                     cmd.Parameters.AddWithValue("@role", user.Role);

@@ -28,7 +28,7 @@ namespace WebApplication.Web.Models.Account
         public string Username { get; set; }
 
         [Required]
-        public string Zipcode { get; set; }
+        public int Zipcode { get; set; }
 
     }
 }
