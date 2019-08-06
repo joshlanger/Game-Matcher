@@ -9,6 +9,9 @@ namespace WebApplication.Web.Models.Account
     public class RegisterViewModel
     {
         [Required]
+        public string Username { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -24,11 +27,12 @@ namespace WebApplication.Web.Models.Account
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
-        public string Username { get; set; }
+        public string Salt { get; set; }
+
+        public string Role { get; set; }
 
         [Required]
-        public string Zipcode { get; set; }
+        public int Zipcode { get; set; }
 
     }
 }
