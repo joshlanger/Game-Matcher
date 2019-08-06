@@ -6,26 +6,33 @@
 
 <h2 id="header" class="h2">Login</h2>
 
-<form id="user-login" asp-controller="account" asp-action="login" method="post">
+<form id="user-login" class="form-horizontal" asp-controller="account" asp-action="login" method="post">
 
     <div class="form-group">
-        <label asp-for="Email"></label>
+        <label class="control-label col-sm-5" asp-for="Email"></label>
         <input type="email" asp-for="Email" />
         <span asp-validation-for="Email"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Password"></label>
+        <label class="control-label col-sm-5" asp-for="Password"></label>
         <input type="password" asp-for="Password" />
         <span asp-validation-for="Password"></span>
     </div>
-
-    <input type="submit" value="Login" class="btn btn-default" />
+    <div class="form-group">
+        <div class="col-sm-offset-5 col-sm-10">
+            <input type="submit" value="Login" class="btn btn-default, button" />
+        </div>
+    </div>
 </form>
 <style>
     .h2{
-        display:flex;
+        display: flex;
         justify-content: center;
-        width: 50%;
-        color: red;
+        width: auto;
+    }
+    .button{
+        background-color: dodgerblue;
+        color: white;
+        
     }
 </style>
