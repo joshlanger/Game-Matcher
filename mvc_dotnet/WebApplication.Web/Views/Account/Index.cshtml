@@ -3,30 +3,93 @@
     ViewData["Title"] = "Index";
 }
 
-<h2 id="header" class="h2">@Model.Username Home</h2>
+@*<h2 id="header" class="h2">@Model.Username Home</h2>*@
 
-<div style="background-color:blue;height: 150px;" id="user-login">
-    <h3 style="color:white">Mini Profile</h3>
-</div>
-<div style="background-color:lightblue;height: 250px;" id="user-login">
-    <h3>Games</h3>
-</div>
-<div style="background-color:lightblue;height: 250px;" id="user-login">
-    <h3>Friends</h3>
-</div>
-<div style="background-color:lightblue;height: 250px;" id="user-login">
-    <h3>Matches</h3>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
 
-
-
-
-<style>
-    .h2 {
-        display: flex;
-        justify-content: center;
-        width: 50%;
-        color: red;
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
     }
-</style>
 
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-lg-3 sidenav">
+                <h4>@Model.Username Home</h4>
+                <img src="sadspaceman.png" class="img-circle" height="150" width="150" alt="Avatar">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="#section1">Home</a></li>
+                    <li><a href="#section2">Your Games</a></li>
+                    <li><a href="#section3">Your Friends</a></li>
+                    <li><a href="#section3">Your Matches</a></li>
+                </ul><br>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-sm-9">
+
+                <hr>
+                <h2>Your Games</h2>
+                <div style="background-color:blue;height: 200px;width:200px;">GameName</div>
+
+                <br><br>
+                <hr> <hr>
+                <h2>Your Friends</h2>
+                <div style="background-color:blue;height: 200px;width:200px;">User</div>
+                <br><br>
+                <hr> <hr>
+                <h2>Your Matches</h2>
+                <div style="background-color:blue;height: 200px;width:200px;">Matches</div>
+                <br><br>
+                <hr>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <footer class="container-fluid">
+        <p>Footer Text</p>
+    </footer>
+
+</body>
+</html>
