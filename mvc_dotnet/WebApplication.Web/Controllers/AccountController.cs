@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication.Web.DAL;
+using WebApplication.Web.Models;
 using WebApplication.Web.Models.Account;
 using WebApplication.Web.Providers.Auth;
 
@@ -10,6 +12,8 @@ namespace WebApplication.Web.Controllers
 {
     public class AccountController : Controller
     {
+        private IUserDAL userDAO;
+
         private readonly IAuthProvider authProvider;
         public AccountController(IAuthProvider authProvider)
         {
@@ -35,6 +39,9 @@ namespace WebApplication.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(LoginViewModel loginViewModel)
         {
+            //var email = userDAO.GetUser(loginViewModel.Email);
+            //var password = userDAO.GetUser(loginViewModel.Password);
+
             // Ensure the fields were filled out
             if (ModelState.IsValid)
             {
@@ -43,7 +50,7 @@ namespace WebApplication.Web.Controllers
                 if (validLogin)
                 {
                     // Redirect the user where you want them to go after successful login
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Account");
                 }
             }
 
