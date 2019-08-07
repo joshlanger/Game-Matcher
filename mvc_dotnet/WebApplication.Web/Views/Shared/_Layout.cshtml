@@ -16,8 +16,14 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body>
-    <nav id="nav-text" class="navbar navbar-inverse navbar-fixed-top">
+
+<body id="body-padding">
+    <header>
+        <div>
+            <h1 id="font-h1">MatchMadeInBETA</h1>
+        </div>
+    </header>
+    <nav id="nav-text" class="navbar navbar-inverse navbar-sticky">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -26,16 +32,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">matchmadeinBETA</a>
+                @*<a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">matchmadeinBETA</a>*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
-                
+
                 <ul class="nav navbar-nav navbar-right">
-                    @await  Component.InvokeAsync("NavBar") @* Render the NavBar component. *@
+                    @await Component.InvokeAsync("NavBar") @* Render the NavBar component. *@
                 </ul>
             </div>
         </div>
@@ -43,9 +49,9 @@
 
     <partial name="_CookieConsentPartial" />
 
-    <div id="login-grid" class="container body-content">
+    <div class="container-fluid">
         @RenderBody()
-        <hr class="footer navbar-fixed-bottom"/>
+        <hr class="footer navbar-fixed-bottom" />
         <footer class="footer navbar-fixed-bottom">
             <p>&copy; 2018 - WebApplication.Web</p>
         </footer>
@@ -75,4 +81,23 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+<style>
+    #font-h1 {
+        display: flex;
+        justify-content:center;
+        margin-top: 10px;
+        color: dodgerblue;
+        font-size: 40pt;
+        font-weight: bolder;
+        text-shadow: 02px 02px 02px grey;
+        
+    }
+    #body-padding{
+        padding-top: 20px;
+    }
+  
+</style>
+
+
+
 
