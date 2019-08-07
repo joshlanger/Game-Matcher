@@ -46,7 +46,7 @@ namespace WebApplication.Web.Providers.Auth
 
             if (user != null && hashProvider.VerifyPasswordMatch(user.Password, password, user.Salt))
             {
-                Session.SetString(SessionKey, user.Username);
+                Session.SetString(SessionKey, user.Email);
                 return true;
             }
 
@@ -95,11 +95,11 @@ namespace WebApplication.Web.Providers.Auth
         /// <returns></returns>
         public User GetCurrentUser()
         {
-            var username = Session.GetString(SessionKey);
+            var email = Session.GetString(SessionKey);
 
-            if (!String.IsNullOrEmpty(username))
+            if (!String.IsNullOrEmpty(email))
             {
-                return userDAL.GetUser(username);
+                return userDAL.GetUser(email);
             }
 
             return null;
