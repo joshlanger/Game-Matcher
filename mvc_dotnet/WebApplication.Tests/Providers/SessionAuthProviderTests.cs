@@ -176,7 +176,7 @@ namespace WebApplication.Tests.Providers
             mockUserDal.Verify(m => m.CreateUser(It.IsAny<User>()));
             mockSession.Verify(m => m.Set(SessionAuthProvider.SessionKey, It.IsAny<byte[]>()));
         }
-        
+
         #region Private Methods
         private void AddUserToDAL(string username)
         {

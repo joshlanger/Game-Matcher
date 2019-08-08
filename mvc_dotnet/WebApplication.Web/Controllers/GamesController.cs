@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,8 +24,11 @@ namespace WebApplication.Web.Controllers
         [HttpGet]
         public ActionResult<List<Game>> GetVideoGames()
         {
-
-            return dal.GetGames();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://api-v3.igdb.com/games/");
+                return dal.GetGames();
+            }
         }
     }
 }
