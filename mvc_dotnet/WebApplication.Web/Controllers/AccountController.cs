@@ -98,5 +98,17 @@ namespace WebApplication.Web.Controllers
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Profile(ProfileViewModel profileViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                authProvider.Profile(profileViewModel.UserName, profileViewModel.AvatarName, profileViewModel.UserBio);
+
+
+            }
+            return RedirectToAction("Profile", "Account");
+        }
     }
 }
