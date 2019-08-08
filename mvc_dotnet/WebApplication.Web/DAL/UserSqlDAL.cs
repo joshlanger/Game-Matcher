@@ -141,8 +141,8 @@ namespace WebApplication.Web.DAL
                 Email = Convert.ToString(reader["email"]),
                 Password = Convert.ToString(reader["password"]),
                 Salt = Convert.ToString(reader["salt"]),
-                Role = Convert.ToString(reader["role"]),
-                ZipCode = Convert.ToInt32(reader["zipcode"])
+                ZipCode = Convert.ToInt32(reader["zipcode"]),
+                Role = Convert.ToString(reader["role"])
             };
         }
     }
