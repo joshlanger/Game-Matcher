@@ -91,11 +91,11 @@ namespace WebApplication.Web.Controllers
 
             return View(registerViewModel);
         }
+
         [HttpGet]
         public IActionResult Profile()
         {
             return View();
         }
-
     }
 }
