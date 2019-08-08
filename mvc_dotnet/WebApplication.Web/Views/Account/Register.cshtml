@@ -7,7 +7,7 @@
 
 <h2 id="header" class="h2">Register</h2>
 
-<form id="user-login"class="form-horizontal" asp-controller="account" asp-action="register" method="post">
+<form id="user-login" class="form-horizontal" asp-controller="account" asp-action="register" method="post">
     <div class="form-group">
         <label class="control-label col-sm-5" asp-for="Username">Username</label>
         <input asp-for="Username" />
@@ -45,15 +45,4 @@
         </div>
     </div>
 </form>
-<style>
-    .h2 {
-        display: flex;
-        justify-content: center;
-        width: auto;
-    }
-
-    .button {
-        background-color: dodgerblue;
-        color: white;
-    }
-</style>
+@*style moved to site wide css*@

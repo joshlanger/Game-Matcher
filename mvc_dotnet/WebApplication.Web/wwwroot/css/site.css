@@ -58,5 +58,16 @@ body {
     align-self: center;
 }
 
+/*moved from register page to site wide*/
+.h2 {
+    display: flex;
+    justify-content: center;
+    width: auto;
+}
+
+.button {
+    background-color: dodgerblue;
+    color: white;
+}
 
 

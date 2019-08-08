@@ -13,11 +13,12 @@ namespace WebApplication.Web.Controllers
     public class AccountController : Controller
     {
         private IUserDAL userDAO;
-
+        //added userDAO to the constructor
         private readonly IAuthProvider authProvider;
-        public AccountController(IAuthProvider authProvider)
+        public AccountController(IAuthProvider authProvider, IUserDAL userDAO)
         {
             this.authProvider = authProvider;
+            this.userDAO = userDAO;
         }
 
         //[AuthorizationFilter] // actions can be filtered to only those that are logged in
@@ -105,10 +106,50 @@ namespace WebApplication.Web.Controllers
             if (ModelState.IsValid)
             {
                 authProvider.Profile(profileViewModel.UserName, profileViewModel.AvatarName, profileViewModel.UserBio);
-
-
             }
             return RedirectToAction("Profile", "Account");
+        }
+
+        [HttpGet]
+        public IActionResult UpdateInfo ()
+        {
+            UpdateInfoModel updateinfo = new UpdateInfoModel();
+
+            //get the current user info
+            var user = authProvider.GetCurrentUser();
+
+            //convert user model to updateinfomodel
+            updateinfo = updateinfo.ConvertUserToUpdateInfo(user);
+
+            //pass info to view.  existing info will be form field defaults
+            //(this needs to be sorted out)
+            return View(updateinfo);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateInfo (UpdateInfoModel updateInfoModel)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new User();
+                //assign updateinfo to user
+                user = user.ConvertUpdateInfoModelToUser(updateInfoModel);
+
+                //call method to update database
+                userDAO.UpdateUser(user);
+
+                return RedirectToAction("Confirmation", "Account");
+            }
+            else
+            {
+                return View(updateInfoModel);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Confirmation(User user)
+        {
+            return View(user);
         }
     }
 }
