@@ -16,7 +16,7 @@ namespace WebApplication.Tests.DAL
             UserSqlDAL dao = new UserSqlDAL(connectionString);
             string username ="IvoryUnclerico";
             User user = dao.GetUser(username);
-            Assert.AreEqual("IvoryUnclerico", );
+            Assert.AreEqual("IvoryUnclerico", user);
         }
         
 
