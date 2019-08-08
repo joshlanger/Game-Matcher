@@ -106,7 +106,9 @@ namespace WebApplication.Web.Controllers
             if (ModelState.IsValid)
             {
                 authProvider.Profile(profileViewModel.UserName, profileViewModel.AvatarName, profileViewModel.UserBio);
-
+            }
+            return RedirectToAction("Profile", "Account");
+        }
 
         [HttpGet]
         public IActionResult UpdateInfo ()
