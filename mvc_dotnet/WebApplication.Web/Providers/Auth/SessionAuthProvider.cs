@@ -37,17 +37,17 @@ namespace WebApplication.Web.Providers.Auth
         /// <summary>
         /// Signs the user in and saves their username in session.
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="username"></param> ***changed to email***
         /// <param name="password"></param>
         /// <returns></returns>
-        public bool SignIn(string username, string password)
+        public bool SignIn(string username, string password) //changing the username param to email breaks the ability to sign in.
         {
-            var user = userDAL.GetUser(username);
+            var user = userDAL.GetUser(username); 
             var hashProvider = new HashProvider();
 
             if (user != null && hashProvider.VerifyPasswordMatch(user.Password, password, user.Salt))
             {
-                Session.SetString(SessionKey, user.Email);
+                Session.SetString(SessionKey, user.Email); 
                 return true;
             }
 
