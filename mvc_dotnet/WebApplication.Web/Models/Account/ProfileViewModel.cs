@@ -6,13 +6,18 @@ using WebApplication.Web.Models.Games;
 
 namespace WebApplication.Web.Models.Account
 {
-    public class Profile
+    public class ProfileViewModel
     {
-        string Username { get; set; }
 
-        string FirstName { get; set; }
+        public int ProfileId { get; set; }
 
-        string LastName { get; set; }
+        public int UserId { get; set; }
+
+        public string UserName { get; set; }
+
+        public string UserBio { get; set; }
+
+        public string AvatarName { get; set; }
 
         public List<Game> AvailableGames { get; set; }
     }
