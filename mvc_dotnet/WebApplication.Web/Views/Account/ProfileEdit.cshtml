@@ -1,8 +1,10 @@
 ﻿@using WebApplication.Web.Models.Account;
 @model Profile
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "ProfileEdit";
 }
+
+<h2>Profile Editor</h2>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +32,7 @@
     </div>
 
     <div>
-        @*<a href="ProfileEdit">Edit <i class="far fa-edit pull-left img-rounded"></i></a>*@
-        <a asp-area="" asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit</a>
+        <a href="#">Edit <i class="far fa-edit pull-left img-rounded"></i></a>
     </div>
 
     <!-- First Container -->
@@ -69,6 +70,8 @@
             </div>
         </div>
     </div>
+
+    <button class="well-sm well" href="~account/profile.cshtml">Publish Changes</button>
 
 </body>
 </html>
