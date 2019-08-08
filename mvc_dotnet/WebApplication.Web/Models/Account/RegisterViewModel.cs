@@ -9,10 +9,12 @@ namespace WebApplication.Web.Models.Account
     public class RegisterViewModel
     {
         [Required]
+        [DataType(DataType.Text)]
+        [StringLength(50, ErrorMessage = "The {0} must be at least 7 characters long.", MinimumLength = 7)]
         public string Username { get; set; }
 
         [Required]
-        [EmailAddress]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -22,6 +24,7 @@ namespace WebApplication.Web.Models.Account
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -32,6 +35,8 @@ namespace WebApplication.Web.Models.Account
         public string Role { get; set; }
 
         [Required]
+        [DataType(DataType.PostalCode)]
+        [Display(Name = "Zipcode")]
         public int Zipcode { get; set; }
 
     }

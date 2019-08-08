@@ -21,7 +21,7 @@ BEGIN TRANSACTION;
 CREATE TABLE users
 (
 	user_id		int			identity(1,1),
-	username    varchar(50) not null,
+	username	varchar(50) not null,
 	email    	varchar(50)	not null,
 	password	varchar(50)	not null,
 	salt		varchar(50)	not null,
@@ -34,8 +34,9 @@ CREATE TABLE profile
 (
 profile_id     int           identity(1,1),
 user_id        int           not null,
-first_name	   varchar(50)   null,
-last_name	   varchar(50)   null,
+user_name		varchar(50)	 null,	
+avatar_name	   varchar(50)	 null,		
+user_bio	   varchar(250)  null,
 
 constraint pk_profile primary key (profile_id),
 foreign key (user_id) references users(user_id)
@@ -44,7 +45,6 @@ foreign key (user_id) references users(user_id)
 CREATE TABLE profile_game(
 games_id	int identity(1,1),
 profile_id	int not null,
-
 constraint pk_profile_game primary key (games_id),
 foreign key (profile_id) references profile(profile_id)
 );
