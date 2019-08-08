@@ -1,8 +1,10 @@
 ﻿@using WebApplication.Web.Models.Account;
 @model ProfileViewModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "ProfileEdit";
 }
+
+<h2>Profile Editor</h2>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,12 +32,13 @@
     </div>
 
     <div>
-        <a asp-area="" asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit</a>
+        <a href="#">Edit <i class="far fa-edit pull-left img-rounded"></i></a>
     </div>
 
     <!-- First Container -->
     <div class="container-fluid bg-1 text-center">
-        <h3 class="margin">Username Profile</h3>
+        <h3 class="margin">UserName</h3>
+        @*<img src="bird.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Avatar" width="250" height="250">*@
         <img src="~/images/sadspaceman.png" class="img-responsive img-circle margin" style="display:inline" alt="Avatar" width="250" height="250">
     </div>
 
@@ -52,18 +55,23 @@
         <div class="row">
             <div class="col-sm-4">
                 <p>Lorem Ipsum</p>
+                @*<img src="birds1.jpg" class="img-responsive margin" style="width:100%" alt="Image">*@
                 <img src="~/images/game1.jpg" class="img-responsive margin" style="width:100%" alt="Image">
             </div>
             <div class="col-sm-4">
                 <p>Aamet Consectetu</p>
+                @*<img src="birds2.jpg" class="img-responsive margin" style="width:100%" alt="Image">*@
                 <img src="~/images/game2.jpg" class="img-responsive margin" style="width:100%" alt="Image">
             </div>
             <div class="col-sm-4">
                 <p>Elit Sed Tempor</p>
+                @*<img src="birds3.jpg" class="img-responsive margin" style="width:100%" alt="Image">*@
                 <img src="~/images/game3.jpg" class="img-responsive margin" style="width:100%" alt="Image">
             </div>
         </div>
     </div>
+
+    <button class="well-sm well" href="~account/profile.cshtml">Publish Changes</button>
 
 </body>
 </html>
