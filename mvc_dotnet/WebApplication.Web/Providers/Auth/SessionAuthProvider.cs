@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApplication.Web.DAL;
 using WebApplication.Web.Models;
+using WebApplication.Web.Models.Account;
 
 namespace WebApplication.Web.Providers.Auth
 {
@@ -141,6 +142,16 @@ namespace WebApplication.Web.Providers.Auth
             var user = GetCurrentUser();
             return (user != null) &&
                 roles.Any(r => r.ToLower() == user.Role.ToLower());
+        }
+
+        public void Profile(string username, string avatarname, string userbio)
+        {
+            var profile = new ProfileViewModel
+            {
+                UserName = username,
+                AvatarName = avatarname,
+                UserBio = userbio
+            };
         }
     }
 }

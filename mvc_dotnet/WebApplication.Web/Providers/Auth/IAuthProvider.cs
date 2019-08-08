@@ -49,6 +49,8 @@ namespace WebApplication.Web.Providers.Auth
         /// <returns></returns>
         void Register(string username, string email, string password, string salt, int zipcode, string role);
 
+
+        void Profile(string username, string avatarname, string userbio);
         /// <summary>
         /// Checks to see if a user has a given role.
         /// </summary>
