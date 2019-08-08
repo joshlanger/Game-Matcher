@@ -4,7 +4,10 @@
     ViewData["Title"] = "ChangeInfo";
 }
 
-<h2 id="header" class="h2">Update Your Account Information</h2>
+<h2 class="h2">Update Your Account Information</h2>
+<p></p>
+<p></p>
+<h4 class="h4">General</h4>
 
 <form form id="" class="form-horizontal" asp-controller="account" asp-action="updateinfo" method="post">
     <div>
@@ -33,16 +36,24 @@
         <label class="control-label col-sm-5" asp-for="Zipcode">Zip Code</label>
         <input asp-for="Zipcode" value="@Model.Zipcode" />
     </div>
-    @*<div>
+    <div>
         <input type="hidden" asp-for="Salt" value="@Model.Salt" />
     </div>
     <div>
         <input type="hidden" asp-for="Role" value="@Model.Role" />
-    </div>*@
+    </div>
     <div class="form-group">
         <div class="col-sm-offset-5 col-sm-10">
             <input type="submit" value="Save Changes" class="btn btn-default, button" />
         </div>
+
     </div>
+</form>
+<form asp-controller="Account" asp-action="DeleteAccount" method="post">
+    <input type="hidden" asp-for="Id" value="@Model.Id"/>
+    <div class="col-sm-offset-5 col-sm-10">
+        <input type="submit" value="Delete Account" class="btn btn-danger"/>
+    </div>
+    
 </form>
 

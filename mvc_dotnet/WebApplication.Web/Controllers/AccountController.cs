@@ -109,6 +109,7 @@ namespace WebApplication.Web.Controllers
             }
             return RedirectToAction("Profile", "Account");
         }
+        //is the above method working ok? it was cut off before the closing bracket of the if statement
 
         [HttpGet]
         public IActionResult UpdateInfo ()
@@ -122,7 +123,6 @@ namespace WebApplication.Web.Controllers
             updateinfo = updateinfo.ConvertUserToUpdateInfo(user);
 
             //pass info to view.  existing info will be form field defaults
-            //(this needs to be sorted out)
             return View(updateinfo);
         }
 
@@ -150,6 +150,17 @@ namespace WebApplication.Web.Controllers
         public IActionResult Confirmation(User user)
         {
             return View(user);
+        }
+
+        //deletes the user's account from the database
+        //i can't get this to work with httpdelete, but it works with post
+        [HttpPost]
+        public IActionResult DeleteAccount(UpdateInfoModel updateInfoModel)
+        {
+            User user = new User();
+            user = user.ConvertUpdateInfoModelToUser(updateInfoModel);
+            userDAO.DeleteUser(user);
+            return RedirectToAction("Logoff", "Account");
         }
     }
 }

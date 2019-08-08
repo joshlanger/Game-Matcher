@@ -58,7 +58,7 @@ namespace WebApplication.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("DELETE FROM users WHERE id = @id;", conn);
+                    SqlCommand cmd = new SqlCommand("DELETE FROM users WHERE user_id = @id;", conn);
                     cmd.Parameters.AddWithValue("@id", user.Id);                    
 
                     cmd.ExecuteNonQuery();
