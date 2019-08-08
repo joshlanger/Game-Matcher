@@ -85,6 +85,7 @@ namespace WebApplication.Web.Controllers
                 authProvider.Register(registerViewModel.Username, registerViewModel.Email, registerViewModel.Password, registerViewModel.Salt, registerViewModel.Zipcode, role: "User");
 
                 // Redirect the user where you want them to go after registering
+                //this should be good. merge conflicts suck.
                 TempData["Status"] = "Congratulations, you have successfully registered for a new account!";
                 return RedirectToAction("Login", "Account");
             }
