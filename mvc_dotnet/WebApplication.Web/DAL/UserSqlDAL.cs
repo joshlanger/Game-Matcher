@@ -77,7 +77,7 @@ namespace WebApplication.Web.DAL
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public User GetUser(string username)
+        public User GetUser(string email)
         {
             User user = null;
             try
@@ -85,8 +85,8 @@ namespace WebApplication.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM USERS WHERE username = @username;", conn);
-                    cmd.Parameters.AddWithValue("@username", username);
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM USERS WHERE email = @email;", conn);
+                    cmd.Parameters.AddWithValue("@email", email);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -141,8 +141,8 @@ namespace WebApplication.Web.DAL
                 Email = Convert.ToString(reader["email"]),
                 Password = Convert.ToString(reader["password"]),
                 Salt = Convert.ToString(reader["salt"]),
-                Role = Convert.ToString(reader["role"]),
-                ZipCode = Convert.ToInt32(reader["zipcode"])
+                ZipCode = Convert.ToInt32(reader["zipcode"]),
+                Role = Convert.ToString(reader["role"])
             };
         }
     }

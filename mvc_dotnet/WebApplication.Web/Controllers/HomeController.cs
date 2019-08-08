@@ -11,7 +11,6 @@ namespace WebApplication.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IUserDAL userDAO;
 
         public IActionResult Index()
         {            
@@ -20,14 +19,14 @@ namespace WebApplication.Web.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Welcome to MatchMadeInBeta!";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "We'd love to hear from you. Please see below out contact information.";
 
             return View();
         }

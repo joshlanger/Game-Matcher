@@ -35,15 +35,17 @@ body {
         display: none;
     }
 }
+
+}
 #login-grid {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     grid-column-gap: 7px;
     grid-row-gap: 7px;
     grid-template-areas:
-        ". header ."
-        ". login-info ."
-        ". footer ."
+        "header-l header header-r"
+        "login-l login-info login-r"
+        "footer-l footer footer-r"
 }
 #title-login{
     grid-area: header;
@@ -55,5 +57,6 @@ body {
     grid-area: login-info;
     align-self: center;
 }
+
 
 
