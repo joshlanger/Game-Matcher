@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication.Web.Models.Account;
 
 namespace WebApplication.Web.Models
 {
@@ -48,5 +49,18 @@ namespace WebApplication.Web.Models
         /// The user's zip code.
         /// </summary>
         public int ZipCode { get; set; }
+
+        public User ConvertUpdateInfoModelToUser (UpdateInfoModel updateInfoModel)
+        {
+            User updatedUser = new User();
+            updatedUser.Email = updateInfoModel.Email;
+            updatedUser.Id = updateInfoModel.Id;
+            updatedUser.Password = updateInfoModel.Password;
+            updatedUser.Role = updateInfoModel.Role;
+            updatedUser.Salt = updateInfoModel.Salt;
+            updatedUser.Username = updateInfoModel.Username;
+            updatedUser.ZipCode = updateInfoModel.Zipcode;
+            return updatedUser;
+        }
     }
 }
