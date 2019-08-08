@@ -146,6 +146,26 @@ namespace WebApplication.Web.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult UpdatePassword(UpdateInfoModel updateInfoModel)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = new User();
+                //assign updateinfo to user
+                user = user.ConvertUpdateInfoModelToUser(updateInfoModel);
+
+                //call method to update database
+                userDAO.UpdateUser(user);
+
+                return RedirectToAction("Confirmation", "Account");
+            }
+            else
+            {
+                return View(updateInfoModel);
+            }
+        }
+
         [HttpGet]
         public IActionResult Confirmation(User user)
         {
