@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication.Web.Models;
+using WebApplication.Web.Models.Account;
 
 namespace WebApplication.Web.DAL
 {
@@ -132,7 +133,7 @@ namespace WebApplication.Web.DAL
             }
         }
 
-        public void UpdatePassword(User user)
+        public void ChangePassword(ChangePasswordModel password)
         {
             try
             {
@@ -140,10 +141,10 @@ namespace WebApplication.Web.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("UPDATE users SET password = @password, salt = @salt, role = @role WHERE user_id = @id;", conn);
-                    cmd.Parameters.AddWithValue("@password", user.Password);
-                    cmd.Parameters.AddWithValue("@salt", user.Salt);
-                    cmd.Parameters.AddWithValue("@role", user.Role);
-                    cmd.Parameters.AddWithValue("@id", user.Id);
+                    cmd.Parameters.AddWithValue("@password", password.Password);
+                    cmd.Parameters.AddWithValue("@salt", password.Salt);
+                    cmd.Parameters.AddWithValue("@role", password.Role);
+                    cmd.Parameters.AddWithValue("@id", password.Id);
                     
 
                     cmd.ExecuteNonQuery();
