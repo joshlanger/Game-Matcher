@@ -11,38 +11,94 @@
         <input type="hidden" asp-for="Id" value="@Model.Id" />
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-5" asp-for="Username">Username</label>
+        <label class="control-label col-sm-5" asp-for="Username">New Username</label>
         <input asp-for="Username" value="@Model.Username" />
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-5" asp-for="Email">Email</label>
+        <label class="control-label col-sm-5" asp-for="Email">New Email</label>
         <input type="email" asp-for="Email" value="@Model.Email" />
         <span asp-validation-for="Email"></span>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-5" asp-for="Password">Password</label>
+        <label class="control-label col-sm-5" asp-for="Password">New Password</label>
         <input type="password" asp-for="Password" value="@Model.Password" />
         <span asp-validation-for="Password"></span>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-5" asp-for="ConfirmPassword">Confirm Password</label>
+        <label class="control-label col-sm-5" asp-for="ConfirmPassword">Confirm New Password</label>
         <input type="password" asp-for="ConfirmPassword" value="@Model.Password" />
         <span asp-validation-for="ConfirmPassword"></span>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-5" asp-for="Zipcode">Zip Code</label>
+        <label class="control-label col-sm-5" asp-for="Zipcode">New Zip Code</label>
         <input asp-for="Zipcode" value="@Model.Zipcode" />
     </div>
-    @*<div>
-        <input type="hidden" asp-for="Salt" value="@Model.Salt" />
-    </div>
     <div>
-        <input type="hidden" asp-for="Role" value="@Model.Role" />
-    </div>*@
+            <input type="hidden" asp-for="Salt" value="@Model.Salt" />
+        </div>
+        <div>
+            <input type="hidden" asp-for="Role" value="@Model.Role" />
+        </div>
     <div class="form-group">
         <div class="col-sm-offset-5 col-sm-10">
             <input type="submit" value="Save Changes" class="btn btn-default, button" />
         </div>
     </div>
 </form>
+
+<style>
+    body {
+        font: 20px Montserrat, sans-serif;
+        line-height: 1.8;
+        color: #0F1108;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .margin {
+        margin-bottom: 45px;
+    }
+
+    .bg-1 {
+        background-color: #00F6ED; /* Turquoise */
+        color: #0F1108;
+    }
+
+    .bg-2 {
+        background-color: #0F1108; /* Smoky Black */
+        color: #E5E5E5;
+    }
+
+    .bg-3 {
+        background-color: #E5E5E5; /* Platinum */
+        color: #0F1108;
+    }
+
+    .bg-4 {
+        background-color: #0F1108; /* Black Gray */
+        color: #E5E5E5;
+    }
+
+    .container-fluid {
+        padding-top: 5%;
+        padding-bottom: 5%;
+    }
+
+    .navbar {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+        font-size: 12px;
+        letter-spacing: 5px;
+    }
+
+    .navbar-nav li a:hover {
+        color: #FF7B00 !important; /* Heat Wave */
+    }
+</style>
+
 

@@ -148,7 +148,7 @@ namespace WebApplication.Web.Providers.Auth
         {
             var profile = new ProfileViewModel
             {
-                UserName = username,
+                Username = username,
                 AvatarName = avatarname,
                 UserBio = userbio
             };

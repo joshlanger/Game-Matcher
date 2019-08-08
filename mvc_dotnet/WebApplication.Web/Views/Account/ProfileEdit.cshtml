@@ -1,10 +1,16 @@
 ﻿@using WebApplication.Web.Models.Account;
 @model ProfileViewModel
 @{
-    ViewData["Title"] = "ProfileEdit";
+    ViewData["Title"] = "Profile";
 }
 
-<h2>Profile Editor</h2>
+@{
+    if (TempData["Status"] != null)
+    {
+        <h1>@TempData["Status"]</h1>
+
+    };
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,12 +38,13 @@
     </div>
 
     <div>
-        <a href="#">Edit <i class="far fa-edit pull-left img-rounded"></i></a>
+        @*<a href="ProfileEdit">Edit <i class="far fa-edit pull-left img-rounded"></i></a>*@
+        <a asp-area="" asp-controller="Account" asp-action="UpdateProfile"><i class="far fa-edit pull-left img-rounded"></i> Edit</a>
     </div>
 
     <!-- First Container -->
     <div class="container-fluid bg-1 text-center">
-        <h3 class="margin">UserName</h3>
+        <h3 class="margin"></h3>
         @*<img src="bird.jpg" class="img-responsive img-circle margin" style="display:inline" alt="Avatar" width="250" height="250">*@
         <img src="~/images/sadspaceman.png" class="img-responsive img-circle margin" style="display:inline" alt="Avatar" width="250" height="250">
     </div>
@@ -70,8 +77,6 @@
             </div>
         </div>
     </div>
-
-    <button class="well-sm well" href="~account/profile.cshtml">Publish Changes</button>
 
 </body>
 </html>

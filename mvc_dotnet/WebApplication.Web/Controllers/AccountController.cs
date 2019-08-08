@@ -13,12 +13,14 @@ namespace WebApplication.Web.Controllers
     public class AccountController : Controller
     {
         private IUserDAL userDAO;
+        private IProfileDAL profileDAO;
         //added userDAO to the constructor
         private readonly IAuthProvider authProvider;
-        public AccountController(IAuthProvider authProvider, IUserDAL userDAO)
+        public AccountController(IAuthProvider authProvider, IUserDAL userDAO, IProfileDAL profileDAO)
         {
             this.authProvider = authProvider;
             this.userDAO = userDAO;
+            this.profileDAO = profileDAO;
         }
 
         //[AuthorizationFilter] // actions can be filtered to only those that are logged in
@@ -51,7 +53,7 @@ namespace WebApplication.Web.Controllers
                 if (validLogin)
                 {
                     // Redirect the user where you want them to go after successful login
-                    return RedirectToAction("Index", "Account");
+                    return RedirectToAction("Profile", "Account");
                 }
             }
 
@@ -99,13 +101,30 @@ namespace WebApplication.Web.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult ProfileEdit()
+        {
+            ProfileViewModel updateProfile = new ProfileViewModel();
+
+            //get the current user info
+            var user = authProvider.GetCurrentUser();
+
+            //convert user model to updateinfomodel
+            updateProfile.Username = user.Username;
+
+            //pass info to view.  existing info will be form field defaults
+            //(this needs to be sorted out)
+            return View(updateProfile);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Profile(ProfileViewModel profileViewModel)
         {
             if (ModelState.IsValid)
             {
-                authProvider.Profile(profileViewModel.UserName, profileViewModel.AvatarName, profileViewModel.UserBio);
+                authProvider.Profile(profileViewModel.Username, profileViewModel.AvatarName, profileViewModel.UserBio);
             }
             return RedirectToAction("Profile", "Account");
         }
@@ -127,18 +146,21 @@ namespace WebApplication.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult UpdateInfo (UpdateInfoModel updateInfoModel)
         {
             if (ModelState.IsValid)
             {
                 User user = new User();
                 //assign updateinfo to user
+                authProvider.Register(updateInfoModel.Username, updateInfoModel.Email, updateInfoModel.Password, updateInfoModel.Salt, updateInfoModel.Zipcode, role: "User");
                 user = user.ConvertUpdateInfoModelToUser(updateInfoModel);
 
                 //call method to update database
                 userDAO.UpdateUser(user);
 
-                return RedirectToAction("Confirmation", "Account");
+                TempData["Status"] = "Congratulations, you have successfully updated your account!";
+                return RedirectToAction("Profile", "Account");
             }
             else
             {
