@@ -15,9 +15,19 @@ namespace WebApplication.Web.Models.Account
 
         public string Username { get; set; }
 
+        public string AvatarName { get; set; }
+
         public string UserBio { get; set; }
 
-        public string AvatarName { get; set; }
+        public int GamingExperience { get; set; }
+
+        public string FavoriteGenres { get; set; }
+
+        public string ContactPreference { get; set; }
+
+        public string OtherInterests { get; set; }
+
+        public bool IsPrivate { get; set; }
 
         public List<Game> AvailableGames { get; set; }
     }
