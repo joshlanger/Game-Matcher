@@ -145,19 +145,19 @@ namespace WebApplication.Web.Controllers
 
         //why isn't the binding working? no info is being passed into the method
         [HttpPost]
-        public IActionResult ChangePassword(ChangePasswordModel password)
+        public IActionResult ChangePassword(ChangePasswordModel passwordIn)
         {
             if (ModelState.IsValid)
             {
                 
                 //call method to update database
-                userDAO.ChangePassword(password);
+                userDAO.ChangePassword(passwordIn);
 
                 return RedirectToAction("Confirmation", "Account");
             }
             else
             {
-                return View(password);
+                return View(passwordIn);
             }
         }
 
