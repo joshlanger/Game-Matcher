@@ -43,6 +43,12 @@ body {
 
 }
 
+.h4{
+    display: flex;
+    justify-content: center;
+    width: auto;
+}
+
 /*moved from register page to site wide*/
 .h2 {
     display: flex;

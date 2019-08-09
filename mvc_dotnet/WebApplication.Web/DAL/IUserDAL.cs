@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication.Web.Models;
+using WebApplication.Web.Models.Account;
 
 namespace WebApplication.Web.DAL
 {
@@ -32,5 +33,8 @@ namespace WebApplication.Web.DAL
         /// </summary>
         /// <param name="user"></param>
         void DeleteUser(User user);
+
+
+        void ChangePassword(ChangePasswordModel password);
     }
 }

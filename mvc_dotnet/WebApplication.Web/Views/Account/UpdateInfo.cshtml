@@ -1,10 +1,12 @@
-﻿@using WebApplication.Web.Models.Account;
-@model UpdateInfoModel
+﻿@model User
 @{
     ViewData["Title"] = "ChangeInfo";
 }
 
-<h2 id="header" class="h2">Update Your Account Information</h2>
+<h2 class="h2">Update Your Account Information</h2>
+<p></p>
+<p></p>
+<h4 class="h4">General</h4>
 
 <form form id="" class="form-horizontal" asp-controller="account" asp-action="updateinfo" method="post">
     <div>
@@ -20,29 +22,32 @@
         <span asp-validation-for="Email"></span>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-5" asp-for="Password">Password</label>
-        <input type="password" asp-for="Password" value="@Model.Password" />
-        <span asp-validation-for="Password"></span>
+        <label class="control-label col-sm-5" asp-for="ZipCode">Zip Code</label>
+        <input asp-for="ZipCode" value="@Model.ZipCode" />
     </div>
-    <div class="form-group">
-        <label class="control-label col-sm-5" asp-for="ConfirmPassword">Confirm Password</label>
-        <input type="password" asp-for="ConfirmPassword" value="@Model.Password" />
-        <span asp-validation-for="ConfirmPassword"></span>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-5" asp-for="Zipcode">Zip Code</label>
-        <input asp-for="Zipcode" value="@Model.Zipcode" />
-    </div>
-    @*<div>
-        <input type="hidden" asp-for="Salt" value="@Model.Salt" />
-    </div>
-    <div>
-        <input type="hidden" asp-for="Role" value="@Model.Role" />
-    </div>*@
     <div class="form-group">
         <div class="col-sm-offset-5 col-sm-10">
             <input type="submit" value="Save Changes" class="btn btn-default, button" />
         </div>
     </div>
+</form>
+
+<form asp-controller="Account" asp-action="ChangePassword" method="get">
+    <div>
+        <input type="hidden" asp-for="Id" value="@Model.Id"/>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-5 col-sm-10">
+            <input type="submit" value="Change Password" class="btn btn-default, button" />
+        </div>
+    </div>
+</form>
+
+<form asp-controller="Account" asp-action="DeleteAccount" method="post">
+    <input type="hidden" asp-for="Id" value="@Model.Id"/>
+    <div class="col-sm-offset-5 col-sm-10">
+        <input type="submit" value="Delete Account" class="btn btn-danger"/>
+    </div>
+    
 </form>
 
