@@ -3,7 +3,6 @@
     ViewData["Title"] = "Index";
 }
 
-@*<h2 id="header" class="h2">@Model.Username Home</h2>*@
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,69 +14,117 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <style>
-    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-    .row.content {height: 1500px}
+        /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+        .row.content {
+            height: 1000px;
+            }
 
-    /* Set gray background color and 100% height */
-    .sidenav {
-      background-color: #f1f1f1;
-      height: 100%;
-    }
+        /* Set gray background color and 100% height */
+        .sidenav {
+            background-color: #f1f1f1;
+            height: 100%;
+        }
 
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
 
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height: auto;}
-    }
+        .row.content {
+            height: auto;
+        }
+
+        }
+
+        ul.nav-pills {
+            top: 20px;
+            position: fixed;
+        }
+
+        div.col-sm-9 div {
+            height: 350px;
+            font-size: 28px;
+        }
+
+        #section1 {
+            color: #fff;
+            background-color: #1E88E5;
+        }
+
+        #section2 {
+            color: #fff;
+            background-color: #673ab7;
+        }
+
+        #section3 {
+            color: #fff;
+            background-color: #ff9800;
+        }
+
+        media screen and (max-width: 810px) {
+            #section1, #section2, #section3
+
+        {
+            margin-left: 150px;
+        }
+        }
     </style>
 </head>
 <body>
 
     <div class="container-fluid">
         <div class="row content">
-            <div class="col-lg-3 sidenav">
+            <div id="sticky" class="col-lg-3 sidenav">
                 <h4>@Model.Username Home</h4>
-                <img src="~/images/sadspaceman.png" class="img-circle" height="150" width="150" alt="Avatar">
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#section1">Home</a></li>
-                    <li><a href="#section2">Your Games</a></li>
-                    <li><a href="#section3">Your Friends</a></li>
-                    <li><a href="#section3">Your Matches</a></li>
-                </ul><br>
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </div>
+                <img src="~/images/sadspaceman.png" class="img-circle" height="250" width="250" alt="Avatar">
+                <br></br>
+
+                <nav class="col-sm-3" id="myScrollspy">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="#section1">My Games</a></li>
+                        <li><a href="#section2">My Friends</a></li>
+                        <li><a href="#section3">My Matches</a></li>
+
+                    </ul>
+                    </li>
+                    </ul>
+                    <br></br>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </nav>
+
+
             </div>
+
+
+
 
             <div class="col-sm-9">
 
-                <hr>
-                <h2>Your Games</h2>
-                <div style="background-color:blue;height: 200px;width:200px;">GameName</div>
+                <div id="section1">
+                    <h1>My Games</h1>
+                    <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+                </div>
+                <div id="section2">
+                    <h1>My Friends</h1>
+                    <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+                </div>
+                <div id="section3">
+                    <h1>My Matches</h1>
+                    <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+                </div>
 
-                <br><br>
-                <hr> <hr>
-                <h2>Your Friends</h2>
-                <div style="background-color:blue;height: 200px;width:200px;">User</div>
-                <br><br>
-                <hr> <hr>
-                <h2>Your Matches</h2>
-                <div style="background-color:blue;height: 200px;width:200px;">Matches</div>
-                <br><br>
-                <hr>
+
+
+
 
             </div>
         </div>
@@ -93,3 +140,10 @@
 
 </body>
 </html>
+
+<style>
+    #sticky {
+        position: sticky;
+        top: 0;
+    }
+</style>
