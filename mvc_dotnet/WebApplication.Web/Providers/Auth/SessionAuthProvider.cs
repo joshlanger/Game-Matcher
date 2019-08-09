@@ -81,7 +81,8 @@ namespace WebApplication.Web.Providers.Auth
                 user.Password = newHash.Password;
                 user.Salt = newHash.Salt;
 
-                // Save into the db
+                // Save into the db; changed userDAL.UpdateUser(user); to:
+                
                 userDAL.UpdateUser(user);
 
                 return true;
@@ -148,7 +149,7 @@ namespace WebApplication.Web.Providers.Auth
         {
             var profile = new ProfileViewModel
             {
-                UserName = username,
+                Username = username,
                 AvatarName = avatarname,
                 UserBio = userbio
             };

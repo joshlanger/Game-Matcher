@@ -99,19 +99,30 @@ namespace WebApplication.Web.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Profile(ProfileViewModel profileViewModel)
         {
             if (ModelState.IsValid)
             {
-                authProvider.Profile(profileViewModel.UserName, profileViewModel.AvatarName, profileViewModel.UserBio);
+                authProvider.Profile(profileViewModel.Username, profileViewModel.AvatarName, profileViewModel.UserBio);
             }
             return RedirectToAction("Profile", "Account");
         }
 
         [HttpGet]
-        public IActionResult UpdateInfo ()
+        public IActionResult ProfileEdit()
+        {
+            ProfileViewModel profileEdit = new ProfileViewModel();
+
+            var user = authProvider.GetCurrentUser();
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult UpdateInfo()
         {
             User updateinfo = new User();
 
@@ -145,19 +156,19 @@ namespace WebApplication.Web.Controllers
 
         //why isn't the binding working? no info is being passed into the method
         [HttpPost]
-        public IActionResult ChangePassword(ChangePasswordModel password)
+        public IActionResult ChangePassword(ChangePasswordModel passwordIn)
         {
             if (ModelState.IsValid)
             {
                 
                 //call method to update database
-                userDAO.ChangePassword(password);
+                userDAO.ChangePassword(passwordIn);
 
                 return RedirectToAction("Confirmation", "Account");
             }
             else
             {
-                return View(password);
+                return View(passwordIn);
             }
         }
 

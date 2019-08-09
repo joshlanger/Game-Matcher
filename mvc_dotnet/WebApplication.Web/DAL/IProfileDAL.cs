@@ -8,10 +8,10 @@ namespace WebApplication.Web.DAL
 {
     public interface IProfileDAL
     {
-        ProfileViewModel GetProfile(string UserName);
+        ProfileViewModel GetProfile(string Username);
 
         void CreateProfile(ProfileViewModel profile);
 
-        void UdatedProfile(ProfileViewModel profile);
+        void UpdatedProfile(ProfileViewModel profile);
     }
 }
