@@ -12,6 +12,6 @@ namespace WebApplication.Web.DAL
 
         void CreateProfile(ProfileViewModel profile);
 
-        void UdatedProfile(ProfileViewModel profile);
+        void UpdatedProfile(ProfileViewModel profile);
     }
 }
