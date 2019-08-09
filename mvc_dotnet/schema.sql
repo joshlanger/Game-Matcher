@@ -4,16 +4,20 @@ USE master;
 GO
 
 -- Delete the DemoDB Database (IF EXISTS)
-IF EXISTS(select * from sys.databases where name='GamingMatcher')
-DROP DATABASE GamingMatcher;
+IF EXISTS(select * from sys.databases where name='GameMatcher')
+DROP DATABASE GameMatcher;
+GO
+
+CREATE DATABASE GameMatcher
+( EDITION = 'Standard', SERVICE_OBJECTIVE = 'S3' );
 GO
 
 -- Create a new DemoDB Database
-CREATE DATABASE GamingMatcher;
+CREATE DATABASE GameMatcher;
 GO
 
 -- Switch to the DemoDB Database
-USE GamingMatcher;
+USE GameMatcher;
 GO
 
 BEGIN TRANSACTION;
@@ -32,11 +36,17 @@ CREATE TABLE users
 );
 CREATE TABLE profile
 (
-profile_id     int           identity(1,1),
-user_id        int           not null,
-user_name		varchar(50)	 null,	
-avatar_name	   varchar(50)	 null,		
-user_bio	   varchar(250)  null,
+profile_id			int				identity(1,1),
+user_id				int				not null,
+user_name			varchar(50)		null,	
+avatar_name			varchar(50)		null,		
+user_bio			varchar(250)	null,
+gaming_experience	int				null,
+favorite_genres		varchar(250)	null,
+contact_preference	varchar(50)		not null,
+other_interests		varchar(140)	null,
+is_Private			bit				not null,
+
 
 constraint pk_profile primary key (profile_id),
 foreign key (user_id) references users(user_id)
