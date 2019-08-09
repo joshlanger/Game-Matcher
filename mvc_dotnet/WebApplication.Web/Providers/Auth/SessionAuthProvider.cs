@@ -83,7 +83,7 @@ namespace WebApplication.Web.Providers.Auth
 
                 // Save into the db; changed userDAL.UpdateUser(user); to:
                 
-                userDAL.UpdateUser(user);
+                userDAL.ChangePassword(user);
 
                 return true;
             }
