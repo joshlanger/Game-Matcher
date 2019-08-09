@@ -113,36 +113,51 @@ namespace WebApplication.Web.Controllers
         [HttpGet]
         public IActionResult UpdateInfo ()
         {
-            UpdateInfoModel updateinfo = new UpdateInfoModel();
+            User updateinfo = new User();
 
             //get the current user info
             var user = authProvider.GetCurrentUser();
 
             //convert user model to updateinfomodel
-            updateinfo = updateinfo.ConvertUserToUpdateInfo(user);
+            //updateinfo = updateinfo.ConvertUserToUpdateInfo(user);
 
             //pass info to view.  existing info will be form field defaults
-            //(this needs to be sorted out)
-            return View(updateinfo);
+            return View(user);
         }
 
         [HttpPost]
-        public IActionResult UpdateInfo (UpdateInfoModel updateInfoModel)
+        public IActionResult UpdateInfo (User user)
+        {
+            
+                userDAO.UpdateUser(user);
+
+                return RedirectToAction("Confirmation", "Account");
+           
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword (User user)
+        {
+            ChangePasswordModel password = new ChangePasswordModel();
+            password.Id = user.Id;
+            return View(password);
+        }
+
+        //why isn't the binding working? no info is being passed into the method
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordModel password)
         {
             if (ModelState.IsValid)
             {
-                User user = new User();
-                //assign updateinfo to user
-                user = user.ConvertUpdateInfoModelToUser(updateInfoModel);
-
+                
                 //call method to update database
-                userDAO.UpdateUser(user);
+                userDAO.ChangePassword(password);
 
                 return RedirectToAction("Confirmation", "Account");
             }
             else
             {
-                return View(updateInfoModel);
+                return View(password);
             }
         }
 
@@ -150,6 +165,16 @@ namespace WebApplication.Web.Controllers
         public IActionResult Confirmation(User user)
         {
             return View(user);
+        }
+
+        //deletes the user's account from the database
+        //i can't get this to work with httpdelete, but it works with post
+        [HttpPost]
+        public IActionResult DeleteAccount(User user)
+        {
+
+            userDAO.DeleteUser(user);
+            return RedirectToAction("Logoff", "Account");
         }
     }
 }
