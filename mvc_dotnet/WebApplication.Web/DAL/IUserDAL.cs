@@ -35,6 +35,6 @@ namespace WebApplication.Web.DAL
         void DeleteUser(User user);
 
 
-        void ChangePassword(ChangePasswordModel password);
+        void ChangePassword(User password);
     }
 }
