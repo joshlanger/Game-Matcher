@@ -13,7 +13,7 @@ namespace WebApplication.Web.Models.Account
 
         public int UserId { get; set; }
 
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         public string UserBio { get; set; }
 

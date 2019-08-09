@@ -51,6 +51,7 @@ namespace WebApplication.Web
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IAuthProvider, SessionAuthProvider>();
             services.AddTransient<IUserDAL>(m => new UserSqlDAL(connectionString));
+            services.AddTransient<IProfileDAL>(m => new ProfileSqlDAL(connectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

@@ -99,19 +99,30 @@ namespace WebApplication.Web.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Profile(ProfileViewModel profileViewModel)
         {
             if (ModelState.IsValid)
             {
-                authProvider.Profile(profileViewModel.UserName, profileViewModel.AvatarName, profileViewModel.UserBio);
+                authProvider.Profile(profileViewModel.Username, profileViewModel.AvatarName, profileViewModel.UserBio);
             }
             return RedirectToAction("Profile", "Account");
         }
 
         [HttpGet]
-        public IActionResult UpdateInfo ()
+        public IActionResult ProfileEdit()
+        {
+            ProfileViewModel profileEdit = new ProfileViewModel();
+
+            var user = authProvider.GetCurrentUser();
+
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult UpdateInfo()
         {
             User updateinfo = new User();
 

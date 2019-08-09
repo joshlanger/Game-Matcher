@@ -41,7 +41,7 @@ namespace WebApplication.Web.DAL
         }
 
 
-        public ProfileViewModel GetProfile(string UserName)
+        public ProfileViewModel GetProfile(string Username)
         {
             ProfileViewModel profile = null;
             try
@@ -49,8 +49,8 @@ namespace WebApplication.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM profile WHERE user_name = @user_name;", conn);
-                    cmd.Parameters.AddWithValue("@user_name", UserName);
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM profile WHERE username = @username;", conn);
+                    cmd.Parameters.AddWithValue("@username", Username);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -68,15 +68,15 @@ namespace WebApplication.Web.DAL
             
         }
 
-        public void UdatedProfile(ProfileViewModel profile)
+        public void UpdatedProfile(ProfileViewModel profile)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("UPDATE profile SET user_name = @UserName, avatar_name = @AvatarName, user_bio = @UserBio WHERE id = @id;", conn);
-                    cmd.Parameters.AddWithValue("@UserName", profile.UserName);
+                    SqlCommand cmd = new SqlCommand("UPDATE profile SET user_name = @Username, avatar_name = @AvatarName, user_bio = @UserBio WHERE id = @id;", conn);
+                    cmd.Parameters.AddWithValue("@Username", profile.Username);
                     cmd.Parameters.AddWithValue("@AvatarName", profile.AvatarName);
                     cmd.Parameters.AddWithValue("@UserBio", profile.UserBio);
                     
@@ -94,7 +94,7 @@ namespace WebApplication.Web.DAL
             {
                 ProfileId = Convert.ToInt32(reader["profile_id"]),
                 UserId = Convert.ToInt32(reader["user_id"]),
-                UserName = Convert.ToString(reader["user_name"]),
+                Username = Convert.ToString(reader["username"]),
                 AvatarName = Convert.ToString(reader["avatar_name"]),
                 UserBio = Convert.ToString(reader["user_bio"])
                 

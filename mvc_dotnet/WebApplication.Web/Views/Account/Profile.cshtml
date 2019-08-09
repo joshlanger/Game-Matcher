@@ -4,6 +4,14 @@
     ViewData["Title"] = "Profile";
 }
 
+@{
+    if (TempData["Status"] != null)
+    {
+        <h1>@TempData["Status"]</h1>
+
+    };
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
