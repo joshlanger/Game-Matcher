@@ -75,8 +75,8 @@ namespace WebApplication.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("UPDATE profile SET user_name = @username, avatar_name = @AvatarName, user_bio = @UserBio WHERE id = @id;", conn);
-                    cmd.Parameters.AddWithValue("@username", profile.Username);
+                    SqlCommand cmd = new SqlCommand("UPDATE profile SET user_name = @Username, avatar_name = @AvatarName, user_bio = @UserBio WHERE id = @id;", conn);
+                    cmd.Parameters.AddWithValue("@Username", profile.Username);
                     cmd.Parameters.AddWithValue("@AvatarName", profile.AvatarName);
                     cmd.Parameters.AddWithValue("@UserBio", profile.UserBio);
                     
