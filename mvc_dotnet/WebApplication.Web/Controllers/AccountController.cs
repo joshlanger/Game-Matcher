@@ -13,12 +13,14 @@ namespace WebApplication.Web.Controllers
     public class AccountController : Controller
     {
         private IUserDAL userDAO;
-        //added userDAO to the constructor
+        private IProfileDAL profileDAO;
         private readonly IAuthProvider authProvider;
-        public AccountController(IAuthProvider authProvider, IUserDAL userDAO)
+
+        public AccountController(IAuthProvider authProvider, IUserDAL userDAO, IProfileDAL profileDAO)
         {
             this.authProvider = authProvider;
             this.userDAO = userDAO;
+            this.profileDAO = profileDAO;
         }
 
         //[AuthorizationFilter] // actions can be filtered to only those that are logged in
@@ -40,9 +42,6 @@ namespace WebApplication.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(LoginViewModel loginViewModel)
         {
-            //var email = userDAO.GetUser(loginViewModel.Email);
-            //var password = userDAO.GetUser(loginViewModel.Password);
-
             // Ensure the fields were filled out
             if (ModelState.IsValid)
             {
@@ -78,7 +77,14 @@ namespace WebApplication.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Register(RegisterViewModel registerViewModel)
         {
-            if (ModelState.IsValid)
+            //var userCheck = userDAO.GetUser(registerViewModel.Email);
+            //bool isTaken = false;
+            //if(userCheck.Email != null)
+            //{
+            //    isTaken = true;
+            //}
+
+            if (ModelState.IsValid /*&& !isTaken*/)
             {
                 // Register them as a new user (and set default role)
                 // When a user registers they need to be given a role. If you don't need anything special
@@ -100,26 +106,65 @@ namespace WebApplication.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult ProfileEdit(User editUserProfile)
+        {
+            ProfileViewModel profile = new ProfileViewModel();
+            var user = authProvider.GetCurrentUser();
+            editUserProfile.Email = user.Email;
+            userDAO.GetUser(user.Email);
+            editUserProfile.Id = user.Id;
+            profile.UserId = editUserProfile.Id;
+            return View(profile);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Profile(ProfileViewModel profileViewModel)
+        public IActionResult ProfileEdit(ProfileViewModel profile)
         {
-            if (ModelState.IsValid)
-            {
-                authProvider.Profile(profileViewModel.Username, profileViewModel.AvatarName, profileViewModel.UserBio);
-            }
-            return RedirectToAction("Profile", "Account");
+            profileDAO.CreateProfile(profile);
+
+            return RedirectToAction("Confirmation", "Account");
         }
 
-        [HttpGet]
-        public IActionResult ProfileEdit()
-        {
-            ProfileViewModel profileEdit = new ProfileViewModel();
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult ProfileEdit(ProfileViewModel profileViewModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        authProvider.Profile(profileViewModel.Username, profileViewModel.AvatarName, profileViewModel.UserBio);
+        //    }
+        //    return RedirectToAction("ProfileEdit", "Account");
+        //}
 
-            var user = authProvider.GetCurrentUser();
+        //[HttpGet]
+        //public IActionResult ProfileEdit(string username)
+        //{
+        //    var user = authProvider.GetCurrentUser(); //have user here 
+        //    profileDAO.CreateProfile(username);
+        //    return View(user);
+        //}
 
-            return View();
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult ProfileEdit(ProfileViewModel profile)
+        //{
+        //    ProfileViewModel profileEdit = new ProfileViewModel();
+
+        //    profileEdit.Username = profile.Username;
+        //    profileEdit.AvatarName = profile.AvatarName;
+        //    profileEdit.UserBio = profile.UserBio;
+        //    profileEdit.GamingExperience = profile.GamingExperience;
+        //    profileEdit.FavoriteGenres = profile.FavoriteGenres;
+        //    profileEdit.ContactPreference = profile.ContactPreference;
+        //    profileEdit.OtherInterests = profile.OtherInterests;
+        //    profileEdit.IsPrivate = profile.IsPrivate;
+
+        //    profileDAO.CreateProfile(profileEdit);
+
+        //    return RedirectToAction("Confirmation", "Account");
+        //}
 
         [HttpGet]
         public IActionResult UpdateInfo()
@@ -129,21 +174,17 @@ namespace WebApplication.Web.Controllers
             //get the current user info
             var user = authProvider.GetCurrentUser();
 
-            //convert user model to updateinfomodel
-            //updateinfo = updateinfo.ConvertUserToUpdateInfo(user);
-
             //pass info to view.  existing info will be form field defaults
             return View(user);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult UpdateInfo (User user)
-        {
-            
+        { 
                 userDAO.UpdateUser(user);
 
-                return RedirectToAction("Confirmation", "Account");
-           
+                return RedirectToAction("Confirmation", "Account");  
         }
 
         [HttpGet]
@@ -154,15 +195,14 @@ namespace WebApplication.Web.Controllers
             return View(password);
         }
 
-        //why isn't the binding working? no info is being passed into the method
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ChangePassword(ChangePasswordModel passwordIn)
         {
             if (ModelState.IsValid)
             {
                 
-                //call method to update database
-                userDAO.ChangePassword(passwordIn);
+                authProvider.ChangePassword(passwordIn.ExistingPassword, passwordIn.Password);
 
                 return RedirectToAction("Confirmation", "Account");
             }
@@ -179,11 +219,11 @@ namespace WebApplication.Web.Controllers
         }
 
         //deletes the user's account from the database
-        //i can't get this to work with httpdelete, but it works with post
+        //i can't get this to work with [httpdelete], but it works with post
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteAccount(User user)
         {
-
             userDAO.DeleteUser(user);
             return RedirectToAction("Logoff", "Account");
         }

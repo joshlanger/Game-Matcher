@@ -27,7 +27,7 @@ namespace WebApplication.Web.DAL
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    //changed emailadress to email in sql statement and param
+                    //changed emailaddress to email in sql statement and param
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@username, @email, @password, @salt, @role, @zipcode)", conn);
                     cmd.Parameters.AddWithValue("@username", user.Username);
@@ -86,7 +86,7 @@ namespace WebApplication.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM USERS WHERE email = @email;", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT * from users WHERE email = @email;", conn);
                     cmd.Parameters.AddWithValue("@email", email);
 
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -133,7 +133,7 @@ namespace WebApplication.Web.DAL
             }
         }
 
-        public void ChangePassword(ChangePasswordModel password)
+        public void ChangePassword(User passwordIn)
         {
             try
             {
@@ -141,10 +141,10 @@ namespace WebApplication.Web.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("UPDATE users SET password = @password, salt = @salt, role = @role WHERE user_id = @id;", conn);
-                    cmd.Parameters.AddWithValue("@password", password.Password);
-                    cmd.Parameters.AddWithValue("@salt", password.Salt);
-                    cmd.Parameters.AddWithValue("@role", password.Role);
-                    cmd.Parameters.AddWithValue("@id", password.Id);
+                    cmd.Parameters.AddWithValue("@password", passwordIn.Password);
+                    cmd.Parameters.AddWithValue("@salt", passwordIn.Salt);
+                    cmd.Parameters.AddWithValue("@role", passwordIn.Role);
+                    cmd.Parameters.AddWithValue("@id", passwordIn.Id);
                     
 
                     cmd.ExecuteNonQuery();

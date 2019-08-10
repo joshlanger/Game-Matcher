@@ -26,7 +26,7 @@ namespace WebApplication.Web.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "We'd love to hear from you. Please see below out contact information.";
+            ViewData["Message"] = "We'd love to hear from you. Please see below our contact information.";
 
             return View();
         }
