@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Web.Models.Profile
 {
-    public class GamerProfile
+    public class SearchModel
     {
+        public string searchParameter { get; set; }
     }
 }
