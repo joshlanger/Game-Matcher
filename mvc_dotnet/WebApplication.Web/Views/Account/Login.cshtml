@@ -17,38 +17,38 @@
 <form class="form-horizontal" asp-controller="account" asp-action="login" method="post">
 
     <div class="form-group">
-        <label id="labels" class="col-md-1 col-form-label col-form-label-md font-color" asp-for="Email">Email:</label>
-            <div class="col-md-11">
-                <input id="fields" type="email" class="form-control form-control-sm" asp-for="Email" />
-                <span asp-validation-for="Email"></span>
-            </div>
+        <label id="labels" class="col-sm-2 col-md-2 col-lg-2 control-label font-color" asp-for="Email">Email:</label>
+        <div class="col-sm-10 col-md-10 col-lg-10">
+            <input class="form-control" type="email" asp-for="Email"/>
+            <span asp-validation-for="Email"></span>
+        </div>
     </div>
     <div class="form-group">
-       
-        <label id="labels" class="col-md-1 col-form-label font-color" asp-for="Password">Password:</label>
-            <div class="col-md-11">
-                <input id="fields" type="password" class="form-control" asp-for="Password"/>
-                <span asp-validation-for="Password"></span>
-            </div>
+        <label id="labels" class="col-sm-2 col-md-2 col-lg-2 control-label font-color" asp-for="Password">Password:</label>
+        <div class="col-sm-10 col-md-10 col-lg-10">
+            <input id="fields" class="form-control" type="password" asp-for="Password"/>
+            <span asp-validation-for="Password"></span>
+        </div>
         
     </div>
     <div class="form-group">
-        <div class="col-md-1 col-form-label">
-            <input type="submit" value="Login" class="btn btn-default, button" />
+        <div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+            <div>
+                <label class="control-label">
+                    <input type="submit" value="Login" class="btn btn-default, button" />
+                </label>
+                <button asp-area="" class="btn btn-default, button" asp-controller="Account" asp-action="Register">Create a Account</button>
+                <button asp-area="" class="btn btn-default, button" asp-controller="Account" asp-action="Register">Forgot Your Password?</button>
+            </div>
         </div>
-        <div class="col-md-2 col-form-label">
-            <button asp-area="" class="btn btn-default, button" asp-controller="Account" asp-action="Register">Create a Account</button>
-        </div>
-        <div class="col-md-3 col-form-label">
-            <button asp-area="" class="btn btn-default, button" asp-controller="Account" asp-action="Register">Forgot Your Password?</button>
-        </div>
+       
+       
+        
     </div>
 </form>
 </div>
 
-<style>
-
-
+<style scoped>
     .h2 {
         display: flex;
         justify-content: center;
@@ -58,6 +58,9 @@
         background-color: magenta;
         color: white;
     }
+    .margin-left1{
+        margin-left: 05px;
+    }
     .font-color{
         color: magenta;
     }
@@ -66,17 +69,17 @@
         border-color: #00f6ed;
     }
     #container {
-        margin-top: 200px;
+        margin-top: 100px;
         background-color: darkslateblue;
         width: 50%;
-        height: auto;
+        height: 75%;
         box-shadow: 05px 05px 05px purple;
     }
     #labels{
-        
         padding-top: 10px;
+        
     }
     #fields{
-        margin: 05px;
+        padding: 10px;
     }
 </style>

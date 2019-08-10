@@ -5,36 +5,34 @@
     ViewData["Title"] = "Register";
 }
 <div id="container" class="container-fluid border-color">
-    
-    
 
-    <form id="user-login" class="form-horizontal" asp-controller="account" asp-action="register" method="post">
+    <h2 id="header" class="h2 font-color">Register</h2>
+    <form class="form-horizontal" asp-controller="account" asp-action="register" method="post">
         <div class="form-group">
-            <h2 class="font-color col-sm-offset-5">Register</h2>
-            <label id="labels" class="control-label col-md-3 font-color" asp-for="Username">Username:</label>
-            <div class="col-md-7">
+            <label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Username">Username:</label>
+            <div class="col-sm-8 col-md-8 col-lg-8">
                 <input id="fields" class="form-control" asp-for="Username" />
                 <span asp-validation-for="Username"></span>
             </div>
 
         </div>
         <div class="form-group">
-            <label id="labels" class="control-label col-md-3 font-color" asp-for="Email">Email:</label>
-            <div class="col-md-7">
+            <label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Email">Email:</label>
+            <div class="col-sm-8 col-md-8 col-lg-8">
                 <input id="fields" type="email" class="form-control" asp-for="Email" />
                 <span asp-validation-for="Email"></span>
             </div>
         </div>
         <div class="form-group">
-            <label id="labels" class="control-label col-md-3 font-color" asp-for="Password">Password:</label>
-            <div class="col-md-7">
+            <label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Password">Password:</label>
+            <div class="col-sm-8 col-md-8 col-lg-8">
                 <input id="fields" type="password" class="form-control" asp-for="Password" />
                 <span asp-validation-for="Password"></span>
             </div>
         </div>
         <div class="form-group">
-            <label id="labels" class="control-label col-md-3 font-color" asp-for="ConfirmPassword">Confirm Password:</label>
-            <div class="col-md-7">
+            <label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="ConfirmPassword">Confirm Password:</label>
+            <div class="col-sm-8 col-md-8 col-lg-8">
                 <input id="fields" type="password" class="form-control" asp-for="ConfirmPassword" />
                 <span asp-validation-for="ConfirmPassword"></span>
             </div>
@@ -46,20 +44,24 @@
             <input type="hidden" asp-for="Role" />
         </div>
         <div class="form-group">
-            <label id="labels" class="control-label col-md-3 font-color" asp-for="Zipcode">Zip Code:</label>
-            <div class="col-md-7">
+            <label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Zipcode">Zip Code:</label>
+            <div class="col-sm-8 col-md-8 col-lg-8">
                 <input id="fields" class="form-control" asp-for="Zipcode" />
                 <span asp-validation-for="Zipcode"></span>
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-5">
-                <input id="fields" type="submit" value="Register" class="btn btn-default, button" />
+            <div>
+                <div class="col-sm-offset-5 col-md-offset-5 col-lg-offset-5">
+                    <lable class="control-label">
+                        <input id="fields" type="submit" value="Register" class="btn btn-default, button" />
+                    </lable>
+                </div>
             </div>
         </div>
     </form>
 </div>
-<style>
+<style scoped>
     .h2 {
         display: flex;
         justify-content: center;
@@ -79,15 +81,13 @@
         border: ridge;
         border-color: #00f6ed;
     }
-
     #container {
-        margin-top: 200px;
+        margin-top: 100px;
         background-color: darkslateblue;
         width: 50%;
-        height: auto;
+        height: 75%;
         box-shadow: 05px 05px 05px purple;
     }
-
     #labels {
         padding-top: 10px;
     }
