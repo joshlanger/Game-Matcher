@@ -133,7 +133,7 @@ namespace WebApplication.Web.DAL
             }
         }
 
-        public void ChangePassword(ChangePasswordModel password)
+        public void ChangePassword(User passwordIn)
         {
             try
             {
@@ -141,10 +141,10 @@ namespace WebApplication.Web.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("UPDATE users SET password = @password, salt = @salt, role = @role WHERE user_id = @id;", conn);
-                    cmd.Parameters.AddWithValue("@password", password.Password);
-                    cmd.Parameters.AddWithValue("@salt", password.Salt);
-                    cmd.Parameters.AddWithValue("@role", password.Role);
-                    cmd.Parameters.AddWithValue("@id", password.Id);
+                    cmd.Parameters.AddWithValue("@password", passwordIn.Password);
+                    cmd.Parameters.AddWithValue("@salt", passwordIn.Salt);
+                    cmd.Parameters.AddWithValue("@role", passwordIn.Role);
+                    cmd.Parameters.AddWithValue("@id", passwordIn.Id);
                     
 
                     cmd.ExecuteNonQuery();

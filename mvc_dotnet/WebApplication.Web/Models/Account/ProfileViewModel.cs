@@ -29,6 +29,16 @@ namespace WebApplication.Web.Models.Account
 
         public bool IsPrivate { get; set; }
 
-        public List<Game> AvailableGames { get; set; }
+        public string GamingExperience { get; set; }
+
+        public string FavoriteGenres { get; set; }
+
+        public string ContactPreference { get; set; }
+
+        public string OtherInterests { get; set; }
+
+        public string IsPrivate { get; set; }
+
+        //public List<Game> AvailableGames { get; set; }
     }
 }
