@@ -24,12 +24,12 @@ namespace WebApplication.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO profile VALUES (@username, @avatar_name, @user_bio, @gaming_experience, @favorite_genres, @contact_preference, @other_interests, @is_private)", conn);
-                    cmd.Parameters.AddWithValue("@username", profile.Username);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO profile VALUES (@user_id, @user_name, @avatar_name, @user_bio, @gaming_experience, @contact_preference, @other_interests, @is_private)", conn);
+                    cmd.Parameters.AddWithValue("@user_id", profile.UserId);
+                    cmd.Parameters.AddWithValue("@user_name", profile.Username);
                     cmd.Parameters.AddWithValue("@avatar_name", profile.AvatarName);
                     cmd.Parameters.AddWithValue("@user_bio", profile.UserBio);
                     cmd.Parameters.AddWithValue("@gaming_experience", profile.GamingExperience);
-                    cmd.Parameters.AddWithValue("@favorite_genres", profile.FavoriteGenres);
                     cmd.Parameters.AddWithValue("@contact_preference", profile.ContactPreference);
                     cmd.Parameters.AddWithValue("@other_interests", profile.OtherInterests);
                     cmd.Parameters.AddWithValue("@is_private", profile.IsPrivate);
@@ -100,11 +100,10 @@ namespace WebApplication.Web.DAL
             {
                 ProfileId = Convert.ToInt32(reader["profile_id"]),
                 UserId = Convert.ToInt32(reader["user_id"]),
-                Username = Convert.ToString(reader["username"]),
+                Username = Convert.ToString(reader["user_name"]),
                 AvatarName = Convert.ToString(reader["avatar_name"]),
                 UserBio = Convert.ToString(reader["user_bio"]),
                 GamingExperience = Convert.ToInt32(reader["gaming_experience"]),
-                FavoriteGenres = Convert.ToString(reader["favorite_genres"]),
                 ContactPreference = Convert.ToString(reader["contact_preference"]),
                 OtherInterests = Convert.ToString(reader["other_interests"]),
                 IsPrivate = Convert.ToBoolean(reader["is_Private"])

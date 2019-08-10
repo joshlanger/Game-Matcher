@@ -109,20 +109,23 @@ namespace WebApplication.Web.Controllers
         [HttpGet]
         public IActionResult ProfileEdit(User editUserProfile)
         {
+            ProfileViewModel profile = new ProfileViewModel();
             var user = authProvider.GetCurrentUser();
             editUserProfile.Email = user.Email;
             userDAO.GetUser(user.Email);
-            return RedirectToAction("Profile", "Account");
+            editUserProfile.Id = user.Id;
+            profile.UserId = editUserProfile.Id;
+            return View(profile);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult ProfileEdit(ProfileViewModel profile)
-        //{
-        //    profileDAO.CreateProfile(profile);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ProfileEdit(ProfileViewModel profile)
+        {
+            profileDAO.CreateProfile(profile);
 
-        //    return RedirectToAction("Confirmation", "Account");
-        //}
+            return RedirectToAction("Confirmation", "Account");
+        }
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
