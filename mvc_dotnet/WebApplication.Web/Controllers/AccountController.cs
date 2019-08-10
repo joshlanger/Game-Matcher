@@ -64,7 +64,7 @@ namespace WebApplication.Web.Controllers
             authProvider.LogOff();
 
             // Redirect the user where you want them to go after logoff
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpGet]
