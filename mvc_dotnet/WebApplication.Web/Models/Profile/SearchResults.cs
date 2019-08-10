@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication.Web.Models.Account;
 
 namespace WebApplication.Web.Models.Profile
 {
-    public class GamerProfile
+    public class SearchResults
     {
+        public List<ProfileViewModel> Results { get; set; }
     }
 }

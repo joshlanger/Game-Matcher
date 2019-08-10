@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication.Web.Models.Account;
+using WebApplication.Web.Models.Profile;
 
 namespace WebApplication.Web.DAL
 {
@@ -76,6 +77,35 @@ namespace WebApplication.Web.DAL
             }
         }
 
+        public List<ProfileViewModel> SearchByGenre(string genre)
+        {
+            List<ProfileViewModel> Results = new List<ProfileViewModel>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT * from profile WHERE favorite_genres LIKE %@genre%", conn);
+                    cmd.Parameters.AddWithValue("@genre", genre);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while(reader.Read())
+                    {
+                        var Container = MapRowToProfile(reader);
+                        Results.Add(Container);
+                    }
+
+                    return Results;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+        }
+
         private ProfileViewModel MapRowToProfile(SqlDataReader reader)
         {
             return new ProfileViewModel()
@@ -89,7 +119,7 @@ namespace WebApplication.Web.DAL
                 FavoriteGenres = Convert.ToString(reader["favorite_genres"]),
                 ContactPreference = Convert.ToString(reader["contact_preference"]),
                 OtherInterests = Convert.ToString(reader["other_interests"]),
-                IsPrivate = Convert.ToString(reader["is_Private"])
+                IsPrivate = Convert.ToBoolean(reader["is_Private"])
             };
         }
     }

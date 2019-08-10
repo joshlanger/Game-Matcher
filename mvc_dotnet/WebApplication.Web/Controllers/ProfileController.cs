@@ -22,6 +22,12 @@ namespace WebApplication.Web.Controllers
         public IActionResult GamerProfile(int id)
         {
             var profile = profileSearchDAL.GetProfile(id);
+            return View(profile);
+        }
+
+        [HttpGet]
+        public IActionResult SearchResults(string genre)
+        {
             return View();
         }
 
@@ -31,5 +37,6 @@ namespace WebApplication.Web.Controllers
             int id = profileSearchDAL.SearchProfileByUsername(searchUsername);
             return RedirectToAction("GamerProfile", "Profile", "id");
         }
+
     }
 }

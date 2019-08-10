@@ -27,7 +27,7 @@ namespace WebApplication.Web.Models.Account
 
         public string OtherInterests { get; set; }
 
-        public string IsPrivate { get; set; }
+        public bool IsPrivate { get; set; }
 
         //public List<Game> AvailableGames { get; set; }
     }
