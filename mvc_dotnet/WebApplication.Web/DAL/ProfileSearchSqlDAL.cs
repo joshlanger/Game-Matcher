@@ -85,11 +85,10 @@ namespace WebApplication.Web.DAL
                 Username = Convert.ToString(reader["user_name"]),
                 AvatarName = Convert.ToString(reader["avatar_name"]),
                 UserBio = Convert.ToString(reader["user_bio"]),
-                GamingExperience = Convert.ToString(reader["gaming_experience"]),
-                FavoriteGenres = Convert.ToString(reader["favorite_genres"]),
+                GamingExperience = Convert.ToInt32(reader["gaming_experience"]),
                 ContactPreference = Convert.ToString(reader["contact_preference"]),
                 OtherInterests = Convert.ToString(reader["other_interests"]),
-                IsPrivate = Convert.ToString(reader["is_Private"])
+                IsPrivate = Convert.ToBoolean(reader["is_Private"])
             };
         }
     }

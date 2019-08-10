@@ -13,12 +13,14 @@ namespace WebApplication.Web.Controllers
     public class AccountController : Controller
     {
         private IUserDAL userDAO;
-        //added userDAO to the constructor
+        private IProfileDAL profileDAO;
         private readonly IAuthProvider authProvider;
-        public AccountController(IAuthProvider authProvider, IUserDAL userDAO)
+
+        public AccountController(IAuthProvider authProvider, IUserDAL userDAO, IProfileDAL profileDAO)
         {
             this.authProvider = authProvider;
             this.userDAO = userDAO;
+            this.profileDAO = profileDAO;
         }
 
         //[AuthorizationFilter] // actions can be filtered to only those that are logged in
@@ -40,9 +42,6 @@ namespace WebApplication.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(LoginViewModel loginViewModel)
         {
-            //var email = userDAO.GetUser(loginViewModel.Email);
-            //var password = userDAO.GetUser(loginViewModel.Password);
-
             // Ensure the fields were filled out
             if (ModelState.IsValid)
             {
@@ -107,26 +106,65 @@ namespace WebApplication.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult ProfileEdit(User editUserProfile)
+        {
+            ProfileViewModel profile = new ProfileViewModel();
+            var user = authProvider.GetCurrentUser();
+            editUserProfile.Email = user.Email;
+            userDAO.GetUser(user.Email);
+            editUserProfile.Id = user.Id;
+            profile.UserId = editUserProfile.Id;
+            return View(profile);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Profile(ProfileViewModel profileViewModel)
+        public IActionResult ProfileEdit(ProfileViewModel profile)
         {
-            if (ModelState.IsValid)
-            {
-                authProvider.Profile(profileViewModel.Username, profileViewModel.AvatarName, profileViewModel.UserBio);
-            }
-            return RedirectToAction("Profile", "Account");
+            profileDAO.CreateProfile(profile);
+
+            return RedirectToAction("Confirmation", "Account");
         }
 
-        [HttpGet]
-        public IActionResult ProfileEdit()
-        {
-            ProfileViewModel profileEdit = new ProfileViewModel();
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult ProfileEdit(ProfileViewModel profileViewModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        authProvider.Profile(profileViewModel.Username, profileViewModel.AvatarName, profileViewModel.UserBio);
+        //    }
+        //    return RedirectToAction("ProfileEdit", "Account");
+        //}
 
-            var user = authProvider.GetCurrentUser();
+        //[HttpGet]
+        //public IActionResult ProfileEdit(string username)
+        //{
+        //    var user = authProvider.GetCurrentUser(); //have user here 
+        //    profileDAO.CreateProfile(username);
+        //    return View(user);
+        //}
 
-            return View();
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult ProfileEdit(ProfileViewModel profile)
+        //{
+        //    ProfileViewModel profileEdit = new ProfileViewModel();
+
+        //    profileEdit.Username = profile.Username;
+        //    profileEdit.AvatarName = profile.AvatarName;
+        //    profileEdit.UserBio = profile.UserBio;
+        //    profileEdit.GamingExperience = profile.GamingExperience;
+        //    profileEdit.FavoriteGenres = profile.FavoriteGenres;
+        //    profileEdit.ContactPreference = profile.ContactPreference;
+        //    profileEdit.OtherInterests = profile.OtherInterests;
+        //    profileEdit.IsPrivate = profile.IsPrivate;
+
+        //    profileDAO.CreateProfile(profileEdit);
+
+        //    return RedirectToAction("Confirmation", "Account");
+        //}
 
         [HttpGet]
         public IActionResult UpdateInfo()
