@@ -13,12 +13,14 @@ namespace WebApplication.Web.Controllers
     public class AccountController : Controller
     {
         private IUserDAL userDAO;
-        //added userDAO to the constructor
+        private IProfileDAL profileDAO;
         private readonly IAuthProvider authProvider;
-        public AccountController(IAuthProvider authProvider, IUserDAL userDAO)
+
+        public AccountController(IAuthProvider authProvider, IUserDAL userDAO, IProfileDAL profileDAO)
         {
             this.authProvider = authProvider;
             this.userDAO = userDAO;
+            this.profileDAO = profileDAO;
         }
 
         //[AuthorizationFilter] // actions can be filtered to only those that are logged in
@@ -40,9 +42,6 @@ namespace WebApplication.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(LoginViewModel loginViewModel)
         {
-            //var email = userDAO.GetUser(loginViewModel.Email);
-            //var password = userDAO.GetUser(loginViewModel.Password);
-
             // Ensure the fields were filled out
             if (ModelState.IsValid)
             {
@@ -100,26 +99,62 @@ namespace WebApplication.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Profile(ProfileViewModel profileViewModel)
+        [HttpGet]
+        public IActionResult ProfileEdit(User editUserProfile)
         {
-            if (ModelState.IsValid)
-            {
-                authProvider.Profile(profileViewModel.Username, profileViewModel.AvatarName, profileViewModel.UserBio);
-            }
+            var user = authProvider.GetCurrentUser();
+            editUserProfile.Email = user.Email;
+            userDAO.GetUser(user.Email);
             return RedirectToAction("Profile", "Account");
         }
 
-        [HttpGet]
-        public IActionResult ProfileEdit()
-        {
-            ProfileViewModel profileEdit = new ProfileViewModel();
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult ProfileEdit(ProfileViewModel profile)
+        //{
+        //    profileDAO.CreateProfile(profile);
 
-            var user = authProvider.GetCurrentUser();
+        //    return RedirectToAction("Confirmation", "Account");
+        //}
 
-            return View();
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult ProfileEdit(ProfileViewModel profileViewModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        authProvider.Profile(profileViewModel.Username, profileViewModel.AvatarName, profileViewModel.UserBio);
+        //    }
+        //    return RedirectToAction("ProfileEdit", "Account");
+        //}
+
+        //[HttpGet]
+        //public IActionResult ProfileEdit(string username)
+        //{
+        //    var user = authProvider.GetCurrentUser(); //have user here 
+        //    profileDAO.CreateProfile(username);
+        //    return View(user);
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult ProfileEdit(ProfileViewModel profile)
+        //{
+        //    ProfileViewModel profileEdit = new ProfileViewModel();
+
+        //    profileEdit.Username = profile.Username;
+        //    profileEdit.AvatarName = profile.AvatarName;
+        //    profileEdit.UserBio = profile.UserBio;
+        //    profileEdit.GamingExperience = profile.GamingExperience;
+        //    profileEdit.FavoriteGenres = profile.FavoriteGenres;
+        //    profileEdit.ContactPreference = profile.ContactPreference;
+        //    profileEdit.OtherInterests = profile.OtherInterests;
+        //    profileEdit.IsPrivate = profile.IsPrivate;
+
+        //    profileDAO.CreateProfile(profileEdit);
+
+        //    return RedirectToAction("Confirmation", "Account");
+        //}
 
         [HttpGet]
         public IActionResult UpdateInfo()
@@ -137,6 +172,7 @@ namespace WebApplication.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult UpdateInfo (User user)
         {
             
@@ -156,6 +192,7 @@ namespace WebApplication.Web.Controllers
 
         //why isn't the binding working? no info is being passed into the method
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ChangePassword(ChangePasswordModel passwordIn)
         {
             if (ModelState.IsValid)
@@ -181,6 +218,7 @@ namespace WebApplication.Web.Controllers
         //deletes the user's account from the database
         //i can't get this to work with httpdelete, but it works with post
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteAccount(User user)
         {
 
