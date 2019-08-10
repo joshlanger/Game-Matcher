@@ -77,7 +77,14 @@ namespace WebApplication.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Register(RegisterViewModel registerViewModel)
         {
-            if (ModelState.IsValid)
+            //var userCheck = userDAO.GetUser(registerViewModel.Email);
+            //bool isTaken = false;
+            //if(userCheck.Email != null)
+            //{
+            //    isTaken = true;
+            //}
+
+            if (ModelState.IsValid /*&& !isTaken*/)
             {
                 // Register them as a new user (and set default role)
                 // When a user registers they need to be given a role. If you don't need anything special
@@ -164,9 +171,6 @@ namespace WebApplication.Web.Controllers
             //get the current user info
             var user = authProvider.GetCurrentUser();
 
-            //convert user model to updateinfomodel
-            //updateinfo = updateinfo.ConvertUserToUpdateInfo(user);
-
             //pass info to view.  existing info will be form field defaults
             return View(user);
         }
@@ -174,12 +178,10 @@ namespace WebApplication.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult UpdateInfo (User user)
-        {
-            
+        { 
                 userDAO.UpdateUser(user);
 
-                return RedirectToAction("Confirmation", "Account");
-           
+                return RedirectToAction("Confirmation", "Account");  
         }
 
         [HttpGet]
@@ -190,7 +192,6 @@ namespace WebApplication.Web.Controllers
             return View(password);
         }
 
-        //why isn't the binding working? no info is being passed into the method
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult ChangePassword(ChangePasswordModel passwordIn)
@@ -198,8 +199,7 @@ namespace WebApplication.Web.Controllers
             if (ModelState.IsValid)
             {
                 
-                //call method to update database
-                userDAO.ChangePassword(passwordIn);
+                authProvider.ChangePassword(passwordIn.ExistingPassword, passwordIn.Password);
 
                 return RedirectToAction("Confirmation", "Account");
             }
@@ -216,12 +216,11 @@ namespace WebApplication.Web.Controllers
         }
 
         //deletes the user's account from the database
-        //i can't get this to work with httpdelete, but it works with post
+        //i can't get this to work with [httpdelete], but it works with post
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteAccount(User user)
         {
-
             userDAO.DeleteUser(user);
             return RedirectToAction("Logoff", "Account");
         }
