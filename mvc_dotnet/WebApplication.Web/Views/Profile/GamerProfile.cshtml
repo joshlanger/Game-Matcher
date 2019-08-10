@@ -1,7 +1,30 @@
-﻿
+﻿@using WebApplication.Web.Models.Account;
+@model ProfileViewModel
 @{
     ViewData["Title"] = "GamerProfile";
 }
 
 <h2>GamerProfile</h2>
-
+<div class="visibility">
+    <p>
+        @Model.Username
+    </p>
+    <p>
+        @Model.AvatarName
+    </p>
+    <p>
+        @Model.UserBio
+    </p>
+    <p>
+        @Model.GamingExperience
+    </p>
+    <p>
+        @Model.ContactPreference
+    </p>
+    <p></p>
+</div>
+<style>
+    .visibility {
+        color:antiquewhite
+    }
+</style>

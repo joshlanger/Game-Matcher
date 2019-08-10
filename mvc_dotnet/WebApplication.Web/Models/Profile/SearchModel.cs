@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApplication.Web.Models.Account;
 
 namespace WebApplication.Web.Models.Profile
 {
-    public class SearchResults
+    public class SearchModel
     {
-        public List<ProfileViewModel> Results { get; set; }
+        public string searchParameter { get; set; }
     }
 }

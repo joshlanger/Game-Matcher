@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Web.DAL;
 using WebApplication.Web.Models;
+using WebApplication.Web.Models.Profile;
 
 namespace WebApplication.Web.Controllers
 {
@@ -18,6 +19,11 @@ namespace WebApplication.Web.Controllers
             this.userDAL = userDAL;
         }
 
+        public IActionResult Search()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult GamerProfile(int id)
         {
@@ -26,17 +32,18 @@ namespace WebApplication.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult SearchResults(string genre)
+        public IActionResult SearchResults(SearchModel genre)
         {
             return View();
         }
 
         [HttpGet]
-        public IActionResult SearchUserName(string searchUsername)
+        public IActionResult SearchUserName(SearchModel searchUsername)
         {
-            int id = profileSearchDAL.SearchProfileByUsername(searchUsername);
-            return RedirectToAction("GamerProfile", "Profile", "id");
+            int id = profileSearchDAL.SearchProfileByUsername(searchUsername.searchParameter);
+            return RedirectToAction("GamerProfile", new { id });
+            
         }
-
+        // id is not getting passed to the gamerprofile method on redirect.
     }
 }
