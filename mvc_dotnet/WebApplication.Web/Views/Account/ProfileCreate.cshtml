@@ -7,7 +7,7 @@
 @{
     if (TempData["Status"] != null)
     {
-    <h1>@TempData["Status"]</h1>
+        <h1>@TempData["Status"]</h1>
 
     };
 }
@@ -88,15 +88,6 @@
         <h3 class="margin">About Me</h3>
         <p>Location: Somewhere, PA</p>
         <p>30 Friends</p>
-
-        <h3 class="margin">@Model.Username Profile</h3>
-        <p>
-            @Model.UserBio
-            @Model.ContactPreference
-            @Model.GamingExperience
-            @Model.IsPrivate
-            @Model.OtherInterests
-        </p>
     </div>
 
     <!-- Third Container (Grid) -->

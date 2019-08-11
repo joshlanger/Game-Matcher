@@ -107,7 +107,7 @@ namespace WebApplication.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ProfileEdit(User editUserProfile)
+        public IActionResult ProfileCreate(User editUserProfile)
         {
             ProfileViewModel profile = new ProfileViewModel();
             var user = authProvider.GetCurrentUser();
@@ -120,51 +120,32 @@ namespace WebApplication.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ProfileEdit(ProfileViewModel profile)
+        public IActionResult ProfileCreate(ProfileViewModel profile)
         {
             profileDAO.CreateProfile(profile);
 
             return RedirectToAction("Confirmation", "Account");
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult ProfileEdit(ProfileViewModel profileViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        authProvider.Profile(profileViewModel.Username, profileViewModel.AvatarName, profileViewModel.UserBio);
-        //    }
-        //    return RedirectToAction("ProfileEdit", "Account");
-        //}
+        [HttpGet]
+        public IActionResult ProfileEdit(User editUserProfile)
+        {
+            ProfileViewModel profileEdit = new ProfileViewModel();
+            var user = authProvider.GetCurrentUser();
+            editUserProfile.Username = user.Username;
+            profileDAO.GetProfile(editUserProfile.Username);
+            profileEdit.ProfileId = editUserProfile.Id;
+            return View(profileEdit);
+        }
 
-        //[HttpGet]
-        //public IActionResult ProfileEdit(string username)
-        //{
-        //    var user = authProvider.GetCurrentUser(); //have user here 
-        //    profileDAO.CreateProfile(username);
-        //    return View(user);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ProfileEdit(ProfileViewModel profile)
+        {
+            profileDAO.UpdatedProfile(profile);
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult ProfileEdit(ProfileViewModel profile)
-        //{
-        //    ProfileViewModel profileEdit = new ProfileViewModel();
-
-        //    profileEdit.Username = profile.Username;
-        //    profileEdit.AvatarName = profile.AvatarName;
-        //    profileEdit.UserBio = profile.UserBio;
-        //    profileEdit.GamingExperience = profile.GamingExperience;
-        //    profileEdit.FavoriteGenres = profile.FavoriteGenres;
-        //    profileEdit.ContactPreference = profile.ContactPreference;
-        //    profileEdit.OtherInterests = profile.OtherInterests;
-        //    profileEdit.IsPrivate = profile.IsPrivate;
-
-        //    profileDAO.CreateProfile(profileEdit);
-
-        //    return RedirectToAction("Confirmation", "Account");
-        //}
+            return RedirectToAction("Confirmation", "Account");
+        }
 
         [HttpGet]
         public IActionResult UpdateInfo()
