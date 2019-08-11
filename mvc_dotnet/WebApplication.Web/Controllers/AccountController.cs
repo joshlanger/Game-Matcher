@@ -130,6 +130,7 @@ namespace WebApplication.Web.Controllers
         [HttpGet]
         public IActionResult ProfileEdit(User editUserProfile)
         {
+
             ProfileViewModel profileEdit = new ProfileViewModel();
             var user = authProvider.GetCurrentUser();
             editUserProfile.Username = user.Username;
@@ -142,6 +143,11 @@ namespace WebApplication.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ProfileEdit(ProfileViewModel profile)
         {
+            var user = authProvider.GetCurrentUser();
+            profile.UserId = user.Id;
+            ProfileViewModel container = new ProfileViewModel();
+            container = profileDAO.GetProfile(user.Username);
+            profile.ProfileId = container.ProfileId;
             profileDAO.UpdatedProfile(profile);
 
             return RedirectToAction("Confirmation", "Account");
