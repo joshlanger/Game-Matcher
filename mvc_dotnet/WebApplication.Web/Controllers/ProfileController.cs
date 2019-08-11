@@ -32,9 +32,11 @@ namespace WebApplication.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult SearchResults(SearchModel genre)
+        public IActionResult SearchResults(SearchModel parameter)
         {
-            return View();
+            SearchResultsModel Results = new SearchResultsModel();
+            Results.Results = profileSearchDAL.SearchAll(parameter.searchParameter);
+            return View(Results);
         }
 
         [HttpGet]
@@ -44,6 +46,6 @@ namespace WebApplication.Web.Controllers
             return RedirectToAction("GamerProfile", new { id });
             
         }
-        // id is not getting passed to the gamerprofile method on redirect.
+        
     }
 }
