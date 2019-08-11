@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication.Web.Models.Account;
+using WebApplication.Web.Models.Profile;
 
 namespace WebApplication.Web.DAL
 {
@@ -68,6 +69,35 @@ namespace WebApplication.Web.DAL
                     }
 
                     return Profile;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ProfileViewModel> SearchByGenre(string genre)
+        {
+            List<ProfileViewModel> Results = new List<ProfileViewModel>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT * from profile WHERE favorite_genres LIKE %@genre%", conn);
+                    cmd.Parameters.AddWithValue("@genre", genre);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while(reader.Read())
+                    {
+                        var Container = MapRowToProfile(reader);
+                        Results.Add(Container);
+                    }
+
+                    return Results;
                 }
             }
             catch (SqlException ex)
