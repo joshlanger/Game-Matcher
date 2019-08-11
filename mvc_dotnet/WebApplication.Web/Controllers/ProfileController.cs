@@ -44,6 +44,6 @@ namespace WebApplication.Web.Controllers
             return RedirectToAction("GamerProfile", new { id });
             
         }
-        // id is not getting passed to the gamerprofile method on redirect.
+        
     }
 }
