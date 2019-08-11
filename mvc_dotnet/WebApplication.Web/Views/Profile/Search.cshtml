@@ -4,15 +4,22 @@
     ViewData["Title"] = "Search";
 }
 
-<h2>Search</h2>
-<h4>This is a temporary? page for testing search methods</h4>
-<form asp-controller="profile" asp-action="searchusername" method="get">
-    <label asp-for="@Model.searchParameter">Username Search</label>
-    <input asp-for="@Model.searchParameter" />
-    <input type="submit" value="Search" class="btn btn-default, button" />
-</form>
-<form asp-controller="profile" asp-action="SearchResults" method="get">
-    <label asp-for="@Model.searchParameter">Genre Search</label>
-    <input asp-for="@Model.searchParameter" />
-    <input type="submit" value="Search" class="btn btn-default, button" />
-</form>
+<h2 class="visibility">Search</h2>
+<h4 class="visibility">This is a temporary? page for testing search methods</h4>
+<div class="visibility">
+    <form asp-controller="profile" asp-action="searchusername" method="get">
+        <label asp-for="@Model.searchParameter">Username Search</label>
+        <input asp-for="@Model.searchParameter" />
+        <input type="submit" value="Search" class="btn btn-default, button" />
+    </form>
+    <form asp-controller="profile" asp-action="SearchResults" method="get">
+        <label asp-for="@Model.searchParameter">Genre Search</label>
+        <input asp-for="@Model.searchParameter" />
+        <input type="submit" value="Search" class="btn btn-default, button" />
+    </form>
+</div>
+<style>
+    .visibility {
+        color: deeppink
+    }
+</style>
