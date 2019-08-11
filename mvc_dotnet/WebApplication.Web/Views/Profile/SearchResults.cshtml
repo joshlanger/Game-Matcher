@@ -4,14 +4,19 @@
     ViewData["Title"] = "SearchResults";
 }
 
-<h2>Search Results</h2>
+<h2 class="visibility">Search Results</h2>
 
-<ul>
+<ul class="visibility">
     @foreach (var gamer in Model.Results)
     {
         if (!gamer.IsPrivate)
         {
-            <li><a asp-controller="Profile" asp-action="GamerProfile" asp-route="@gamer.ProfileId"> @gamer.Username</a></li>
+            <li class="visibility"><a asp-controller="Profile" asp-action="GamerProfile" asp-fragment ="@gamer.ProfileId"> @gamer.Username</a></li>
         }
     }
 </ul>
+<style>
+    .visibility {
+        color: deeppink
+    }
+</style>
