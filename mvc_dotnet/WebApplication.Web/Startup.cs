@@ -52,6 +52,7 @@ namespace WebApplication.Web
             services.AddScoped<IAuthProvider, SessionAuthProvider>();
             services.AddTransient<IUserDAL>(m => new UserSqlDAL(connectionString));
             services.AddTransient<IProfileDAL>(m => new ProfileSqlDAL(connectionString));
+            services.AddTransient<IProfileSearchDAL>(m => new ProfileSearchSqlDAL(connectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
