@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApplication.Web.DAL;
 using WebApplication.Web.Models;
 using WebApplication.Web.Models.Account;
@@ -215,5 +216,13 @@ namespace WebApplication.Web.Controllers
             userDAO.DeleteUser(user);
             return RedirectToAction("Logoff", "Account");
         }
+
+        private List<SelectListItem> ExperienceLevel = new List<SelectListItem>()
+        {
+            new SelectListItem() { Text = "Novice" },
+            new SelectListItem() { Text = "Intermediate" },
+            new SelectListItem() { Text = "Expert" },
+        };
     }
+
 }

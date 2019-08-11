@@ -11,5 +11,7 @@ namespace WebApplication.Web.DAL
         int SearchProfileByUsername(string username);
 
         ProfileViewModel GetProfile(int profileId);
+
+        List<ProfileViewModel> SearchAll(string parameter);
     }
 }

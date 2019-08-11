@@ -28,7 +28,7 @@ namespace WebApplication.Web.Models.Account
         public string UserBio { get; set; }
 
         [Required]
-        public int GamingExperience { get; set; }
+        public string GamingExperience { get; set; }
 
         [Required]
         [StringLength(140, ErrorMessage = "The {0} must have a bio of at least 50 characters.", MinimumLength = 50)]
