@@ -134,21 +134,22 @@ namespace WebApplication.Web.Controllers
             ProfileViewModel profileEdit = new ProfileViewModel();
             var user = authProvider.GetCurrentUser();
             editUserProfile.Username = user.Username;
-            profileDAO.GetProfile(editUserProfile.Username);
-            profileEdit.ProfileId = editUserProfile.Id;
+            var container = profileDAO.GetProfile(editUserProfile.Username);
+            profileEdit.UserId = user.Id;
+            profileEdit.ProfileId = container.ProfileId;
             return View(profileEdit);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ProfileEdit(ProfileViewModel profile)
+        public IActionResult ProfileEdit(ProfileViewModel profileEdit)
         {
+            User userTemp = new User();
             var user = authProvider.GetCurrentUser();
-            profile.UserId = user.Id;
-            ProfileViewModel container = new ProfileViewModel();
-            container = profileDAO.GetProfile(user.Username);
-            profile.ProfileId = container.ProfileId;
-            profileDAO.UpdatedProfile(profile);
+            userTemp.Username = user.Username;
+            var container = profileDAO.GetProfile(userTemp.Username);
+            profileEdit.ProfileId = container.ProfileId;
+            profileDAO.UpdatedProfile(profileEdit);
 
             return RedirectToAction("Confirmation", "Account");
         }

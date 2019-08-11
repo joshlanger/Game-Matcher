@@ -81,7 +81,7 @@ namespace WebApplication.Web.DAL
                 using (SqlConnection conn = new SqlConnection(connectionString)) 
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("UPDATE profile SET user_name = @user_name, avatar_name = @avatar_name, user_bio = @user_bio, gaming_experience = @gaming_experience, contact_preference = @contact_preference, other_interests = @other_interests, is_Private = @is_private WHERE user_id = @user_id and profile_id = @profile_id)", conn);
+                    SqlCommand cmd = new SqlCommand("UPDATE profile SET user_name = @user_name, avatar_name = @avatar_name, user_bio = @user_bio, gaming_experience = @gaming_experience, contact_preference = @contact_preference, other_interests = @other_interests, is_Private = @is_private WHERE user_id = @user_id", conn);
                     cmd.Parameters.AddWithValue("@user_id", profile.UserId);
                     cmd.Parameters.AddWithValue("@profile_id", profile.ProfileId);
                     cmd.Parameters.AddWithValue("@user_name", profile.Username);
@@ -96,9 +96,9 @@ namespace WebApplication.Web.DAL
                     return;
                 }
             }
-            catch
+            catch(SqlException ex)
             {
-                throw new NotImplementedException();
+                throw ex;
             }
             
         }
