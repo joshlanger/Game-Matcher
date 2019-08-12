@@ -145,54 +145,6 @@ namespace WebApplication.Web.DAL
             return Nothing;
         }
 
-        //public List<ProfileViewModel> MatchStrengthSearch(string parameter)
-        //{
-        //    List<ProfileViewModel> Results = new List<ProfileViewModel>();
-        //    try
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(connectionString))
-        //        {
-        //            string query = @"select profile.user_name, profile.is_Private, profile.profile_id, users.zipcode, board_game.name, video_game.name,   
-        //                            rpg.name, genre_library.genre, profile.user_bio, profile.gaming_experience, profile.other_interests from board_game  
-        //                            full join profile_game on profile_game.games_id = board_game.games_id
-        //                            full join video_game on video_game.games_id = profile_game.games_id
-        //                            full join rpg on rpg.games_id = profile_game.games_id
-        //                            full join profile on profile.profile_id = profile_game.profile_id
-        //                            full join profile_genre on profile_genre.profile_id = profile.profile_id
-        //                            full join genre_library on profile_genre.genre_id = genre_library.genre_id
-        //                            full join users on profile.user_id = users.user_id
-        //                            where video_game.name like @parameter 
-        //                            or board_game.name like @parameter 
-        //                            or rpg.name like @parameter
-        //                            or genre_library.genre like @parameter
-        //                            or profile.user_name like @parameter
-        //                            or profile.user_bio like @parameter
-        //                            or profile.other_interests like @parameter
-        //                            or users.zipcode like @parameter
-        //                            or profile.gaming_experience like @parameter";
-
-
-        //            conn.Open();
-        //            SqlCommand cmd = new SqlCommand(query, conn);
-        //            cmd.Parameters.AddWithValue("@parameter", "%" + parameter + "%");
-
-        //            SqlDataReader reader = cmd.ExecuteReader();
-
-        //            while (reader.Read())
-        //            {
-        //                var Container = MapRowToProfileForFullSearch(reader);
-        //                Results.Add(Container);
-        //            }
-
-        //            return Results;
-        //        }
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-
         public List<SelectListItem> GetGames()
         {
             List<SelectListItem> Games = new List<SelectListItem>();

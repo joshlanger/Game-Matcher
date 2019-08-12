@@ -237,6 +237,14 @@ namespace WebApplication.Web.Controllers
         [HttpGet]
         public IActionResult Confirmation(User user)
         {
+            var userConfirm = authProvider.GetCurrentUser();
+            user.Email = userConfirm.Email;
+            user.Id = userConfirm.Id;
+            user.Password = userConfirm.Password;
+            user.Role = userConfirm.Role;
+            user.Salt = userConfirm.Salt;
+            user.ZipCode = userConfirm.ZipCode;
+            user.Username = userConfirm.Username;
             return View(user);
         }
 
