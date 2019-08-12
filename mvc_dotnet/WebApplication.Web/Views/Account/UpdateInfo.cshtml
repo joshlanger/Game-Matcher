@@ -2,19 +2,17 @@
 @{
     ViewData["Title"] = "ChangeInfo";
 }
-<div id="container" class="container-fluid border-color">
-    <div class="col-sm-12">
-       
-
+<div id="container" class="container border-color">
+    
         <form class="form-horizontal" asp-controller="account" asp-action="updateinfo" method="post">
-            <h2 class="h2 font-color font-size">Update Your Account Information</h2>
-            <h4 class="h2 font-color font-size">General</h4>
             <div>
-                <input type="hidden" asp-for="Id" value="@Model.Id" />
+                <h2 class="h2 font-color font-size">Update Your Account Information</h2>
             </div>
+                <h4 class="h2 font-color font-size">General</h4>
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
             <div class="form-group">
-                <label class="col-sm-4 control-label font-color" asp-for="Username">Username</label>
-                <div class="col-sm-6">
+                <label class="col-sm-4 col-md-4 col-lg-4 control-label font-color" asp-for="Username">Username</label>
+                <div class="col-sm-6 col-md-6 col-lg-6">
                     <input asp-for="Username" value="@Model.Username" />
                 </div>
             </div>
