@@ -10,9 +10,9 @@ namespace WebApplication.Web.Models.Account
     public class ProfileViewModel
     {
 
-        public int ProfileId { get; set; }
+        public int? ProfileId { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         public string Username { get; set; }
 
