@@ -221,8 +221,6 @@ namespace WebApplication.Web.DAL
 
         }
 
-
-
         private ProfileViewModel MapRowToProfile(SqlDataReader reader)
         {
             return new ProfileViewModel()
@@ -242,9 +240,7 @@ namespace WebApplication.Web.DAL
         private ProfileViewModel MapRowToProfileForFullSearch(SqlDataReader reader)
         {
             ProfileViewModel Container = new ProfileViewModel();
-            
-
-           
+   
             if(reader["user_name"] != DBNull.Value)
             {
                 Container.Username = Convert.ToString(reader["user_name"]);
