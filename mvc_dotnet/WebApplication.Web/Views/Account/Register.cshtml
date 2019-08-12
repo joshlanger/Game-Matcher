@@ -5,7 +5,6 @@
     ViewData["Title"] = "Register";
 }
 <div id="container" class="container-fluid border-color">
-
     <h2 id="header" class="h2 font-color">Register</h2>
     <form class="form-horizontal" asp-controller="account" asp-action="register" method="post">
         <div class="form-group">
@@ -14,7 +13,6 @@
                 <input id="fields" class="form-control" asp-for="Username" />
                 <span asp-validation-for="Username"></span>
             </div>
-
         </div>
         <div class="form-group">
             <label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Email">Email:</label>
@@ -44,6 +42,7 @@
             <input type="hidden" asp-for="Role" />
         </div>
         <div class="form-group">
+
             <label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Zipcode">Zip Code:</label>
             <div class="col-sm-8 col-md-8 col-lg-8">
                 <input id="fields" class="form-control" asp-for="Zipcode" />
@@ -51,16 +50,16 @@
             </div>
         </div>
         <div class="form-group">
-            <div>
                 <div class="col-sm-offset-5 col-md-offset-5 col-lg-offset-5">
                     <lable class="control-label">
                         <input id="fields" type="submit" value="Register" class="btn btn-default, button" />
                     </lable>
                 </div>
-            </div>
+           
         </div>
     </form>
 </div>
+
 <style scoped>
     .navbar {
         display: none
@@ -70,7 +69,6 @@
         justify-content: center;
         width: auto;
     }
-
     .button {
         background-color: magenta;
         color: white;
@@ -79,12 +77,26 @@
     .font-color {
         color: magenta;
     }
-
     .border-color {
         border: ridge;
         border-color: #00f6ed;
     }
     #container {
+        margin-top: 200px;
+        background-color: darkslateblue;
+        width: 25%;
+        height: 50%;
+        box-shadow: 05px 05px 05px purple;
+    }
+    .button{
+        display: flex;
+        align-items: center;
+        background-color: magenta;
+        color: white
+    }
+    .font-color2 {
+        text-align: left;
+        color: magenta;
         margin-top: 100px;
         background-color: darkslateblue;
         width: 50%;

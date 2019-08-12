@@ -2,51 +2,121 @@
 @{
     ViewData["Title"] = "ChangeInfo";
 }
+<div id="container" class="container-fluid border-color">
+    <div class="col-sm-12">
+       
 
-<h2 class="h2">Update Your Account Information</h2>
-<p></p>
-<p></p>
-<h4 class="h4">General</h4>
+        <form class="form-horizontal" asp-controller="account" asp-action="updateinfo" method="post">
+            <h2 class="h2 font-color font-size">Update Your Account Information</h2>
+            <h4 class="h2 font-color font-size">General</h4>
+            <div>
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label font-color" asp-for="Username">Username</label>
+                <div class="col-sm-6">
+                    <input asp-for="Username" value="@Model.Username" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label font-color" asp-for="Email">Email</label>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input type="email" asp-for="Email" value="@Model.Email" />
+                    <span asp-validation-for="Email"></span>
+                </div>
 
-<form form id="" class="form-horizontal" asp-controller="account" asp-action="updateinfo" method="post">
-    <div>
-        <input type="hidden" asp-for="Id" value="@Model.Id" />
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-5" asp-for="Username">Username</label>
-        <input asp-for="Username" value="@Model.Username" />
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-5" asp-for="Email">Email</label>
-        <input type="email" asp-for="Email" value="@Model.Email" />
-        <span asp-validation-for="Email"></span>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-5" asp-for="ZipCode">Zip Code</label>
-        <input asp-for="ZipCode" value="@Model.ZipCode" />
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-5 col-sm-10">
-            <input type="submit" value="Save Changes" class="btn btn-default, button" />
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label font-color" asp-for="ZipCode">Zip Code</label>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <input asp-for="ZipCode" value="@Model.ZipCode" />
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4 col-sm-push-4">
+                    <input type="submit" value="Save Changes" class="btn btn-block, btn-sm button" />
+                </div>
+            </div>
+        </form>
+
+    <form class="form-horizontal" asp-controller="Account" asp-action="ChangePassword" method="get">
+        <div>
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
         </div>
-    </div>
-</form>
+        <div class="form-group">
+            <div class="col-sm-4 col-sm-push-4">
+                <input type="submit" value="Change Password" class="btn btn-block, button" />
 
-<form asp-controller="Account" asp-action="ChangePassword" method="get">
-    <div>
-        <input type="hidden" asp-for="Id" value="@Model.Id" />
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-5 col-sm-10">
-            <input type="submit" value="Change Password" class="btn btn-default button" />
+            </div>
         </div>
-    </div>
-</form>
+    </form>
 
-<form asp-controller="Account" asp-action="DeleteAccount" method="post">
-    <input type="hidden" asp-for="Id" value="@Model.Id" />
-    <div class="col-sm-offset-5 col-sm-10">
-        <input type="submit" value="Delete Account" class="btn btn-danger" />
-    </div>
+    <form class="form-horizontal" asp-controller="Account" asp-action="DeleteAccount" method="post">
+        <div>
+            <input type="hidden" class="form-control" asp-for="Id" value="@Model.Id" />
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4 col-sm-push-4">
+                 <input type="submit" value="Delete Account" class="btn btn-block, btn-sm button" />
+            </div>
+        </div>
 
-</form>
+    </form>
+    </div>
+</div>
+    <style scoped>
+        .h2 {
+            display: flex;
+            justify-content: center;
+            width: auto;
+        }
+
+        .button {
+            background-color: magenta;
+            color: white;
+        }
+
+        .font-color {
+            color: magenta;
+            
+        }
+        .font-size{
+            font-size: 16pt;
+        }
+        .border-color {
+            border: ridge;
+            border-color: #00f6ed;
+            background-color: darkslateblue;
+        }
+
+        #container {
+            margin-top: 100px;
+            background-color: darkslateblue;
+            width: 40%;
+            box-shadow: 05px 05px 05px purple;
+        }
+
+        .button {
+            background-color: magenta;
+            color: white
+        }
+
+        .font-color2 {
+            text-align: left;
+            color: magenta;
+            margin-top: 100px;
+            background-color: darkslateblue;
+            width: 50%;
+            height: 75%;
+            box-shadow: 05px 05px 05px purple;
+        }
+
+        #labels {
+            padding-top: 10px;
+        }
+
+        #fields {
+            margin: 05px;
+        }
+    </style>
