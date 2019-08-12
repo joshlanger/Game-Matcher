@@ -102,9 +102,26 @@ namespace WebApplication.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Profile()
+        public IActionResult Profile(User userProfile)
         {
-            return View();
+            ProfileViewModel profile = new ProfileViewModel();
+            var user = authProvider.GetCurrentUser();
+            userProfile.Email = user.Email;
+            userProfile.Username = user.Username;
+            profile.UserId = user.Id;
+            profile.Username = user.Username;
+
+            var container = profileDAO.GetProfile(userProfile.Username);
+            profile.Username = container.Username;
+            profile.UserBio = container.UserBio;
+            profile.ProfileId = container.ProfileId;
+            profile.OtherInterests = container.OtherInterests;
+            profile.IsPrivate = container.IsPrivate;
+            profile.GamingExperience = container.GamingExperience;
+            profile.ContactPreference = container.ContactPreference;
+            profile.AvatarName = container.AvatarName;
+
+            return View(profile);
         }
 
         [HttpGet]
