@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -11,11 +12,14 @@ namespace WebApplication.Web.DAL
     public class ProfileSearchSqlDAL : IProfileSearchDAL
     {
         private string connectionString;
+        
 
         public ProfileSearchSqlDAL(string connectionString)
         {
+           
             this.connectionString = connectionString;
         }
+       
 
         public int SearchProfileByUsername(string username)
         {
@@ -84,18 +88,17 @@ namespace WebApplication.Web.DAL
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    string query = @"select profile.user_name, profile.is_Private, profile.profile_id, users.zipcode, board_game.name, video_game.name,   
-                                    rpg.name, genre_library.genre, profile.user_bio, profile.gaming_experience, profile.other_interests from board_game  
+                    string query = @"select profile.user_name, profile.is_Private, profile.profile_id, users.zipcode, game_library.title, game_library.style,   
+                                    game_library.genre, genre_library.genre, profile.user_bio, profile.gaming_experience, profile.other_interests from board_game  
                                     full join profile_game on profile_game.games_id = board_game.games_id
-                                    full join video_game on video_game.games_id = profile_game.games_id
-                                    full join rpg on rpg.games_id = profile_game.games_id
+                                    full join game_library on game_library.games_id = profile_game.games_id
                                     full join profile on profile.profile_id = profile_game.profile_id
                                     full join profile_genre on profile_genre.profile_id = profile.profile_id
                                     full join genre_library on profile_genre.genre_id = genre_library.genre_id
                                     full join users on profile.user_id = users.user_id
-                                    where video_game.name like @parameter 
-                                    or board_game.name like @parameter 
-                                    or rpg.name like @parameter
+                                    where game_library.title like @parameter
+                                    or game_library.style like @parameter 
+                                    or game_library.genre like @parameter
                                     or genre_library.genre like @parameter
                                     or profile.user_name like @parameter
                                     or profile.user_bio like @parameter
@@ -113,7 +116,11 @@ namespace WebApplication.Web.DAL
                     while (reader.Read())
                     {
                         var Container = MapRowToProfileForFullSearch(reader);
-                        Results.Add(Container);
+                        int index = Results.FindIndex(f => f.Username == Container.Username);
+                        if (index == -1)
+                        {
+                            Results.Add(Container);
+                        }  
                     }
 
                     return Results;
@@ -123,7 +130,98 @@ namespace WebApplication.Web.DAL
             {
                 throw ex;
             }
+            finally
+            {
+                if(Results == null)
+                {
+                   
+                }
+            }
         }
+
+        public List<ProfileViewModel> NothingFound()
+        {
+            List<ProfileViewModel> Nothing = new List<ProfileViewModel>();
+            return Nothing;
+        }
+
+        //public List<ProfileViewModel> MatchStrengthSearch(string parameter)
+        //{
+        //    List<ProfileViewModel> Results = new List<ProfileViewModel>();
+        //    try
+        //    {
+        //        using (SqlConnection conn = new SqlConnection(connectionString))
+        //        {
+        //            string query = @"select profile.user_name, profile.is_Private, profile.profile_id, users.zipcode, board_game.name, video_game.name,   
+        //                            rpg.name, genre_library.genre, profile.user_bio, profile.gaming_experience, profile.other_interests from board_game  
+        //                            full join profile_game on profile_game.games_id = board_game.games_id
+        //                            full join video_game on video_game.games_id = profile_game.games_id
+        //                            full join rpg on rpg.games_id = profile_game.games_id
+        //                            full join profile on profile.profile_id = profile_game.profile_id
+        //                            full join profile_genre on profile_genre.profile_id = profile.profile_id
+        //                            full join genre_library on profile_genre.genre_id = genre_library.genre_id
+        //                            full join users on profile.user_id = users.user_id
+        //                            where video_game.name like @parameter 
+        //                            or board_game.name like @parameter 
+        //                            or rpg.name like @parameter
+        //                            or genre_library.genre like @parameter
+        //                            or profile.user_name like @parameter
+        //                            or profile.user_bio like @parameter
+        //                            or profile.other_interests like @parameter
+        //                            or users.zipcode like @parameter
+        //                            or profile.gaming_experience like @parameter";
+
+
+        //            conn.Open();
+        //            SqlCommand cmd = new SqlCommand(query, conn);
+        //            cmd.Parameters.AddWithValue("@parameter", "%" + parameter + "%");
+
+        //            SqlDataReader reader = cmd.ExecuteReader();
+
+        //            while (reader.Read())
+        //            {
+        //                var Container = MapRowToProfileForFullSearch(reader);
+        //                Results.Add(Container);
+        //            }
+
+        //            return Results;
+        //        }
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+
+        public List<SelectListItem> GetGames()
+        {
+            List<SelectListItem> Games = new List<SelectListItem>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("select games_id, title from game_library", conn);
+                    
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Games.Add(new SelectListItem() { Text = Convert.ToString(reader["title"]), Value = Convert.ToString(reader["games_id"]) });  
+                    }
+
+                    return Games;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
+        }
+
+
 
         private ProfileViewModel MapRowToProfile(SqlDataReader reader)
         {
@@ -143,12 +241,28 @@ namespace WebApplication.Web.DAL
 
         private ProfileViewModel MapRowToProfileForFullSearch(SqlDataReader reader)
         {
-            return new ProfileViewModel()
+            ProfileViewModel Container = new ProfileViewModel();
+            
+
+           
+            if(reader["user_name"] != DBNull.Value)
             {
-                Username = Convert.ToString(reader["user_name"]), 
-                IsPrivate = Convert.ToBoolean(reader["is_Private"]),
-                ProfileId = Convert.ToInt32(reader["profile_id"])
-            };
+                Container.Username = Convert.ToString(reader["user_name"]);
+                Container.IsPrivate = Convert.ToBoolean(reader["is_Private"]);
+                Container.ProfileId = Convert.ToInt32(reader["profile_id"]);
+            }
+            return Container;
         }
+        
+        //private ProfileViewModel MapRow(SqlDataReader reader)
+        //{
+        //    return new ProfileViewModel()
+        //    {
+        //        Username = Convert.ToString(reader["user_name"]),
+        //        IsPrivate = Convert.ToBoolean(reader["is_Private"]),
+        //        ProfileId = Convert.ToInt32(reader["profile_id"]),
+        //        Zipcode = Convert.ToInt32(reader["zipcode"]),
+        //    };
+        //}
     }
 }

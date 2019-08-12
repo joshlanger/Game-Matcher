@@ -6,7 +6,15 @@
 <div id="container" class="container-fluid border-color">
     <h2 class="h2 font-color">Search Results</h2>
 
+<h2 class="visibility">Search Results</h2>
+
+@if (Model.Results[0].Username == null)
+{
+    <h4 class="visibility">No Matching Gamers Were Found.</h4>
+}
+else{ 
     <ul class="visibility">
+
         @foreach (var gamer in Model.Results)
         {
             if (!gamer.IsPrivate)
