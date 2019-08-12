@@ -11,7 +11,7 @@
     {
         if (!gamer.IsPrivate)
         {
-            <li class="visibility"><a asp-controller="Profile" asp-action="GamerProfile" asp-fragment ="@gamer.ProfileId"> @gamer.Username</a></li>
+            <li class="visibility"><a href="@Url.Action("GamerProfile", "Profile")?id=@gamer.ProfileId">@gamer.Username</a></li>
         }
     }
 </ul>
