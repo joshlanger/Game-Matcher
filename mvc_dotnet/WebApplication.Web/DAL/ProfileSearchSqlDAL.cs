@@ -147,7 +147,7 @@ namespace WebApplication.Web.DAL
             {
                 Username = Convert.ToString(reader["user_name"]), 
                 IsPrivate = Convert.ToBoolean(reader["is_Private"]),
-                ProfileId = Convert.ToInt32(reader["profile_id"])
+                ProfileId = Convert.ToInt32(reader["profile_id"]),
             };
         }
     }
