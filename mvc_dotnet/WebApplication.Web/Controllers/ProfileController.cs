@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Web.DAL;
 using WebApplication.Web.Models;
+using WebApplication.Web.Models.Account;
 using WebApplication.Web.Models.Profile;
 
 namespace WebApplication.Web.Controllers
@@ -36,6 +37,11 @@ namespace WebApplication.Web.Controllers
         {
             SearchResultsModel Results = new SearchResultsModel();
             Results.Results = profileSearchDAL.SearchAll(parameter.searchParameter);
+            if(Results.Results.Count == 0)
+            {
+                ProfileViewModel Container = new ProfileViewModel();
+                Results.Results.Add(Container);
+            }
             return View(Results);
         }
 
@@ -46,6 +52,16 @@ namespace WebApplication.Web.Controllers
             return RedirectToAction("GamerProfile", new { id });
             
         }
-        
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Input(SelectGameModel selectedGame)
+        {
+           
+            //code to save to database here
+
+            return RedirectToAction("Profile", "Account");
+        }
+
     }
 }
