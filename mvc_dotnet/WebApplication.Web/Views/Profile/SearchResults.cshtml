@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "SearchResults";
 }
+<div id="container" class="container-fluid border-color">
+    <h2 class="h2 font-color">Search Results</h2>
 
 <h2 class="visibility">Search Results</h2>
 
@@ -21,9 +23,71 @@ else{
             }
         }
     </ul>
-}
-    <style>
+
+</div>
+@*<style>
         .visibility {
             color: deeppink
         }
-    </style>
+    </style>*@
+
+<style scoped>
+
+    .h2 {
+        display: flex;
+        justify-content: center;
+        width: auto;
+    }
+
+    .h4 {
+        display: flex;
+        justify-content: center;
+        width: auto;
+        color: white;
+    }
+
+    .button {
+        background-color: magenta;
+        color: white;
+    }
+
+    .margin-left1 {
+        margin-left: 05px;
+    }
+
+    .font-color {
+        color: magenta;
+    }
+
+    .font-color2 {
+        color: #00f6ed;
+    }
+
+    .border-color {
+        border: ridge;
+        border-color: #00f6ed;
+    }
+
+    #container {
+        margin-top: 100px;
+        background-color: darkslateblue;
+        width: 50%;
+        height: 75%;
+        box-shadow: 05px 05px 05px purple;
+    }
+
+    #labels {
+        padding-top: 10px;
+    }
+
+    #fields {
+        padding: 10px;
+    }
+
+    .font-family {
+        display: flex;
+        justify-content: center;
+        font-family: 'Racing Sans One', cursive;
+        font-size: medium;
+    }
+</style>
