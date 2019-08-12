@@ -46,6 +46,16 @@ namespace WebApplication.Web.Controllers
             return RedirectToAction("GamerProfile", new { id });
             
         }
-        
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Input(SelectGameModel selectedGame)
+        {
+           
+            //code to save to database here
+
+            return RedirectToAction("Profile", "Account");
+        }
+
     }
 }

@@ -45,7 +45,7 @@ namespace WebApplication.Web
 
             // Connection String
             string connectionString = Configuration.GetConnectionString("Database");
-
+           
             // Dependency Injection
             // For Authentication
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

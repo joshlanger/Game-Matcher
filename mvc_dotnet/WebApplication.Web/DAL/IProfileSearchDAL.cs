@@ -13,5 +13,7 @@ namespace WebApplication.Web.DAL
         ProfileViewModel GetProfile(int profileId);
 
         List<ProfileViewModel> SearchAll(string parameter);
+
+        List<ProfileViewModel> NothingFound();
     }
 }
