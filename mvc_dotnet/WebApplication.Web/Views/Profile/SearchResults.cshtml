@@ -8,22 +8,23 @@
 
 <h2 class="visibility">Search Results</h2>
 
-@if (Model.Results[0].Username == null)
-{
-    <h4 class="visibility">No Matching Gamers Were Found.</h4>
-}
-else{ 
-    <ul class="visibility">
+    @if (Model.Results[0].Username == null)
+    {
+        <h4 class="visibility">No Matching Gamers Were Found.</h4>
+    }
+    else
+    {
+        <ul class="visibility">
 
-        @foreach (var gamer in Model.Results)
-        {
-            if (!gamer.IsPrivate)
+            @foreach (var gamer in Model.Results)
             {
-                <li class="visibility"><a href="@Url.Action("GamerProfile", "Profile")?id=@gamer.ProfileId">@gamer.Username</a></li>
+                if (!gamer.IsPrivate)
+                {
+                    <li class="visibility"><a href="@Url.Action("GamerProfile", "Profile")?id=@gamer.ProfileId">@gamer.Username</a></li>
+                }
             }
-        }
-    </ul>
-
+        </ul>
+    }
 </div>
 @*<style>
         .visibility {
