@@ -247,24 +247,11 @@ namespace WebApplication.Web.DAL
            
             if(reader["user_name"] != DBNull.Value)
             {
-
-            };
-
                 Container.Username = Convert.ToString(reader["user_name"]);
                 Container.IsPrivate = Convert.ToBoolean(reader["is_Private"]);
                 Container.ProfileId = Convert.ToInt32(reader["profile_id"]);
+            }
             return Container;
         }
-        
-        //private ProfileViewModel MapRow(SqlDataReader reader)
-        //{
-        //    return new ProfileViewModel()
-        //    {
-        //        Username = Convert.ToString(reader["user_name"]),
-        //        IsPrivate = Convert.ToBoolean(reader["is_Private"]),
-        //        ProfileId = Convert.ToInt32(reader["profile_id"]),
-        //        Zipcode = Convert.ToInt32(reader["zipcode"]),
-        //    };
-        //}
     }
 }
