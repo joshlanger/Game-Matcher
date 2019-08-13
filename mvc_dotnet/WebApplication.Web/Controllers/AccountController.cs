@@ -37,7 +37,6 @@ namespace WebApplication.Web.Controllers
             profile.Username = user.Username;
 
             var container = profileDAO.GetProfile(userProfile.Username);
-
             return View(container);
         }
 
@@ -120,8 +119,7 @@ namespace WebApplication.Web.Controllers
             profile.Username = user.Username;
 
             var container = profileDAO.GetProfile(userProfile.Username);
-
-            return View(profile);
+            return View(container);
         }
 
         [HttpGet]
@@ -165,9 +163,11 @@ namespace WebApplication.Web.Controllers
             userTemp.Username = user.Username;
             var container = profileDAO.GetProfile(userTemp.Username);
             profileEdit.ProfileId = container.ProfileId;
+            profileDAO.SaveGameOptions(profileEdit, profileEdit.GamesSelected);
+            profileDAO.GameNames(profileEdit);
             profileDAO.UpdatedProfile(profileEdit);
 
-            return RedirectToAction("Confirmation", "Account");
+            return View(profileEdit);
         }
 
         [HttpGet]

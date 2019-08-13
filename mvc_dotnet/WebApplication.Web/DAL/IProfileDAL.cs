@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,5 +14,11 @@ namespace WebApplication.Web.DAL
         void CreateProfile(ProfileViewModel profile);
 
         void UpdatedProfile(ProfileViewModel profile);
+
+        IList<SelectListItem> GetGames();
+
+        void SaveGameOptions(ProfileViewModel profile, int[] games);
+
+        string[] GameNames(ProfileViewModel profile);
     }
 }

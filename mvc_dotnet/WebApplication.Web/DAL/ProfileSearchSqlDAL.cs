@@ -145,34 +145,6 @@ namespace WebApplication.Web.DAL
             return Nothing;
         }
 
-        public List<SelectListItem> GetGames()
-        {
-            List<SelectListItem> Games = new List<SelectListItem>();
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand("select games_id, title from game_library", conn);
-                    
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        Games.Add(new SelectListItem() { Text = Convert.ToString(reader["title"]), Value = Convert.ToString(reader["games_id"]) });  
-                    }
-
-                    return Games;
-                }
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
-
-        }
-
         private ProfileViewModel MapRowToProfile(SqlDataReader reader)
         {
             return new ProfileViewModel()
