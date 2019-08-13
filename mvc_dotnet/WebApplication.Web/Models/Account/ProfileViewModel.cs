@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApplication.Web.Models.Games;
 
 namespace WebApplication.Web.Models.Account
 {
     public class ProfileViewModel
     {
 
-        public int? ProfileId { get; set; }
+        public int ProfileId { get; set; }
 
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
 
         public string Username { get; set; }
 
@@ -43,6 +43,12 @@ namespace WebApplication.Web.Models.Account
         [Required]
         public bool IsPrivate { get; set; }
 
-        //public List<Game> AvailableGames { get; set; }
+        public IList<SelectListItem> Games { get; set; }
+
+        public int[] GamesSelected { get; set; }
+
+        public int GamesId { get; set; }
+
+        public string[] GameTitles { get; set; }
     }
 }

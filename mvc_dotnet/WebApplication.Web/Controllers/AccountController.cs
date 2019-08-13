@@ -37,16 +37,7 @@ namespace WebApplication.Web.Controllers
             profile.Username = user.Username;
 
             var container = profileDAO.GetProfile(userProfile.Username);
-            profile.Username = container.Username;
-            profile.UserBio = container.UserBio;
-            profile.ProfileId = container.ProfileId;
-            profile.OtherInterests = container.OtherInterests;
-            profile.IsPrivate = container.IsPrivate;
-            profile.GamingExperience = container.GamingExperience;
-            profile.ContactPreference = container.ContactPreference;
-            profile.AvatarName = container.AvatarName;
-
-            return View(profile);
+            return View(container);
         }
 
         [HttpGet]
@@ -128,16 +119,7 @@ namespace WebApplication.Web.Controllers
             profile.Username = user.Username;
 
             var container = profileDAO.GetProfile(userProfile.Username);
-            profile.Username = container.Username;
-            profile.UserBio = container.UserBio;
-            profile.ProfileId = container.ProfileId;
-            profile.OtherInterests = container.OtherInterests;
-            profile.IsPrivate = container.IsPrivate;
-            profile.GamingExperience = container.GamingExperience;
-            profile.ContactPreference = container.ContactPreference;
-            profile.AvatarName = container.AvatarName;
-
-            return View(profile);
+            return View(container);
         }
 
         [HttpGet]
@@ -169,9 +151,7 @@ namespace WebApplication.Web.Controllers
             var user = authProvider.GetCurrentUser();
             editUserProfile.Username = user.Username;
             var container = profileDAO.GetProfile(editUserProfile.Username);
-            profileEdit.UserId = user.Id;
-            profileEdit.ProfileId = container.ProfileId;
-            return View(profileEdit);
+            return View(container);
         }
 
         [HttpPost]
@@ -183,9 +163,11 @@ namespace WebApplication.Web.Controllers
             userTemp.Username = user.Username;
             var container = profileDAO.GetProfile(userTemp.Username);
             profileEdit.ProfileId = container.ProfileId;
+            profileDAO.SaveGameOptions(profileEdit, profileEdit.GamesSelected);
+            profileDAO.GameNames(profileEdit);
             profileDAO.UpdatedProfile(profileEdit);
 
-            return RedirectToAction("Confirmation", "Account");
+            return View(profileEdit);
         }
 
         [HttpGet]
@@ -250,11 +232,15 @@ namespace WebApplication.Web.Controllers
 
         //deletes the user's account from the database
         //i can't get this to work with [httpdelete], but it works with post
+        //note that this assumes the username of the profile and user table are the same
+        //we should probably remove update user name from the update account options as it serves no real purpose
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteAccount(User user)
         {
-            userDAO.DeleteUser(user);
+            ProfileViewModel Container = new ProfileViewModel();
+            Container = profileDAO.GetProfile(user.Username);
+            userDAO.DeleteUser(Container.ProfileId, user.Id);
             return RedirectToAction("Logoff", "Account");
         }
 

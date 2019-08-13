@@ -37,7 +37,7 @@ namespace WebApplication.Web.Controllers
         {
             SearchResultsModel Results = new SearchResultsModel();
             Results.Results = profileSearchDAL.SearchAll(parameter.searchParameter);
-            if(Results.Results.Count == 0)
+            if (Results.Results.Count == 0)
             {
                 ProfileViewModel Container = new ProfileViewModel();
                 Results.Results.Add(Container);
@@ -53,15 +53,15 @@ namespace WebApplication.Web.Controllers
             
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Input(SelectGameModel selectedGame)
-        {
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Input(SelectGameModel selectedGame)
+        //{
            
-            //code to save to database here
+        //    //code to save to database here
 
-            return RedirectToAction("Profile", "Account");
-        }
+        //    return RedirectToAction("Profile", "Account");
+        //}
 
     }
 }
