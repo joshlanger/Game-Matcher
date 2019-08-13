@@ -29,7 +29,7 @@ namespace WebApplication.Web.DAL
                 {
                     //changed emailaddress to email in sql statement and param
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@username, @email, @password, @salt, @role, @zipcode", conn);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@username, @email, @password, @salt, @role, @zipcode); INSERT INTO profile VALUES ((SELECT scope_identity()), @username, '', '', '', '', '', 1);", conn);
                     cmd.Parameters.AddWithValue("@username", user.Username);
                     cmd.Parameters.AddWithValue("@email", user.Email);
                     cmd.Parameters.AddWithValue("@password", user.Password);
