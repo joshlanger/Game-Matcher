@@ -1,5 +1,5 @@
-﻿@using WebApplication.Web.Models.Account;
-@model ProfileViewModel
+﻿
+@model User
 @{
     ViewData["Title"] = "Index";
 }
@@ -22,10 +22,9 @@
         <div class="row content">
             <div id="sticky" class="col-lg-3 sidenav">
                 <h4>@Model.Username Home</h4>
-                <img src="~/images/@Model.AvatarName" class="img-circle" height="250" width="250" alt="Avatar">
+                <img src="~/images/sadspaceman.png" class="img-circle" height="250" width="250" alt="Avatar">
                 <br></br>
-                <nav class="col-md-12" id="myScrollspy">
-                    <ul class="nav nav-pills nav-stacked">
+
                 <nav class="col-sm-3" id="myScrollspy">
                     <ul class="nav nav-pills nav-stacked nav-fill">
                         <li class="active"><a href="#section1">My Games</a></li>
@@ -39,12 +38,14 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search...">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
+                            <button class="btn btn-default" type="button" @*onclick="href=" @Url.Action("GamerProfile", "Profile") ?"*@>
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
                     </div>
                 </nav>
+
+
             </div>
 
 
@@ -64,85 +65,89 @@
                     <h1>My Matches</h1>
                     <p>Try to scroll this section and look at the navigation list while scrolling!</p>
                 </div>
+
+
+
+
+
             </div>
         </div>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
+   
 
+    <footer class="container-fluid">
+        <p>Footer Text</p>
+    </footer>
 </body>
+
 </html>
 
-<style>
+    <style>
 
-    body {
-        font-family: 'Roboto', sans-serif;
-    }
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
 
 
-    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-    .row.content {
-        height: 1000px;
-    }
+        /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+        .row.content {
+            height: 1000px;
+            }
 
-    /* Set gray background color and 100% height */
-    .sidenav {
-        background-color: #f1f1f1;
-        height: 100%;
-    }
+        /* Set gray background color and 100% height */
+        .sidenav {
+            background-color: #f1f1f1;
+            height: 100%;
+        }
 
-    /* Set black background color, white text and some padding */
-    footer {
-        background-color: #555;
-        color: white;
-        padding: 15px;
-    }
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
 
-    .row.content {
-        height: auto;
-    }
+        .row.content {
+            height: auto;
+        }
 
-    }
+        }
 
-    ul.nav-pills {
-        top: 20px;
-        position: fixed;
-    }
+        ul.nav-pills {
+            top: 20px;
+            position: fixed;
+        }
 
-    div.col-sm-9 div {
-        height: 350px;
-        font-size: 28px;
-    }
+        div.col-sm-9 div {
+            height: 350px;
+            font-size: 28px;
+        }
 
-    #section1 {
-        color: #fff;
-        background-color: #1E88E5;
-    }
+        #section1 {
+            color: #fff;
+            background-color: #1E88E5;
+        }
 
-    #section2 {
-        color: #fff;
-        background-color: #673ab7;
-    }
+        #section2 {
+            color: #fff;
+            background-color: #673ab7;
+        }
 
-    #section3 {
-        color: #fff;
-        background-color: #ff9800;
-    }
+        #section3 {
+            color: #fff;
+            background-color: #ff9800;
+        }
 
-    media screen and (max-width: 810px) {
-        #section1, #section2, #section3
-    }
+        media screen and (max-width: 810px) {
+            #section1, #section2, #section3
 
-    {
-        margin-left: 150px;
-    }
+        {
+            margin-left: 150px;
+        }
+        }
 
-    }
-
-    #sticky {
-        position: sticky;
-        top: 0;
-    }
-</style>
+        #sticky {
+            position: sticky;
+            top: 0;
+        }
+    </style>

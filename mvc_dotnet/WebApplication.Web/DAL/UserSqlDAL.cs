@@ -29,7 +29,7 @@ namespace WebApplication.Web.DAL
                 {
                     //changed emailaddress to email in sql statement and param
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@username, @email, @password, @salt, @role, @zipcode)", conn);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@username, @email, @password, @salt, @role, @zipcode", conn);
                     cmd.Parameters.AddWithValue("@username", user.Username);
                     cmd.Parameters.AddWithValue("@email", user.Email);
                     cmd.Parameters.AddWithValue("@password", user.Password);
@@ -52,15 +52,22 @@ namespace WebApplication.Web.DAL
         /// Deletes the user from the database.
         /// </summary>
         /// <param name="user"></param>
-        public void DeleteUser(User user)
+        public void DeleteUser(int profileId, int userId)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("DELETE FROM users WHERE user_id = @id;", conn);
-                    cmd.Parameters.AddWithValue("@id", user.Id);                    
+                    string query = @"delete from profile_genre where profile_id= @profile_id;
+                                    delete from profile_game where profile_id = @profile_id;
+                                    delete from friend_list where profile_id = @profile_id;
+                                    delete from profile where profile_id = @profile_id;
+                                    delete from users where user_id = @user_id;";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@user_id", userId);
+                    cmd.Parameters.AddWithValue("@profile_id", profileId);
 
                     cmd.ExecuteNonQuery();
 
