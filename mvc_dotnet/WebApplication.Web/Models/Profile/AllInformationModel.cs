@@ -15,10 +15,10 @@ namespace WebApplication.Web.Models.Profile
             List<MatchStrengthModel> Matches = new List<MatchStrengthModel>();
 
 
-            foreach(var user in allUsers)
-            {
-                if()
-            }
+            //foreach(var user in allUsers)
+            //{
+            //    if () { } ;
+            //}
 
             return Matches;
         }

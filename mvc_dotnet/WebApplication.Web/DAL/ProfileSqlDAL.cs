@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -64,6 +65,8 @@ namespace WebApplication.Web.DAL
                     {
                         profile = MapRowToProfile(reader);
                     }
+                    profile.Games = GetGames();
+                    profile.GameTitles = GameNames(profile);
                     return profile;
                 }
             }
@@ -102,6 +105,91 @@ namespace WebApplication.Web.DAL
             }
             
         }
+
+        public IList<SelectListItem> GetGames()
+        {
+            List<SelectListItem> Games = new List<SelectListItem>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("select games_id, title from game_library", conn);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Games.Add(new SelectListItem() { Text = Convert.ToString(reader["title"]), Value = Convert.ToString(reader["games_id"]) });
+                    }
+
+                    return Games;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public void SaveGameOptions(ProfileViewModel gameEdit, int[] Games)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("INSERT INTO profile_game VALUES (@games_id, @profile_id)", conn);
+                    cmd.Parameters.AddWithValue("@profile_id", gameEdit.ProfileId);
+                    cmd.Parameters.Add("@games_id",System.Data.SqlDbType.Int);
+
+                    foreach (int game_id in Games)
+                    {
+                        cmd.Parameters["@games_id"].Value =  game_id;
+                        cmd.ExecuteNonQuery();
+                    }
+                    return;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public string[] GameNames(ProfileViewModel profile)
+        {
+            List<string> GameTitles = new List<string>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT title from game_library JOIN profile_game ON game_library.games_id = profile_game.games_id WHERE profile_id = @profile_id", conn);
+                    cmd.Parameters.AddWithValue("@profile_id", profile.ProfileId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        GameTitles.Add(Convert.ToString(reader["title"]));
+                    }
+
+                    string[] gameTitles = GameTitles.ToArray();
+                    return gameTitles;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+        }
+
         private ProfileViewModel MapRowToProfile(SqlDataReader reader)
         {
             return new ProfileViewModel()
