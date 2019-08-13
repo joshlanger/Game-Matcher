@@ -37,16 +37,16 @@ namespace WebApplication.Web.Controllers
             profile.Username = user.Username;
 
             var container = profileDAO.GetProfile(userProfile.Username);
-            profile.Username = container.Username;
-            profile.UserBio = container.UserBio;
-            profile.ProfileId = container.ProfileId;
-            profile.OtherInterests = container.OtherInterests;
-            profile.IsPrivate = container.IsPrivate;
-            profile.GamingExperience = container.GamingExperience;
-            profile.ContactPreference = container.ContactPreference;
-            profile.AvatarName = container.AvatarName;
+            //profile.Username = container.Username;
+            //profile.UserBio = container.UserBio;
+            //profile.ProfileId = container.ProfileId;
+            //profile.OtherInterests = container.OtherInterests;
+            //profile.IsPrivate = container.IsPrivate;
+            //profile.GamingExperience = container.GamingExperience;
+            //profile.ContactPreference = container.ContactPreference;
+            //profile.AvatarName = container.AvatarName;
 
-            return View(profile);
+            return View(container);
         }
 
         [HttpGet]
@@ -128,16 +128,17 @@ namespace WebApplication.Web.Controllers
             profile.Username = user.Username;
 
             var container = profileDAO.GetProfile(userProfile.Username);
-            profile.Username = container.Username;
-            profile.UserBio = container.UserBio;
-            profile.ProfileId = container.ProfileId;
-            profile.OtherInterests = container.OtherInterests;
-            profile.IsPrivate = container.IsPrivate;
-            profile.GamingExperience = container.GamingExperience;
-            profile.ContactPreference = container.ContactPreference;
-            profile.AvatarName = container.AvatarName;
+            //profile.Username = container.Username;
+            //profile.UserBio = container.UserBio;
+            //profile.ProfileId = container.ProfileId;
+            //profile.OtherInterests = container.OtherInterests;
+            //profile.IsPrivate = container.IsPrivate;
+            //profile.GamingExperience = container.GamingExperience;
+            //profile.Games = profileDAO.GetGames();
+            //profile.ContactPreference = container.ContactPreference;
+            //profile.AvatarName = container.AvatarName;
 
-            return View(profile);
+            return View(container);
         }
 
         [HttpGet]
@@ -169,9 +170,7 @@ namespace WebApplication.Web.Controllers
             var user = authProvider.GetCurrentUser();
             editUserProfile.Username = user.Username;
             var container = profileDAO.GetProfile(editUserProfile.Username);
-            profileEdit.UserId = user.Id;
-            profileEdit.ProfileId = container.ProfileId;
-            return View(profileEdit);
+            return View(container);
         }
 
         [HttpPost]
@@ -183,9 +182,11 @@ namespace WebApplication.Web.Controllers
             userTemp.Username = user.Username;
             var container = profileDAO.GetProfile(userTemp.Username);
             profileEdit.ProfileId = container.ProfileId;
+            profileDAO.SaveGameOptions(profileEdit, profileEdit.GamesSelected);
+            profileDAO.GameNames(profileEdit);
             profileDAO.UpdatedProfile(profileEdit);
 
-            return RedirectToAction("Confirmation", "Account");
+            return View(profileEdit);
         }
 
         [HttpGet]
