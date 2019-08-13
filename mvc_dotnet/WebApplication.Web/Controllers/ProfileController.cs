@@ -37,7 +37,7 @@ namespace WebApplication.Web.Controllers
         {
             SearchResultsModel Results = new SearchResultsModel();
             Results.Results = profileSearchDAL.SearchAll(parameter.searchParameter);
-            if(Results.Results.Count == 0)
+            if (Results.Results.Count == 0)
             {
                 ProfileViewModel Container = new ProfileViewModel();
                 Results.Results.Add(Container);

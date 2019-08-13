@@ -9,8 +9,5 @@ namespace WebApplication.Web.Models.Profile
     public class SearchResultsModel
     {
         public List<ProfileViewModel> Results { get; set; }
-
-        public bool NoResults { get; set; }
-
     }
 }
