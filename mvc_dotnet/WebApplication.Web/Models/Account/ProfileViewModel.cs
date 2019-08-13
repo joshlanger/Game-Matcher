@@ -49,6 +49,13 @@ namespace WebApplication.Web.Models.Account
 
         public int GamesId { get; set; }
 
-        public string[] GameTitles { get; set; }
+        public List<Game> GameTitles { get; set; }
+
+        public static List<SelectListItem> ExperienceLevel = new List<SelectListItem>()
+        {
+            new SelectListItem() { Text = "Novice" },
+            new SelectListItem() { Text = "Intermediate" },
+            new SelectListItem() { Text = "Expert" },
+        };
     }
 }
