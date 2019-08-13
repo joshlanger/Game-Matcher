@@ -145,34 +145,6 @@ namespace WebApplication.Web.DAL
             return Nothing;
         }
 
-        public List<SelectListItem> GetGames()
-        {
-            List<SelectListItem> Games = new List<SelectListItem>();
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand("select games_id, title from game_library", conn);
-                    
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        Games.Add(new SelectListItem() { Text = Convert.ToString(reader["title"]), Value = Convert.ToString(reader["games_id"]) });  
-                    }
-
-                    return Games;
-                }
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
-
-        }
-
         private ProfileViewModel MapRowToProfile(SqlDataReader reader)
         {
             return new ProfileViewModel()
@@ -201,5 +173,45 @@ namespace WebApplication.Web.DAL
             }
             return Container;
         }
+
+
+        //TODO Check this, please Josh
+        public List<MatchStrengthModel> GetMatches()
+        {
+            List<MatchStrengthModel> Matches = new List<MatchStrengthModel>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(@"select profile.user_name, game_library.title, game_library.genre, profile.gaming_experience, game_library.style from board_game  
+                        full join profile_game on profile_game.games_id = board_game.games_id
+                        full join game_library on game_library.games_id = profile_game.games_id
+                        full join profile on profile.profile_id = profile_game.profile_id
+                        full join profile_genre on profile_genre.profile_id = profile.profile_id
+                        full join genre_library on profile_genre.genre_id = genre_library.genre_id
+                        full join users on profile.user_id = users.user_id
+                        where profile.is_Private = 'false' and game_library.title IS NOT NULL and profile.is_Private = 'false'
+                        ORDER BY profile.user_name", conn);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Matches.Add(new MatchStrengthModel() { Username = Convert.ToString(reader["profile.user_name"]), Experience = Convert.ToString(reader["profile.gaming_experience"]) });
+                    }
+
+                    return Matches;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
+        }
+
+
     }
 }
