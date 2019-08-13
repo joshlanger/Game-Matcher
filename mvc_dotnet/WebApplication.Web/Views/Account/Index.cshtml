@@ -1,9 +1,8 @@
-﻿
-@model User
+﻿@using WebApplication.Web.Models.Account;
+@model ProfileViewModel
 @{
     ViewData["Title"] = "Index";
 }
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,12 +17,11 @@
 </head>
 
 <body>
-
     <div class="container-fluid">
         <div class="row content">
             <div id="sticky" class="col-lg-3 sidenav">
                 <h4>@Model.Username Home</h4>
-                <img src="~/images/sadspaceman.png" class="img-circle" height="250" width="250" alt="Avatar">
+                <img src="~/images/@Model.AvatarName" class="img-circle" height="250" width="250" alt="Avatar">
                 <br></br>
                 <nav class="col-md-12" id="myScrollspy">
                     <ul class="nav nav-pills nav-stacked">
@@ -35,14 +33,12 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search...">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" @*onclick="href=" @Url.Action("GamerProfile", "Profile") ?"*@>
+                            <button class="btn btn-default" type="button">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
                     </div>
                 </nav>
-
-
             </div>
 
             <div class="col-sm-9">
@@ -59,25 +55,17 @@
                     <h1>My Matches</h1>
                     <p>Try to scroll this section and look at the navigation list while scrolling!</p>
                 </div>
-
-
-
-
-
             </div>
         </div>
     </div>
-   
-
-    <footer class="container-fluid">
-        <p>Footer Text</p>
-    </footer>
+    </div>
+    </div>
+    </div>
+    </div>
 </body>
-
 </html>
 
 <style>
-
     body {
         font-family: 'Roboto', sans-serif;
     }
