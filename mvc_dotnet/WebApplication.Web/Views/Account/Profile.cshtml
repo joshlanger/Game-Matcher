@@ -48,6 +48,12 @@
         <p>Stuff about me: @Model.UserBio</p>
         <p>Get a hold of me: @Model.ContactPreference</p>
         <p>Level of Gaming Experience: @Model.GamingExperience</p>
+        <p>Games I Play: <br /> 
+        @foreach (string game in Model.GameTitles)
+        {
+            @game<br />
+        }
+        </p>
         <p>I like other things, too: @Model.OtherInterests</p>
         <p>Private Profile: @Model.IsPrivate</p>
         <p>Location: Somewhere, PA</p>

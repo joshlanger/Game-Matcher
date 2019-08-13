@@ -12,6 +12,10 @@ namespace WebApplication.Web.Models.Profile
         [DisplayName("Game")]
         public int SelectedItem { get; set; }
 
+        public int GamesId { get; set; }
+
+        public int ProfileId { get; set; }
+
         public List<SelectListItem> Items { get; set; }
     }
 }
