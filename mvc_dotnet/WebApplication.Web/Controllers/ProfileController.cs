@@ -32,6 +32,11 @@ namespace WebApplication.Web.Controllers
         public IActionResult GamerProfile(int id)
         {
             var profile = profileSearchDAL.GetProfile(id);
+            AllInformationModel AllInfo = new AllInformationModel();
+            var user = authProvider.GetCurrentUser();
+            AllInfo.AllUsers = profileSearchDAL.GetMatches();
+            AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
+            profile.TopThree = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
             return View(profile);
         }
 
@@ -60,7 +65,7 @@ namespace WebApplication.Web.Controllers
         public IActionResult Matches()
         {
             var user = authProvider.GetCurrentUser();
-            MatchStrengthModel Converter = new MatchStrengthModel();
+            
             AllInformationModel AllInfo = new AllInformationModel();
             AllInfo.AllUsers = profileSearchDAL.GetMatches();
            
@@ -68,16 +73,6 @@ namespace WebApplication.Web.Controllers
             AllInfo.GamerMatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
             return View(AllInfo);
         }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Input(SelectGameModel selectedGame)
-        //{
-           
-        //    //code to save to database here
-
-        //    return RedirectToAction("Profile", "Account");
-        //}
 
     }
 }
