@@ -19,13 +19,13 @@
             <div class="row">
                 @*<label class="col-sm-4 col-md-4 col-lg-4 control-label font-color" asp-for="Username">Username</label>*@
                 <div class="col-md-4">
-                    <input id="fields" asp-for="Username" value="@Model.Username" placeholder=" Enter Username" />
+                    <input id="fields" asp-for="Username" value="@Model.Username" required placeholder=" Enter Username" />
                 </div>
             </div>
             <div class="row">
                 @*<label class="col-sm-4 control-label font-color" asp-for="Email">Email</label>*@
                 <div class="col-md-4">
-                    <input id="fields" type="email" asp-for="Email" value="@Model.Email" placeholder=" Enter Email" />
+                    <input id="fields" type="email" asp-for="Email" value="@Model.Email" required placeholder=" Enter Email" />
                     <span asp-validation-for="Email"></span>
                 </div>
 
@@ -33,7 +33,7 @@
             <div class="row">
                 @*<label class="col-sm-4 control-label font-color" asp-for="ZipCode">Zip Code</label>*@
                 <div class="col-md-4">
-                    <input id="fields" asp-for="ZipCode" value="@Model.ZipCode" placeholder=" Enter ZipCode" />
+                    <input id="fields" asp-for="ZipCode" value="@Model.ZipCode" required placeholder=" Enter ZipCode" />
                 </div>
 
             </div>
