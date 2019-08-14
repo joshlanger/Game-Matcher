@@ -7,6 +7,7 @@ using WebApplication.Web.DAL;
 using WebApplication.Web.Models;
 using WebApplication.Web.Models.Account;
 using WebApplication.Web.Models.Profile;
+using WebApplication.Web.Providers.Auth;
 
 namespace WebApplication.Web.Controllers
 {
@@ -14,10 +15,12 @@ namespace WebApplication.Web.Controllers
     {
         private IProfileSearchDAL profileSearchDAL;
         private IUserDAL userDAL;
-        public ProfileController(IProfileSearchDAL profileSearchDAL, IUserDAL userDAL)
+        private readonly IAuthProvider authProvider;
+        public ProfileController(IProfileSearchDAL profileSearchDAL, IUserDAL userDAL, IAuthProvider authProvider)
         {
             this.profileSearchDAL = profileSearchDAL;
             this.userDAL = userDAL;
+            this.authProvider = authProvider;
         }
 
         public IActionResult Search()
@@ -51,6 +54,19 @@ namespace WebApplication.Web.Controllers
             int id = profileSearchDAL.SearchProfileByUsername(searchUsername.searchParameter);
             return RedirectToAction("GamerProfile", new { id });
             
+        }
+
+        [HttpGet]
+        public IActionResult Matches()
+        {
+            var user = authProvider.GetCurrentUser();
+            MatchStrengthModel Converter = new MatchStrengthModel();
+            AllInformationModel AllInfo = new AllInformationModel();
+            AllInfo.AllUsers = profileSearchDAL.GetMatches();
+           
+            AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
+            AllInfo.GamerMatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+            return View(AllInfo);
         }
 
         //[HttpPost]
