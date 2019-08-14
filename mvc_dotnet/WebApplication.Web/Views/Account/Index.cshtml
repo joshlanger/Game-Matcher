@@ -21,7 +21,7 @@
         <div class="row content">
             <div class="col-md-12 sidenav">
                 <h4 class="col-md-offset-5 font-color">@Model.Username</h4>
-                <img src="~/images/@Model.AvatarName" class="col-md-offset-5 img-circle" height="250" width="250" alt="Avatar">
+                <img src="~/images/@(Model.UserId % 10).jpg" class="col-md-offset-5 img-circle" height="250" width="250" alt="Avatar">
                 <br><br>
                 <nav class="col-md-offset-4 row" id="myScrollspy">
                     <ul class="col-md-12 nav nav-pills nav-inline">
