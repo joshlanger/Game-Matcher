@@ -12,28 +12,28 @@
         <div class="row">
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Username">Username:</label>*@
             <div class="col-md-4">
-                <input id="fields" asp-for="Username" placeholder="Create username"/>
+                <input id="fields" asp-for="Username" required placeholder=" Username required"/>
                 <span asp-validation-for="Username" style="color: deepskyblue"></span>
             </div>
         </div>
         <div class="row">
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Email">Email:</label>*@
             <div class="col-md-4">
-                <input id="fields" type="email" asp-for="Email" placeholder="Email"/>
+                <input id="fields" type="email" asp-for="Email" required placeholder=" Email required"/>
                 <span asp-validation-for="Email" style="color: deepskyblue"></span>
             </div>
         </div>
         <div class="row">
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Password">Password:</label>*@
             <div class="col-md-4">
-                <input id="fields" type="password"  asp-for="Password" placeholder="Password"/>
+                <input id="fields" type="password"  asp-for="Password" required placeholder=" Password required"/>
                 <span asp-validation-for="Password" style="color: deepskyblue"></span>
             </div>
         </div>
         <div class="row">
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="ConfirmPassword">Confirm Password:</label>*@
             <div class="col-md-4">
-                <input id="fields" type="password" asp-for="ConfirmPassword" placeholder="Cofirm Password" />
+                <input id="fields" type="password" asp-for="ConfirmPassword" required placeholder=" Cofirm password required" />
                 <span asp-validation-for="ConfirmPassword" style="color: deepskyblue"></span>
             </div>
         </div>
@@ -47,7 +47,7 @@
 
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Zipcode">Zip Code:</label>*@
             <div class="col-md-4">
-                <input id="fields" asp-for="Zipcode" placeholder="Zip Code" />
+                <input id="fields" asp-for="Zipcode" placeholder=" Zip code" />
                 <span asp-validation-for="Zipcode" style="color: deepskyblue"></span>
             </div>
         </div>

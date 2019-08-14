@@ -3,25 +3,23 @@
 @{
     ViewData["Title"] = "Search";
 }
-<div id="container" class="container-fluid border-color">
-    <h2 class="h2 font-color">Search</h2>
-    <h4 class="h4 font-color">This is a temporary page for testing search methods</h4>
-    <div >
-        @*<form asp-controller="profile" asp-action="searchusername" method="get">
-                <label asp-for="@Model.searchParameter">Username Search</label>
-                <input asp-for="@Model.searchParameter" />
-                <input type="submit" value="Search" class="btn btn-default, button" />
-            </form>*@
-        <form asp-controller="profile" asp-action="SearchResults" method="get" style="justify-content:center">
-            <label asp-for="@Model.searchParameter" class="font-color">Search</label>
-            <input asp-for="@Model.searchParameter" />
-            <input type="submit" value="Search" class="btn btn-default, button" />
-        </form>
-    </div>
+<div class="col-md-12">
+    
+    <form id="container" class="container border-color" asp-controller="profile" asp-action="SearchResults" method="get" style="justify-content:center">
+        <div class="row">
+            <h2 class="col-md-pull-1 h2 font-color">Search</h2>
+            @*<h4 class="h4 font-color"></h4>*@
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                @*<label asp-for="@Model.searchParameter" class="font-color">Search</label>*@
+                <input id="fields" asp-for="@Model.searchParameter" placeholder=" Search for matches" />
+                <input id="fields" type="submit" value="Search" class="btn btn-default, button" />
+            </div>
+        </div>
+    </form>
+    
 </div>
-
-
-
 
 @*<style>
     .visibility {
@@ -31,7 +29,9 @@
 
 
 <style scoped>
-
+    .col-md-4 {
+        margin-left: 25px;
+    }
     .h2 {
         display: flex;
         justify-content: center;
@@ -47,6 +47,7 @@
     .button {
         background-color: magenta;
         color: white;
+        width: 180px;
     }
 
     .margin-left1 {
@@ -54,7 +55,8 @@
     }
 
     .font-color {
-        color: magenta;
+        color: deepskyblue;
+        font-weight: 600;
     }
 
     .font-color2 {
@@ -67,19 +69,19 @@
     }
 
     #container {
-        margin-top: 100px;
-        background-color: darkslateblue;
-        width: 50%;
-        height: 75%;
+        margin-top: 30px;
+        background-color: rgba(72, 61, 139, 0.50);
+        width: 25%;
+        height: auto;
         box-shadow: 05px 05px 05px purple;
     }
-
+    #fields {
+        margin-left: 05px;
+        margin-top: 05px;
+        margin-bottom: 05px;
+    }
     #labels {
         padding-top: 10px;
-    }
-
-    #fields {
-        padding: 10px;
     }
 
     .font-family {

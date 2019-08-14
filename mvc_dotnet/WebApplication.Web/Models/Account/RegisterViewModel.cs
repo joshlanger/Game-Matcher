@@ -8,25 +8,21 @@ namespace WebApplication.Web.Models.Account
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage ="*")]
-        [DataType(DataType.Text)]
+        [Required]
         [StringLength(50, MinimumLength = 7)]
         public string Username { get; set; }
 
-        [Required(ErrorMessage =" *")]
-        [DataType(DataType.EmailAddress)]
+        [Required]
+
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage =" *")]
+        [Required]
         [StringLength(100, MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage =" *")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Required]
         [Compare("Password", ErrorMessage = "Password does not match.")]
         public string ConfirmPassword { get; set; }
 
@@ -34,7 +30,7 @@ namespace WebApplication.Web.Models.Account
 
         public string Role { get; set; }
 
-        [Required(ErrorMessage=" *")]
+        [Required]
         [DataType(DataType.PostalCode)]
         [Display(Name = "Zipcode")]
         public int Zipcode { get; set; }
