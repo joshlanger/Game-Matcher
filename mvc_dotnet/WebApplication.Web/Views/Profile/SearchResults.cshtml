@@ -4,15 +4,16 @@
     ViewData["Title"] = "SearchResults";
 }
 <div class="col-md-12">
-    <div id="container" class="col-md-4 container border-color">
-        <div class="row">
-            <h2 class="h2 font-color">Search Results</h2>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
+    <div id="container" class="container border-color">
+        <div class="col-md-4">
+            <div class="row">
+                <h2 class="h2 font-color">Search Results</h2>
+            </div>
+            <div class="row">
+
                 @if (Model.Results[0].Username == null)
                 {
-                    <h4 class="col-md-4 font-color2">No Matching Gamers Were Found.</h4>
+                    <h4 class="h4 font-color2">No Matching Gamers Were Found.</h4>
                 }
                 else
                 {
@@ -27,12 +28,12 @@
                         }
                     </ul>
                 }
+
             </div>
-           
         </div>
     </div>
 
-   
+
 </div>
 @*<style>
         .visibility {
@@ -44,6 +45,7 @@
     .col-md-4 {
         margin-left: 55px;
     }
+
     .h2 {
         display: flex;
         justify-content: center;
