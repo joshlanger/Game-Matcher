@@ -149,10 +149,13 @@ namespace WebApplication.Web.DAL
                     cmd.Parameters.AddWithValue("@profile_id", gameEdit.ProfileId);
                     cmd.Parameters.Add("@games_id",System.Data.SqlDbType.Int);
 
-                    foreach (int game_id in Games)
+                    if(Games != null)
                     {
-                        cmd.Parameters["@games_id"].Value =  game_id;
-                        cmd.ExecuteNonQuery();
+                        foreach (int game_id in Games)
+                        {
+                            cmd.Parameters["@games_id"].Value = game_id;
+                            cmd.ExecuteNonQuery();
+                        }
                     }
                     return;
                 }
@@ -238,10 +241,13 @@ namespace WebApplication.Web.DAL
                     cmd.Parameters.Add("@genre_id", System.Data.SqlDbType.Int);
                     cmd.Parameters.AddWithValue("@profile_id", genreEdit.ProfileId);
 
-                    foreach (int genre_id in Genres)
+                    if(Genres != null)
                     {
-                        cmd.Parameters["@genre_id"].Value = genre_id;
-                        cmd.ExecuteNonQuery();
+                        foreach (int genre_id in Genres)
+                        {
+                            cmd.Parameters["@genre_id"].Value = genre_id;
+                            cmd.ExecuteNonQuery();
+                        }
                     }
                     return;
                 }
