@@ -12,90 +12,123 @@
 
     };
 }
-<style> #header { display: none } </style>
+<style>
+    #header {
+        display: none
+    }
+</style>
 
-        
-<form class="col-md-12 container border-color" asp-controller="account" asp-action="login" method="post">
-    <div class="row">
-        <h2 class="col-md-push-6 h2 font-color">Login</h2>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <label id="labels" class="control-label font-color" asp-for="Email">Email:</label>
+<div class="col-md-12">
+    <form class="col-md-push-4 container border-color" asp-controller="account" asp-action="login" method="post">
+        <div class="row">
+            <h2 class="col-md-push-1 h2 font-color">Login</h2>
         </div>
-        <div class="col-md-6">
-            <input class="form-control" type="email" asp-for="Email" />
-            <span asp-validation-for="Email"></span>
+        <div class="row">
+            <div>
+                @*<label id="labels" class="control-label font-color" asp-for="Email"></label>*@
+            </div>
+            <div class="col-md-4">
+                <input type="email" asp-for="Email" placeholder="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            <label id="labels" class="control-label font-color" asp-for="Password">Password:</label>
-        </div>
-        <div class="col-md-6">
-            <input id="fields" class="form-control" type="password" asp-for="Password" />
-            <span asp-validation-for="Password"></span>
-        </div>
-        <div class="col-md-6">
-            <input type="submit" value="Login" class="btn btn-default, button" />
-        </div>
-        <div class="col-md-6">
-            <button asp-area="" class="btn btn-default, button" asp-controller="Account" asp-action="Register">Create a Account</button>
-        </div>
-        <div class="col-md-6">
-            <button asp-area="" class="btn btn-default, button" asp-controller="Account" asp-action="ChangePassword">Forgot Your Password?</button>
-        </div>
-    </div>
+        <br />
+        <div class="row">
+            <div>
+                @*<label id="labels" class="control-label font-color" asp-for="Password"></label>*@
+            </div>
+            <div class="col-md-4">
+                <input type="password" asp-for="Password" placeholder="Password" />
+                <span asp-validation-for="Password"></span>
+            </div>
 
-</form>
-    
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <input type="submit" value="Login" class="btn btn-default, button" />
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <button asp-area="" class="btn btn-default, button" asp-controller="Account" asp-action="Register">Create a Account</button>
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <button asp-area="" class="btn btn-default, button" asp-controller="Account" asp-action="ChangePassword">Forgot Your Password?</button>
+            </div>
+        </div>
+        <br />
+
+    </form>
+</div>
 
 
 <style scoped>
+    .col-md-4 {
+        margin-left: 32px;
+    }
+
     .navbar {
         display: none
     }
+
     .h2 {
         display: flex;
         justify-content: center;
         width: auto;
     }
+
     .button {
         background-color: magenta;
         color: white;
-        width: 250px;
+        width: 180px;
     }
-    .margin-left1{
+
+    .margin-left1 {
         margin-left: 05px;
     }
-    .font-color{
-        color: magenta;
+
+    .font-color {
+        color: deepskyblue;
+        font-weight:600;
     }
+
     .font-color2 {
         color: #00f6ed;
     }
+
     .border-color {
         border: ridge;
         border-color: #00f6ed;
     }
-    #container {
-        margin-top: 100px;
-        background-color: darkslateblue;
-        width: 50%;
-        height: 75%;
+
+    .container {
+        margin-top: 25px;
+        background-color: rgba(72, 61, 139, 0.50);
+        width: 25%;
+        height: auto;
         box-shadow: 05px 05px 05px purple;
     }
-    #labels{
+
+    #labels {
         padding-top: 10px;
-        
     }
-    #fields{
+
+    #fields {
         padding: 10px;
     }
+
     .font-family {
         display: flex;
         justify-content: center;
         font-family: 'Racing Sans One', cursive;
-        font-size: medium;
+        font-size: larger;
+        font-weight: 600;
     }
 </style>
