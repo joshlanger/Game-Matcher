@@ -5,7 +5,7 @@
 }
 <div class="col-md-12">
     <div id="container" class="container border-color">
-        <div class="col-md-4">
+        
             <div class="row">
                 <h2 class="h2 font-color">Search Results</h2>
             </div>
@@ -17,7 +17,7 @@
                 }
                 else
                 {
-                    <ul class="visibility font-color2">
+                    <ul class="col-md-offset-3 font-color2" >
 
                         @foreach (var gamer in Model.Results)
                         {
@@ -30,7 +30,7 @@
                 }
 
             </div>
-        </div>
+        
     </div>
 
 
@@ -42,7 +42,7 @@
     </style>*@
 
 <style scoped>
-    .col-md-4 {
+    #col-md-4 {
         margin-left: 55px;
     }
 
@@ -50,6 +50,7 @@
         display: flex;
         justify-content: center;
         width: auto;
+        font-size: 20pt;
     }
 
     .h4 {
@@ -58,7 +59,12 @@
         width: auto;
         color: white;
     }
-
+    .a {
+        display: flex;
+        justify-content: center;
+        width:auto;
+        color:white;
+    }
     .button {
         background-color: magenta;
         color: white;
@@ -73,6 +79,7 @@
     }
 
     .font-color2 {
+        
         color: white;
     }
 
