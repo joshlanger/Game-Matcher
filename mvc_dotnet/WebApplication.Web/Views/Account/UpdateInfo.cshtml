@@ -2,69 +2,80 @@
 @{
     ViewData["Title"] = "ChangeInfo";
 }
-<div id="container" class="container border-color">
-
-    <form class="form-horizontal" asp-controller="account" asp-action="updateinfo" method="post">
-        <div>
-            <h2 class="h2 font-color font-size">Update Your Account Information</h2>
-        </div>
-        <h4 class="h2 font-color font-size">General</h4>
-
-        <input type="hidden" asp-for="Id" value="@Model.Id" />
-        <div class="form-group">
-            <label class="col-sm-4 col-md-4 col-lg-4 control-label font-color" asp-for="Username">Username</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                <input asp-for="Username" value="@Model.Username" />
+<div class="col-md-12">
+    
+    <div id="container" class="col-md-pull-1 container border-color">
+        <form asp-controller="account" asp-action="updateinfo" method="post">
+            <div class="row">
+                <h2 class="col-md-push-1 h2 font-color font-size">Update Your Account</h2>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-4 control-label font-color" asp-for="Email">Email</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                <input type="email" asp-for="Email" value="@Model.Email" />
-                <span asp-validation-for="Email"></span>
+            @*<h4 class="h2 font-color font-size">General</h4*@
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="hidden" asp-for="Id" value="@Model.Id" />
+                </div>
             </div>
 
-        </div>
-        <div class="form-group">
-            <label class="col-sm-4 control-label font-color" asp-for="ZipCode">Zip Code</label>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                <input asp-for="ZipCode" value="@Model.ZipCode" />
+            <div class="row">
+                @*<label class="col-sm-4 col-md-4 col-lg-4 control-label font-color" asp-for="Username">Username</label>*@
+                <div class="col-md-4">
+                    <input id="fields" asp-for="Username" value="@Model.Username" placeholder="Enter Username" />
+                </div>
             </div>
-
-        </div>
-        <div class="form-group">
-            <div class="col-sm-4 col-sm-push-4">
-                <input type="submit" value="Save Changes" class="btn btn-block, btn-sm button" />
-            </div>
-        </div>
-    </form>
-
-    <form class="form-horizontal" asp-controller="Account" asp-action="ChangePassword" method="get">
-        <div>
-            <input type="hidden" asp-for="Id" value="@Model.Id" />
-        </div>
-        <div class="form-group">
-            <div class="col-sm-4 col-sm-push-4">
-                <input type="submit" value="Change Password" class="btn btn-block, button" />
+            <div class="row">
+                @*<label class="col-sm-4 control-label font-color" asp-for="Email">Email</label>*@
+                <div class="col-md-4">
+                    <input id="fields" type="email" asp-for="Email" value="@Model.Email" placeholder="Enter Email" />
+                    <span asp-validation-for="Email"></span>
+                </div>
 
             </div>
-        </div>
-    </form>
+            <div class="row">
+                @*<label class="col-sm-4 control-label font-color" asp-for="ZipCode">Zip Code</label>*@
+                <div class="col-md-4">
+                    <input id="fields" asp-for="ZipCode" value="@Model.ZipCode" placeholder="Enter ZipCode" />
+                </div>
 
-    <form class="form-horizontal" asp-controller="Account" asp-action="DeleteAccount" method="post">
-        <div>
-            <input type="hidden" class="form-control" asp-for="Id" value="@Model.Id" />
-            <input type="hidden" class="form-control" asp-for="Username" value="@Model.Username"/>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-4 col-sm-push-4">
-                <input type="submit" value="Delete Account" class="btn btn-block, btn-sm button" />
             </div>
-        </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input id="fields" type="submit" value="Save Changes" class="btn btn-default, button" />
+                </div>
+            </div>
+        </form>
 
-    </form>
+        <form class="col-md-pull-1" asp-controller="Account" asp-action="ChangePassword" method="get">
+            <div>
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input id="fields" type="submit" value="Change Password" class="btn btn-block, button" />
+
+                </div>
+            </div>
+        </form>
+
+        <form class="col-md-pull-1" asp-controller="Account" asp-action="DeleteAccount" method="post">
+            <div>
+                <input type="hidden" class="form-control" asp-for="Id" value="@Model.Id" />
+                <input type="hidden" class="form-control" asp-for="Username" value="@Model.Username" />
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input id="fields" type="submit" value="Delete Account" class="btn btn-block, btn-sm button" />
+                    <br />
+                </div>
+               
+            </div>
+
+        </form>
+    </div>
 </div>
 <style scoped>
+    .col-md-4 {
+        margin-left: 25px;
+    }
     .h2 {
         display: flex;
         justify-content: center;
@@ -74,10 +85,12 @@
     .button {
         background-color: magenta;
         color: white;
+        width: 180px;
     }
 
     .font-color {
-        color: magenta;
+        color: deepskyblue;
+        font-weight: 600;
     }
 
     .font-size {
@@ -91,12 +104,18 @@
     }
 
     #container {
-        margin-top: 100px;
-        background-color: darkslateblue;
-        width: 40%;
+        margin-top: 35px;
+        background-color: rgba(72, 61, 139, 0.50);
+        width: 25%;
+        height: auto;
         box-shadow: 05px 05px 05px purple;
     }
-
+    #fields {
+        margin-left: 05px;
+        margin-top: 05px;
+        margin-bottom: 05px;
+        
+    }
     .button {
         background-color: magenta;
         color: white
