@@ -143,7 +143,7 @@ namespace WebApplication.Web.DAL
                 {
 
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand(@"select profile.profile_id, profile.user_name, game_library.title, profile.gaming_experience, game_library.style from board_game  
+                    SqlCommand cmd = new SqlCommand(@"select profile.profile_id, profile.user_name, genre_library.genre, game_library.title, profile.gaming_experience from board_game  
                         full join profile_game on profile_game.games_id = board_game.games_id
                         full join game_library on game_library.games_id = profile_game.games_id
                         full join profile on profile.profile_id = profile_game.profile_id
@@ -162,9 +162,10 @@ namespace WebApplication.Web.DAL
 
                         Container.ProfileId = Convert.ToInt32(reader["profile_id"]);
                         Container.Username = Convert.ToString(reader["user_name"]);
+                        Container.Genre = Convert.ToString(reader["genre"]);
                         Container.Title = Convert.ToString(reader["title"]);
                         Container.Experience = Convert.ToString(reader["gaming_experience"]);
-                        Container.Style = Convert.ToString(reader["style"]);
+                        
 
                         Matches.Add(Container);
                     }

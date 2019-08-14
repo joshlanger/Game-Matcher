@@ -11,7 +11,7 @@ namespace WebApplication.Web.Models.Profile
         public string Username { get; set; }
         public string Title { get; set; }
         public string Experience { get; set; }
-        public string Style { get; set; }
+        public string Genre { get; set; }
         public double MatchStrength { get; set; }
         
 
