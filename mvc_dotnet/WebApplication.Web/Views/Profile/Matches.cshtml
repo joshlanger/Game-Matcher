@@ -1,0 +1,19 @@
+﻿@using WebApplication.Web.Models.Profile;
+@model AllInformationModel
+@{
+    ViewData["Title"] = "Matches";
+}
+
+<h2>Matches</h2>
+<ul>
+    @foreach (var gamer in Model.GamerMatchStrength)
+    {
+        <li class="visibility"><a href="@Url.Action("GamerProfile", "Profile")?id=@gamer.ProfileId">@gamer.Username Match Strength: @gamer.MatchStrength</a></li>
+        
+    }
+</ul>
+<style>
+        .visibility {
+            color: deeppink
+        }
+    </style>

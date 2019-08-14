@@ -38,7 +38,7 @@
     <!-- First Container -->
     <div class="container-fluid bg-1 text-center">
         <h3 class="margin">@Model.Username</h3>
-        <img src="~/images/@Model.AvatarName" class="img-responsive img-circle margin" style="display:inline" alt="Avatar" width="250" height="250">
+        <img src="~/images/@(Model.UserId % 10).jpg" class="img-responsive img-circle margin" style="display:inline" alt="Avatar" width="250" height="250">
     <!-- merge conflict -->
     </div>
 
@@ -48,7 +48,12 @@
         <p class="col-sm-4">Stuff about me: @Model.UserBio</p>
         <p class="col-sm-4">Get a hold of me: @Model.ContactPreference</p>
         <p class="col-sm-4">Level of Gaming Experience: @Model.GamingExperience</p>
-        <p class="col-sm-4">Preferred Genres: </p>
+        <p class="col-sm-4">Preferred Genres: <br />
+            @foreach (Genre genre in Model.GenreNames)
+            {
+                @genre.genre<br />
+            }
+        </p>
         <p class="col-sm-4">Games I Play: <br />
         @foreach (Game game in Model.GameTitles)
         {

@@ -51,6 +51,12 @@ namespace WebApplication.Web.Models.Account
 
         public List<Game> GameTitles { get; set; }
 
+        public IList<SelectListItem> Genres { get; set; }
+
+        public int[] GenresSelected { get; set; }
+
+        public List<Genre> GenreNames { get; set; }
+
         public static List<SelectListItem> ExperienceLevel = new List<SelectListItem>()
         {
             new SelectListItem() { Text = "Novice" },
