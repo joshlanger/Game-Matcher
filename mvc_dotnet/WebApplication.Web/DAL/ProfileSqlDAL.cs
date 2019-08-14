@@ -185,6 +185,11 @@ namespace WebApplication.Web.DAL
                         tempGame.image = Convert.ToString(reader["image"]);
                         GameTitles.Add(tempGame);
                     }
+
+                    if (GameTitles == null)
+                    {
+                        GameTitles.Add(new Game());
+                    }
                     return GameTitles;
                 }
             }
@@ -245,7 +250,6 @@ namespace WebApplication.Web.DAL
             {
                 throw ex;
             }
-
         }
 
         public List<Genre> GenreNames(ProfileViewModel profile)
@@ -267,6 +271,10 @@ namespace WebApplication.Web.DAL
                         Genre tempGenre = new Genre();
                         tempGenre.genre = Convert.ToString(reader["genre"]);
                         GenreTitles.Add(tempGenre);
+                    }
+                    if (GenreTitles == null)
+                    {
+                        GenreTitles.Add(new Genre());
                     }
                     return GenreTitles;
                 }
