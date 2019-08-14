@@ -21,8 +21,8 @@
         <div class="row content">
             <div class="col-md-12 sidenav">
                 <h4 class="col-md-offset-5 font-color">@Model.Username</h4>
-                <img src="~/images/@(Model.UserId % 10).jpg" class="col-md-offset-5 img-circle" height="250" width="250" alt="Avatar">
-                <br></br>
+                <img src="~/images/@Model.AvatarName" class="col-md-offset-5 img-circle" height="250" width="250" alt="Avatar">
+                <br><br>
                 <nav class="col-md-offset-4 row" id="myScrollspy">
                     <ul class="col-md-12 nav nav-pills nav-inline">
                         <li><a href="#section1" class="btn btn-default, button">My Games</a></li>
@@ -128,14 +128,6 @@
 
         </div>
     </div>
-<<<<<<< HEAD
-
-=======
-    </div>
-    </div>
-    </div>
-    </div>
->>>>>>> 92d8803ce7565a63c458aba9d272c94e375d0e54
 </body>
 </html>
 
@@ -219,15 +211,15 @@
         background-color: rgba(9, 9, 128, 0.50);
     }
 
-    /*810px previously*/
-    media screen and (max-width:810px) {
+    /*/*810px previously*/
+    /*media screen and (max-width:810px) {
 
         #section1, #section2, #section3
     }
 
     {
         margin-left: 150px;
-    }
+    }*/
     #sticky {
         position: sticky;
         top: 0;
