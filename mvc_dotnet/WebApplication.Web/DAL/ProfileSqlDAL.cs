@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication.Web.Models;
 using WebApplication.Web.Models.Account;
 
 namespace WebApplication.Web.DAL
@@ -161,27 +162,28 @@ namespace WebApplication.Web.DAL
 
         }
 
-        public string[] GameNames(ProfileViewModel profile)
+        public List<Game> GameNames(ProfileViewModel profile)
         {
-            List<string> GameTitles = new List<string>();
+            List<Game> GameTitles = new List<Game>();
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
 
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT title from game_library JOIN profile_game ON game_library.games_id = profile_game.games_id WHERE profile_id = @profile_id", conn);
+                    SqlCommand cmd = new SqlCommand("SELECT title, image from game_library JOIN profile_game ON game_library.games_id = profile_game.games_id WHERE profile_id = @profile_id", conn);
                     cmd.Parameters.AddWithValue("@profile_id", profile.ProfileId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        GameTitles.Add(Convert.ToString(reader["title"]));
+                        Game tempGame = new Game();
+                        tempGame.title = Convert.ToString(reader["title"]);
+                        tempGame.image = Convert.ToString(reader["image"]);
+                        GameTitles.Add(tempGame);
                     }
-
-                    string[] gameTitles = GameTitles.ToArray();
-                    return gameTitles;
+                    return GameTitles;
                 }
             }
             catch (SqlException ex)
