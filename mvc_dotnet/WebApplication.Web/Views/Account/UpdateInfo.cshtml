@@ -2,43 +2,42 @@
 @{
     ViewData["Title"] = "ChangeInfo";
 }
-<div id="container" class="container-fluid border-color">
-    <div class="col-sm-12">
-       
+<div id="container" class="container border-color">
 
-        <form class="form-horizontal" asp-controller="account" asp-action="updateinfo" method="post">
+    <form class="form-horizontal" asp-controller="account" asp-action="updateinfo" method="post">
+        <div>
             <h2 class="h2 font-color font-size">Update Your Account Information</h2>
-            <h4 class="h2 font-color font-size">General</h4>
-            <div>
-                <input type="hidden" asp-for="Id" value="@Model.Id" />
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label font-color" asp-for="Username">Username</label>
-                <div class="col-sm-6">
-                    <input asp-for="Username" value="@Model.Username" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label font-color" asp-for="Email">Email</label>
-                <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input type="email" asp-for="Email" value="@Model.Email" />
-                    <span asp-validation-for="Email"></span>
-                </div>
+        </div>
+        <h4 class="h2 font-color font-size">General</h4>
 
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+        <div class="form-group">
+            <label class="col-sm-4 col-md-4 col-lg-4 control-label font-color" asp-for="Username">Username</label>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <input asp-for="Username" value="@Model.Username" />
             </div>
-            <div class="form-group">
-                <label class="col-sm-4 control-label font-color" asp-for="ZipCode">Zip Code</label>
-                <div class="col-sm-6 col-md-6 col-lg-6">
-                    <input asp-for="ZipCode" value="@Model.ZipCode" />
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label font-color" asp-for="Email">Email</label>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <input type="email" asp-for="Email" value="@Model.Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
 
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label font-color" asp-for="ZipCode">Zip Code</label>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <input asp-for="ZipCode" value="@Model.ZipCode" />
             </div>
-            <div class="form-group">
-                <div class="col-sm-4 col-sm-push-4">
-                    <input type="submit" value="Save Changes" class="btn btn-block, btn-sm button" />
-                </div>
+
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4 col-sm-push-4">
+                <input type="submit" value="Save Changes" class="btn btn-block, btn-sm button" />
             </div>
-        </form>
+        </div>
+    </form>
 
     <form class="form-horizontal" asp-controller="Account" asp-action="ChangePassword" method="get">
         <div>
@@ -59,65 +58,65 @@
         </div>
         <div class="form-group">
             <div class="col-sm-4 col-sm-push-4">
-                 <input type="submit" value="Delete Account" class="btn btn-block, btn-sm button" />
+                <input type="submit" value="Delete Account" class="btn btn-block, btn-sm button" />
             </div>
         </div>
 
     </form>
-    </div>
 </div>
-    <style scoped>
-        .h2 {
-            display: flex;
-            justify-content: center;
-            width: auto;
-        }
+<style scoped>
+    .h2 {
+        display: flex;
+        justify-content: center;
+        width: auto;
+    }
 
-        .button {
-            background-color: magenta;
-            color: white;
-        }
+    .button {
+        background-color: magenta;
+        color: white;
+    }
 
-        .font-color {
-            color: magenta;
-            
-        }
-        .font-size{
-            font-size: 16pt;
-        }
-        .border-color {
-            border: ridge;
-            border-color: #00f6ed;
-            background-color: darkslateblue;
-        }
+    .font-color {
+        color: magenta;
+    }
 
-        #container {
-            margin-top: 100px;
-            background-color: darkslateblue;
-            width: 40%;
-            box-shadow: 05px 05px 05px purple;
-        }
+    .font-size {
+        font-size: 16pt;
+    }
 
-        .button {
-            background-color: magenta;
-            color: white
-        }
+    .border-color {
+        border: ridge;
+        border-color: #00f6ed;
+        background-color: darkslateblue;
+    }
 
-        .font-color2 {
-            text-align: left;
-            color: magenta;
-            margin-top: 100px;
-            background-color: darkslateblue;
-            width: 50%;
-            height: 75%;
-            box-shadow: 05px 05px 05px purple;
-        }
+    #container {
+        margin-top: 100px;
+        background-color: darkslateblue;
+        width: 40%;
+        box-shadow: 05px 05px 05px purple;
+    }
 
-        #labels {
-            padding-top: 10px;
-        }
+    .button {
+        background-color: magenta;
+        color: white
+    }
 
-        #fields {
-            margin: 05px;
-        }
-    </style>
+    .font-color2 {
+        text-align: left;
+        color: magenta;
+        margin-top: 100px;
+        background-color: darkslateblue;
+        width: 50%;
+        height: 75%;
+        box-shadow: 05px 05px 05px purple;
+    }
+
+    #labels {
+        padding-top: 10px;
+    }
+
+    #fields {
+        margin: 05px;
+    }
+</style>
