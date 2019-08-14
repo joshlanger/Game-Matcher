@@ -21,5 +21,11 @@ namespace WebApplication.Web.DAL
         void SaveGameOptions(ProfileViewModel profile, int[] games);
 
         List<Game> GameNames(ProfileViewModel profile);
+
+        IList<SelectListItem> GetGenres();
+
+        void SaveGenreOptions(ProfileViewModel profile, int[] genres);
+
+        List<Genre> GenreNames(ProfileViewModel profile);
     }
 }

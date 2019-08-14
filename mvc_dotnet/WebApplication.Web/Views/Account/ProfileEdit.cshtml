@@ -48,14 +48,13 @@
         <div>
             <input type="hidden" asp-for="UserId" />
         </div>
-        <div class="form-group container-fluid bg-1 text-center">
-            <h3 class="margin"><label class="control-label col-sm-5" asp-for="Username">Username: </label></h3>
-            <input asp-for="Username" />
+        <div>
+            <input type="hidden" asp-for="Username" />
         </div>
-        <div class="form-group container-fluid bg-1 text-center">
+        @*<div class="form-group container-fluid bg-1 text-center">
             <h3 class="margin"><label class="control-label col-sm-5" asp-for="AvatarName">Avatar Url: </label></h3>
             <input asp-for="AvatarName" />
-        </div>
+        </div>*@
         <div class="form-group container-fluid bg-1 text-center">
             <h3 class="margin"><label class="control-label col-sm-5" asp-for="UserBio">Bio: </label></h3>
             <input asp-for="UserBio" />
@@ -67,6 +66,10 @@
         <div class="form-group container-fluid bg-1 text-center">
             <h3 class="margin"><label class="control-label col-sm-5" asp-for="GamesSelected">Games I Play: </label></h3>
             <partial name="_GamesListView" model="Model" />
+        </div>
+        <div class="form-group container-fluid bg-1 text-center">
+            <h3 class="margin"><label class="control-label col-sm-5" asp-for="GenresSelected">Genres I Like: </label></h3>
+            <partial name="_GenresListView" model="Model" />
         </div>
         <div class="form-group container-fluid bg-1 text-center">
             <h3 class="margin"><label class="control-label col-sm-5" asp-for="ContactPreference">Contact Preference: </label></h3>
@@ -102,28 +105,7 @@
             @Model.OtherInterests
         </p>
     </div>
-
-    <!-- Third Container (Grid) -->
-    <div class="container-fluid bg-3 text-center">
-        <h3 class="margin">Top 3 Games</h3><br>
-        <div class="row">
-            <div class="col-sm-4">
-                <p>Lorem Ipsum</p>
-                @*<img src="birds1.jpg" class="img-responsive margin" style="width:100%" alt="Image">*@
-                <img src="~/images/game1.jpg" class="img-responsive margin" style="width:100%" alt="Image">
-            </div>
-            <div class="col-sm-4">
-                <p>Aamet Consectetu</p>
-                @*<img src="birds2.jpg" class="img-responsive margin" style="width:100%" alt="Image">*@
-                <img src="~/images/game2.jpg" class="img-responsive margin" style="width:100%" alt="Image">
-            </div>
-            <div class="col-sm-4">
-                <p>Elit Sed Tempor</p>
-                @*<img src="birds3.jpg" class="img-responsive margin" style="width:100%" alt="Image">*@
-                <img src="~/images/game3.jpg" class="img-responsive margin" style="width:100%" alt="Image">
-            </div>
-        </div>
-    </div>
+    
 
 </body>
 </html>
