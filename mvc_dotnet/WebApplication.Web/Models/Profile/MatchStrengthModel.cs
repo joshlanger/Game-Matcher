@@ -13,6 +13,7 @@ namespace WebApplication.Web.Models.Profile
         public string Experience { get; set; }
         public string Genre { get; set; }
         public double MatchStrength { get; set; }
+        public string AvatarName { get; set; }
         
 
         //public List<MatchStrengthModel> Converter(List<MatchStrengthModel> databaseList)

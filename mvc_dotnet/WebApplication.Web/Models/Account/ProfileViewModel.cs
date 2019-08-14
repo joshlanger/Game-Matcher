@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication.Web.Models.Profile;
 
 namespace WebApplication.Web.Models.Account
 {
@@ -56,6 +57,8 @@ namespace WebApplication.Web.Models.Account
         public int[] GenresSelected { get; set; }
 
         public List<Genre> GenreNames { get; set; }
+
+        public List<MatchStrengthModel> TopThree { get; set; }
 
         public static List<SelectListItem> ExperienceLevel = new List<SelectListItem>()
         {

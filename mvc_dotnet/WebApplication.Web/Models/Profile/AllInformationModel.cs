@@ -171,6 +171,59 @@ namespace WebApplication.Web.Models.Profile
             return CurrentGamer;
         }
 
+        public List<MatchStrengthModel> GetTopThree(List<MatchStrengthModel> allUsers)
+        {
+            List<MatchStrengthModel> TopThree = new List<MatchStrengthModel>();
+
+            double topMatch = 0;
+            string topUserName = "";
+            double secondPlace = 0;
+            string secondName = "";
+            double thirdPlace = 0;
+            string thirdName = "";
+
+            for (int i = 0; i < allUsers.Count; i++)
+            {
+                if(allUsers[i].MatchStrength > topMatch)
+                {
+                    topMatch = allUsers[i].MatchStrength;
+                    topUserName = allUsers[i].Username;
+                }
+            }
+            for (int i = 0; i < allUsers.Count; i++)
+            {
+                if(allUsers[i].MatchStrength > secondPlace && allUsers[i].MatchStrength < topMatch)
+                {
+                    secondPlace = allUsers[i].MatchStrength;
+                    secondName = allUsers[i].Username;
+                }
+            }
+            for(int i = 0; i < allUsers.Count; i++)
+            {
+                if(allUsers[i].MatchStrength > thirdPlace && allUsers[i].MatchStrength < secondPlace)
+                {
+                    thirdPlace = allUsers[i].MatchStrength;
+                    thirdName = allUsers[i].Username;
+                }
+            }
+            foreach(var gamer in allUsers)
+            {
+                if(topUserName == gamer.Username)
+                {
+                    TopThree.Add(gamer);
+                }
+                if(secondName == gamer.Username)
+                {
+                    TopThree.Add(gamer);
+                }
+                if(thirdName == gamer.Username)
+                {
+                    TopThree.Add(gamer);
+                }
+            }
+            return TopThree;
+        }
+
         //public List<MatchStrengthModel> Matches(List<MatchStrengthModel> allUsers, List<MatchStrengthModel> currentUser)
         //{
         //    List<MatchStrengthModel> Matches = new List<MatchStrengthModel>();
