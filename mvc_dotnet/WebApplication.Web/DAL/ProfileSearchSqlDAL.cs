@@ -130,20 +130,55 @@ namespace WebApplication.Web.DAL
             {
                 throw ex;
             }
-            finally
-            {
-                if(Results == null)
-                {
-                   
-                }
-            }
+           
         }
 
-        public List<ProfileViewModel> NothingFound()
+        //TODO Check this, please Josh
+        public List<MatchStrengthModel> GetMatches()
         {
-            List<ProfileViewModel> Nothing = new List<ProfileViewModel>();
-            return Nothing;
+            List<MatchStrengthModel> Matches = new List<MatchStrengthModel>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(@"select profile.profile_id, profile.user_name, game_library.title, profile.gaming_experience, game_library.style from board_game  
+                        full join profile_game on profile_game.games_id = board_game.games_id
+                        full join game_library on game_library.games_id = profile_game.games_id
+                        full join profile on profile.profile_id = profile_game.profile_id
+                        full join profile_genre on profile_genre.profile_id = profile.profile_id
+                        full join genre_library on profile_genre.genre_id = genre_library.genre_id
+                        full join users on profile.user_id = users.user_id
+                        where profile.is_Private = 'false' and game_library.title IS NOT NULL and profile.is_Private = 'false'
+                        ORDER BY profile.user_name", conn);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                   
+                    while (reader.Read())
+                    {
+                        MatchStrengthModel Container = new MatchStrengthModel();
+
+                        Container.ProfileId = Convert.ToInt32(reader["profile_id"]);
+                        Container.Username = Convert.ToString(reader["user_name"]);
+                        Container.Title = Convert.ToString(reader["title"]);
+                        Container.Experience = Convert.ToString(reader["gaming_experience"]);
+                        Container.Style = Convert.ToString(reader["style"]);
+
+                        Matches.Add(Container);
+                    }
+                    return Matches;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
         }
+
+
 
         private ProfileViewModel MapRowToProfile(SqlDataReader reader)
         {
@@ -174,44 +209,50 @@ namespace WebApplication.Web.DAL
             return Container;
         }
 
+        //int i = 0;
+        //int j = 0;
+        //string thisUser = "";
+        //string title = "";
+        //string style = "";
+        //            while (reader.Read())
+        //            {
+        //                MatchStrengthModel Container = new MatchStrengthModel();
 
-        //TODO Check this, please Josh
-        public List<MatchStrengthModel> GetMatches()
-        {
-            List<MatchStrengthModel> Matches = new List<MatchStrengthModel>();
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
+        //                if (thisUser == Container.Username)
+        //                {
+        //                    Matches[j].Title.Add(Convert.ToString(reader["title"]));
+        //                    Matches[j].Style.Add(Convert.ToString(reader["style"]));
+        //                    i++;
+        //                }
+        //                if (thisUser == "")
+        //                {
+        //                    Container.ProfileId = Convert.ToInt32(reader["profile_id"]);
+        //                    Container.Username = Convert.ToString(reader["user_name"]);
+        //                    title = Convert.ToString(reader["title"]);
+        //                    Container.Title.Add(title);
+        //                    Container.Experience = Convert.ToString(reader["profile.gaming_experience"]);
+        //                    style = Convert.ToString(reader["style"]);
+        //                    Container.Style.Add(style);
+        //                    thisUser = Container.Username;
+        //                    Matches.Add(Container);
+        //                    i++;
+        //                    j++;
+        //                }
+        //                if (thisUser != Container.Username)
+        //                {
+        //                    i = 0;
+        //                    Container.ProfileId = Convert.ToInt32(reader["profile_id"]);
+        //                    Container.Username = Convert.ToString(reader["user_name"]);
+        //                    Container.Title[i] = Convert.ToString(reader["title"]);
+        //                    Container.Experience = Convert.ToString(reader["profile.gaming_experience"]);
+        //                    Container.Style[i] = Convert.ToString(reader["style"]);
+        //                    thisUser = Container.Username;
+        //                    Matches.Add(Container);
+        //                    j++;
+        //                }
 
-                    conn.Open();
-                    SqlCommand cmd = new SqlCommand(@"select profile.user_name, game_library.title, game_library.genre, profile.gaming_experience, game_library.style from board_game  
-                        full join profile_game on profile_game.games_id = board_game.games_id
-                        full join game_library on game_library.games_id = profile_game.games_id
-                        full join profile on profile.profile_id = profile_game.profile_id
-                        full join profile_genre on profile_genre.profile_id = profile.profile_id
-                        full join genre_library on profile_genre.genre_id = genre_library.genre_id
-                        full join users on profile.user_id = users.user_id
-                        where profile.is_Private = 'false' and game_library.title IS NOT NULL and profile.is_Private = 'false'
-                        ORDER BY profile.user_name", conn);
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        Matches.Add(new MatchStrengthModel() { Username = Convert.ToString(reader["profile.user_name"]), Experience = Convert.ToString(reader["profile.gaming_experience"]) });
-                    }
-
-                    return Matches;
-                }
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
-
-        }
-
-
+        //            }
+        //            return Matches;
+        //        }
     }
 }
