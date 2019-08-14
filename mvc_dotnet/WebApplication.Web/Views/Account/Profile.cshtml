@@ -48,7 +48,12 @@
         <p class="col-sm-4">Stuff about me: @Model.UserBio</p>
         <p class="col-sm-4">Get a hold of me: @Model.ContactPreference</p>
         <p class="col-sm-4">Level of Gaming Experience: @Model.GamingExperience</p>
-        <p class="col-sm-4">Preferred Genres: </p>
+        <p class="col-sm-4">Preferred Genres: <br />
+            @foreach (Genre genre in Model.GenreNames)
+            {
+                @genre.genre<br />
+            }
+        </p>
         <p class="col-sm-4">Games I Play: <br />
         @foreach (Game game in Model.GameTitles)
         {

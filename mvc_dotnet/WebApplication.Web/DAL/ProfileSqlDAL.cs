@@ -68,6 +68,8 @@ namespace WebApplication.Web.DAL
                     }
                     profile.Games = GetGames();
                     profile.GameTitles = GameNames(profile);
+                    profile.Genres = GetGenres();
+                    profile.GenreNames = GenreNames(profile);
                     return profile;
                 }
             }
@@ -184,6 +186,89 @@ namespace WebApplication.Web.DAL
                         GameTitles.Add(tempGame);
                     }
                     return GameTitles;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+        }
+
+        public IList<SelectListItem> GetGenres()
+        {
+            List<SelectListItem> Genres = new List<SelectListItem>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM genre_library", conn);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Genres.Add(new SelectListItem() { Text = Convert.ToString(reader["genre"]), Value = Convert.ToString(reader["genre_id"]) });
+                    }
+
+                    return Genres;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public void SaveGenreOptions(ProfileViewModel genreEdit, int[] Genres)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("INSERT INTO profile_genre VALUES (@genre_id, @profile_id)", conn);
+                    cmd.Parameters.Add("@genre_id", System.Data.SqlDbType.Int);
+                    cmd.Parameters.AddWithValue("@profile_id", genreEdit.ProfileId);
+
+                    foreach (int genre_id in Genres)
+                    {
+                        cmd.Parameters["@genre_id"].Value = genre_id;
+                        cmd.ExecuteNonQuery();
+                    }
+                    return;
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public List<Genre> GenreNames(ProfileViewModel profile)
+        {
+            List<Genre> GenreTitles = new List<Genre>();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT genre from genre_library JOIN profile_genre ON genre_library.genre_id = profile_genre.genre_id WHERE profile_id = @profile_id", conn);
+                    cmd.Parameters.AddWithValue("@profile_id", profile.ProfileId);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Genre tempGenre = new Genre();
+                        tempGenre.genre = Convert.ToString(reader["genre"]);
+                        GenreTitles.Add(tempGenre);
+                    }
+                    return GenreTitles;
                 }
             }
             catch (SqlException ex)

@@ -131,6 +131,15 @@ namespace WebApplication.Web.Controllers
             userDAO.GetUser(user.Email);
             editUserProfile.Id = user.Id;
             profile.UserId = editUserProfile.Id;
+
+            var container = profileDAO.GetProfile(editUserProfile.Username);
+            profile.ProfileId = container.ProfileId;
+            profileDAO.SaveGameOptions(profile, profile.GamesSelected);
+            profileDAO.GameNames(profile);
+            profileDAO.SaveGenreOptions(profile, profile.GenresSelected);
+            profileDAO.GenreNames(profile);
+            profileDAO.UpdatedProfile(profile);
+
             return View(profile);
         }
 
@@ -162,9 +171,12 @@ namespace WebApplication.Web.Controllers
             var user = authProvider.GetCurrentUser();
             userTemp.Username = user.Username;
             var container = profileDAO.GetProfile(userTemp.Username);
+            profileDAO.UpdatedProfile(profileEdit);
             profileEdit.ProfileId = container.ProfileId;
             profileDAO.SaveGameOptions(profileEdit, profileEdit.GamesSelected);
             profileDAO.GameNames(profileEdit);
+            profileDAO.SaveGenreOptions(profileEdit, profileEdit.GenresSelected);
+            profileDAO.GenreNames(profileEdit);
             profileDAO.UpdatedProfile(profileEdit);
 
             return View(profileEdit);
