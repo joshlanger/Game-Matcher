@@ -64,13 +64,14 @@ namespace WebApplication.Web.Models.Profile
                                 styleCount++;
                             }
                         }
+                        
                     }
                     if(name != allUsers[j].Username)
                     {
 
                         double matchStrength = ((titleCount + experience + styleCount) / (totalTitles + totalStyles + 1.00)) * 100.00;
-                        allUsers[j].MatchStrength = matchStrength;
-                        Matches.Add(allUsers[j]);
+                        allUsers[j-1].MatchStrength = Math.Round(matchStrength, 2);
+                        Matches.Add(allUsers[j-1]);
                         name = allUsers[j].Username;
                         titleCount = 0;
                         experience = 0;
@@ -79,6 +80,7 @@ namespace WebApplication.Web.Models.Profile
                         totalTitles = 0;
                         for (int i = 0; i < currentUser.Count; i++)
                         {
+                            //check to see this is getting hit on the first row of a different gamer
                             if (currentUser[0].Experience == allUsers[j].Experience && i == 0)
                             {
                                 experience++;
@@ -97,7 +99,7 @@ namespace WebApplication.Web.Models.Profile
                     if(j == allUsers.Count-1)
                     {
                         double matchStrength = ((titleCount + experience + styleCount) / (totalTitles + totalStyles + 1.00)) *100.00;
-                        allUsers[allUsers.Count - 1].MatchStrength = matchStrength;
+                        allUsers[allUsers.Count - 1].MatchStrength = Math.Round(matchStrength, 2);
                         Matches.Add(allUsers[allUsers.Count - 1]);
                     }
 
@@ -122,44 +124,103 @@ namespace WebApplication.Web.Models.Profile
             return CurrentGamer;
         }
 
-        //int totalTitles = currentUser.Title.Count;
-        //int totalStyles = currentUser.Style.Count;
-
-        //foreach (var user in allUsers)
+        //public List<MatchStrengthModel> Matches(List<MatchStrengthModel> allUsers, List<MatchStrengthModel> currentUser)
         //{
-        //    if(user.Username != currentUser.Username)
-        //    { 
+        //    List<MatchStrengthModel> Matches = new List<MatchStrengthModel>();
+
+        //    int totalTitles = 0;
+        //    int totalStyles = 0;
+
+        //    string name = "";
         //    int titleCount = 0;
         //    int experience = 0;
-        //    int style = 0;
+        //    int styleCount = 0;
 
-        //    foreach (var title in currentUser.Title)
+        //    for (int j = 0; j < allUsers.Count; j++)
         //    {
-        //        for (int i = 0; i < user.Title.Count; i++)
+        //        if (allUsers[j].Username != currentUser[0].Username)
         //        {
-        //            if (user.Title[i] == title)
+        //            if (name == allUsers[j].Username)
         //            {
-        //                titleCount++;
+        //                for (int i = 0; i < currentUser.Count; i++)
+        //                {
+
+        //                    if (currentUser[i].Title == allUsers[j].Title)
+        //                    {
+        //                        titleCount++;
+        //                    }
+        //                    if (currentUser[i].Style == allUsers[j].Style)
+        //                    {
+        //                        styleCount++;
+        //                    }
+        //                }
         //            }
+
+        //            if (name == "")
+        //            {
+        //                name = allUsers[j].Username;
+
+
+        //                for (int i = 0; i < currentUser.Count; i++)
+        //                {
+        //                    if (currentUser[0].Experience == allUsers[j].Experience && i == 0)
+        //                    {
+        //                        experience++;
+        //                    }
+        //                    if (currentUser[i].Title == allUsers[j].Title)
+        //                    {
+        //                        titleCount++;
+        //                    }
+        //                    if (currentUser[i].Style == allUsers[j].Style)
+        //                    {
+        //                        styleCount++;
+        //                    }
+        //                }
+
+        //            }
+        //            if (name != allUsers[j].Username)
+        //            {
+
+        //                double matchStrength = ((titleCount + experience + styleCount) / (totalTitles + totalStyles + 1.00)) * 100.00;
+        //                allUsers[j - 1].MatchStrength = Math.Round(matchStrength, 2);
+        //                Matches.Add(allUsers[j - 1]);
+        //                name = allUsers[j].Username;
+        //                titleCount = 0;
+        //                experience = 0;
+        //                styleCount = 0;
+        //                totalStyles = 0;
+        //                totalTitles = 0;
+        //                for (int i = 0; i < currentUser.Count; i++)
+        //                {
+        //                    //check to see this is getting hit on the first row of a different gamer
+        //                    if (currentUser[0].Experience == allUsers[j].Experience && i == 0)
+        //                    {
+        //                        experience++;
+        //                    }
+        //                    if (currentUser[i].Title == allUsers[j].Title)
+        //                    {
+        //                        titleCount++;
+        //                    }
+        //                    if (currentUser[i].Style == allUsers[j].Style)
+        //                    {
+        //                        styleCount++;
+        //                    }
+        //                }
+
+        //            }
+        //            if (j == allUsers.Count - 1)
+        //            {
+        //                double matchStrength = ((titleCount + experience + styleCount) / (totalTitles + totalStyles + 1.00)) * 100.00;
+        //                allUsers[allUsers.Count - 1].MatchStrength = Math.Round(matchStrength, 2);
+        //                Matches.Add(allUsers[allUsers.Count - 1]);
+        //            }
+
+        //            totalTitles++;
+        //            totalStyles++;
         //        }
         //    }
-        //    foreach (var gameStyle in currentUser.Style)
-        //    {
-        //        for (int i = 0; i < user.Style.Count; i++)
-        //        {
-        //            if (user.Style[i] == gameStyle)
-        //            {
-        //                style++;
-        //            }
-        //        }
-        //    }
-        //    if(user.Experience == currentUser.Experience)
-        //    {
-        //        experience++;
-        //    }
-        //    double matchStrength = (titleCount + experience + style)/(totalTitles + totalStyles + 1);
-        //    user.MatchStrength = matchStrength;
-        //    }
+
+        //    return Matches;
         //}
     }
 }
