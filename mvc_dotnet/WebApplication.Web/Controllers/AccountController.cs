@@ -243,13 +243,5 @@ namespace WebApplication.Web.Controllers
             userDAO.DeleteUser(Container.ProfileId, user.Id);
             return RedirectToAction("Logoff", "Account");
         }
-
-        private List<SelectListItem> ExperienceLevel = new List<SelectListItem>()
-        {
-            new SelectListItem() { Text = "Novice" },
-            new SelectListItem() { Text = "Intermediate" },
-            new SelectListItem() { Text = "Expert" },
-        };
     }
-
 }
