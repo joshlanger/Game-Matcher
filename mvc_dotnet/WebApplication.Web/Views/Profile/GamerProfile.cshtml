@@ -4,6 +4,49 @@
     ViewData["Title"] = "GamerProfile";
 }
 
+<!DOCTYPE html>
+<html lang="en">
+@**@
+<head>
+    <!-- Theme Made By www.w3schools.com - No Copyright -->
+    <title>Bootstrap Theme Simply Me</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/93cdb99303.js"></script>
+</head>
+<body>
+
+
+    <div>
+        <a asp-area="" asp-controller="Account" asp-action="ProfileCreate"><i class="far fa-edit pull-left img-rounded"></i> Create New Profile</a>
+    </div>
+    <div>
+        <a asp-area="" asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit Existing Profile</a>
+    </div>
+
+    <!-- First Container -->
+    <div class="container-fluid bg-1 text-center">
+        <h3 class="margin">@Model.Username</h3>
+        <img src="~/images/@(Model.UserId % 10).jpg" class="img-responsive img-circle margin" style="display:inline" alt="Avatar" width="250" height="250">
+        <!-- merge conflict -->
+    </div>
+
+    <!-- Second Container -->
+    <div class="container-fluid bg-2 text-center">
+        <h3 class="margin">@Model.Username's Infomania</h3>
+        <p class="col-sm-4">Stuff about me: @Model.UserBio</p>
+        <p class="col-sm-4">Get a hold of me: @Model.ContactPreference</p>
+        <p class="col-sm-4">Level of Gaming Experience: @Model.GamingExperience</p>
+        <p class="col-sm-4">
+            Preferred Genres: <br />
+            @foreach (Genre genre in Model.GenreNames)
+            {
+                @genre.genre<br />
+            }
 <div id="container" class="container-fluid border-color">
     <h2 class="h2 font-color">GamerProfile</h2>
     <div style="color:white">
@@ -11,22 +54,46 @@
             @Model.Username
         </p>
         <img src="~/images/@(Model.UserId % 10).jpg" class="img-responsive img-circle margin" style="display:inline" alt="Avatar" width="100" height="100">
-        @*<p>
-            @Model.AvatarName
-        </p>*@
         <p>
             @Model.UserBio
         </p>
         <p>
             @Model.GamingExperience
         </p>
-        <p>
-            @Model.ContactPreference
+        <p class="col-sm-4">
+            Games I Play: <br />
+            @foreach (Game game in Model.GameTitles)
+            {
+                @game.title<br />
+            }
         </p>
-        <p></p>
+        <p class="col-sm-4">I like other things, too: @Model.OtherInterests</p>
+        <p class="col-sm-4">Private Profile: @Model.IsPrivate</p>
+        <p class="col-sm-4">Location: Somewhere, PA</p>
+        <p class="col-sm-4">30 Friends</p>
     </div>
 
-</div>
+    <!-- Third Container (Grid) -->
+    <div class="container-fluid bg-3 text-center">
+        <h3 class="margin">Top 3 Games</h3><br>
+        <div class="row">
+            <div class="col-sm-4">
+                <p>@Model.GameTitles[0].title</p>
+                <img src="~/images/@Model.GameTitles[0].image" class="img-responsive margin" style="width:100%" alt="Image">
+            </div>
+            <div class="col-sm-4">
+                <p>@Model.GameTitles[1].title</p>
+                <img src="~/images/@Model.GameTitles[1].image" class="img-responsive margin" style="width:100%" alt="Image">
+            </div>
+            <div class="col-sm-4">
+                <p>@Model.GameTitles[2].title</p>
+                <img src="~/images/@Model.GameTitles[2].image" class="img-responsive margin" style="width:100%" alt="Image">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
 
 @*<style>
         .visibility {
@@ -34,64 +101,45 @@
         }
     </style>*@
 
-<style scoped>
-
-    .h2 {
-        display: flex;
-        justify-content: center;
-        width: auto;
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        font: 20px;
+        line-height: 1.8;
+        color: #0F1108;
     }
 
-    .h4 {
-        display: flex;
-        justify-content: center;
-        width: auto;
-        color: white;
+    p {
+        font-size: 16px;
     }
 
-    .button {
-        background-color: magenta;
-        color: white;
+    .margin {
+        margin-bottom: 45px;
     }
 
-    .margin-left1 {
-        margin-left: 05px;
+    .bg-1 {
+        background-color: #00F6ED; /* Turquoise */
+        color: #0F1108;
     }
 
-    .font-color {
-        color: magenta;
+    .bg-2 {
+        background-color: #0F1108; /* Smoky Black */
+        color: #E5E5E5;
     }
 
-    .font-color2 {
-        color: #00f6ed;
+    .bg-3 {
+        background-color: #E5E5E5; /* Platinum */
+        color: #0F1108;
     }
 
-    .border-color {
-        border: ridge;
-        border-color: #00f6ed;
+    .bg-4 {
+        background-color: #0F1108; /* Black Gray */
+        color: #E5E5E5;
     }
 
-    #container {
-        margin-top: 100px;
-        background-color: darkslateblue;
-        width: 50%;
-        height: 75%;
-        box-shadow: 05px 05px 05px purple;
-    }
-
-    #labels {
-        padding-top: 10px;
-    }
-
-    #fields {
-        padding: 10px;
-    }
-
-    .font-family {
-        display: flex;
-        justify-content: center;
-        font-family: 'Racing Sans One', cursive;
-        font-size: medium;
+    .container-fluid {
+        padding-top: 5%;
+        padding-bottom: 5%;
     }
 </style>
 

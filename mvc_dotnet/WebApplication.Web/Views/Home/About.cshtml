@@ -4,15 +4,24 @@
 <h2 class="h2">@ViewData["Title"]</h2>
 <h3 class="h3">@ViewData["Message"]</h3>*@
 
-<div id="container" class="container-fluid border-color">
-    <h2 class="h2 font-color">About</h2>
-    <h4 class="h4 font-color" style="font-size: 24px">Are you an uber gamer looking for other uber gamers in your area!</h4>
-    <div>
-        <p class="h4">
-            Well MatchMadeInBeta is for you! As a MatchMadeInBeta member you'll be
-            able search for gamers in your area looking to create a clan for you favorite console, PC or Table games!
-        </p>
+<div class="col-md-12">
+    <div id="container" class="container border-color">
+        <div class="row">
+            <h2 class="h2 font-color">About</h2>
+        </div>
+        <div class="row">
+            <h5 class="h5 font-color" style="font-size: 24px">Are you an uber gamer looking for other uber gamers in your area!</h5>
+        </div>
+        <div class="row">
+            <p class="margin p-tag">
+              Well MatchMadeInBeta is for you! As a MatchMadeInBeta member you'll be
+              able search for gamers in your area looking to create a clan for you favorite console, PC or Table games!
+
+            </p>
+        </div>
     </div>
+    
+    
 </div>
 
 <style>
@@ -37,28 +46,36 @@
         width: auto;
     }
 
-    .h4 {
+    .h5 {
         display: flex;
-        justify-content: center;
+        text-align: center;
         width: auto;
         color: white;
     }
-
+    .p-tag {
+        display: flex;
+        text-align: left;
+        width: auto;
+        color: white;
+    }
     .button {
         background-color: magenta;
         color: white;
     }
 
-    .margin-left1 {
-        margin-left: 05px;
+    .margin {
+
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-bottom: 10px;
     }
 
     .font-color {
-        color: magenta;
+        color: deepskyblue;
     }
 
     .font-color2 {
-        color: #00f6ed;
+        color: deepskyblue;
     }
 
     .border-color {
@@ -67,10 +84,10 @@
     }
 
     #container {
-        margin-top: 100px;
-        background-color: darkslateblue;
+        margin-top: 55px;
+        background-color: rgba(72, 61, 139, 0.5);
         width: 50%;
-        height: 75%;
+        height: auto;
         box-shadow: 05px 05px 05px purple;
     }
 
