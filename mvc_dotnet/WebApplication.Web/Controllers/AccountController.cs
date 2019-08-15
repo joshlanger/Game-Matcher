@@ -39,6 +39,7 @@ namespace WebApplication.Web.Controllers
             userProfile.Username = user.Username;
             profile.UserId = user.Id;
             profile.Username = user.Username;
+            profile.ZipCode = user.ZipCode;
 
             var container = profileDAO.GetProfile(userProfile.Username);
 
@@ -136,6 +137,7 @@ namespace WebApplication.Web.Controllers
             profile.Username = user.Username;
 
             var container = profileDAO.GetProfile(userProfile.Username);
+            container.ZipCode = user.ZipCode;
             return View(container);
         }
 
@@ -180,13 +182,14 @@ namespace WebApplication.Web.Controllers
             var container = profileDAO.GetProfile(userTemp.Username);
             profileDAO.UpdatedProfile(profileEdit);
             profileEdit.ProfileId = container.ProfileId;
+            profileEdit.AvatarName = container.AvatarName;
             profileDAO.SaveGameOptions(profileEdit, profileEdit.GamesSelected);
             profileDAO.GameNames(profileEdit);
             profileDAO.SaveGenreOptions(profileEdit, profileEdit.GenresSelected);
             profileDAO.GenreNames(profileEdit);
             profileDAO.UpdatedProfile(profileEdit);
 
-            return View(profileEdit);
+            return RedirectToAction("Profile", "Account");
         }
 
         [HttpGet]
