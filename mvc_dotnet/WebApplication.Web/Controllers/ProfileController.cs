@@ -48,7 +48,8 @@ namespace WebApplication.Web.Controllers
             var user = authProvider.GetCurrentUser();
             AllInfo.AllUsers = profileSearchDAL.GetMatches();
             AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
-            profile.TopThree = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+            profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+             
             return View(profile);
         }
 
