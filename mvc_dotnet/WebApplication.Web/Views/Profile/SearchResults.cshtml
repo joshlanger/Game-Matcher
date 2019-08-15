@@ -3,29 +3,37 @@
 @{
     ViewData["Title"] = "SearchResults";
 }
-<div id="container" class="container-fluid border-color">
-    <h2 class="h2 font-color">Search Results</h2>
+<div class="col-md-12">
+    <div id="container" class="container border-color">
+        
+            <div class="row">
+                <h2 class="h2 font-color">Search Results</h2>
+            </div>
+            <div class="row">
 
-    <h2 class="visibility">Search Results</h2>
-
-    
-    @if (Model.Results[0].Username == null)
-    {
-        <h4 class="visibility">No Matching Gamers Were Found.</h4>
-    }
-    else
-    {
-        <ul class="visibility">
-
-            @foreach (var gamer in Model.Results)
-            {
-                if (!gamer.IsPrivate)
+                @if (Model.Results[0].Username == null)
                 {
-                    <li class="visibility"><a href="@Url.Action("GamerProfile", "Profile")?id=@gamer.ProfileId">@gamer.Username</a></li>
+                    <h4 class="h4 font-color2">No Matching Gamers Were Found.</h4>
                 }
-            }
-        </ul>
-    }
+                else
+                {
+                    <ul class="col-md-offset-3 font-color2" >
+
+                        @foreach (var gamer in Model.Results)
+                        {
+                            if (!gamer.IsPrivate)
+                            {
+                                <li class="visibility"><a class="font-color2" href="@Url.Action("GamerProfile", "Profile")?id=@gamer.ProfileId">@gamer.Username</a></li>
+                            }
+                        }
+                    </ul>
+                }
+
+            </div>
+        
+    </div>
+
+
 </div>
 @*<style>
         .visibility {
@@ -34,11 +42,15 @@
     </style>*@
 
 <style scoped>
+    #col-md-4 {
+        margin-left: 55px;
+    }
 
     .h2 {
         display: flex;
         justify-content: center;
         width: auto;
+        font-size: 20pt;
     }
 
     .h4 {
@@ -47,7 +59,12 @@
         width: auto;
         color: white;
     }
-
+    .a {
+        display: flex;
+        justify-content: center;
+        width:auto;
+        color:white;
+    }
     .button {
         background-color: magenta;
         color: white;
@@ -58,11 +75,12 @@
     }
 
     .font-color {
-        color: magenta;
+        color: deepskyblue;
     }
 
     .font-color2 {
-        color: #00f6ed;
+        
+        color: white;
     }
 
     .border-color {
@@ -71,10 +89,10 @@
     }
 
     #container {
-        margin-top: 100px;
-        background-color: darkslateblue;
-        width: 50%;
-        height: 75%;
+        margin-top: 60px;
+        background-color: rgba(72, 61, 139, 0.5);
+        width: 30%;
+        height: auto;
         box-shadow: 05px 05px 05px purple;
     }
 

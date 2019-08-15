@@ -28,7 +28,7 @@
                 @*<label id="labels" class="control-label font-color" asp-for="Email"></label>*@
             </div>
             <div class="col-md-4">
-                <input type="email" asp-for="Email" placeholder="Email" />
+                <input type="email" asp-for="Email" required placeholder=" Enter email" />
                 <span asp-validation-for="Email"></span>
             </div>
         </div>
@@ -38,7 +38,7 @@
                 @*<label id="labels" class="control-label font-color" asp-for="Password"></label>*@
             </div>
             <div class="col-md-4">
-                <input type="password" asp-for="Password" placeholder="Password" />
+                <input type="password" asp-for="Password"  required placeholder=" Enter password" />
                 <span asp-validation-for="Password"></span>
             </div>
 
@@ -71,7 +71,7 @@
 
 <style scoped>
     .col-md-4 {
-        margin-left: 32px;
+        margin-left: 35px;
     }
 
     .navbar {
