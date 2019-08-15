@@ -27,6 +27,7 @@ namespace WebApplication.Web.Controllers
             this.profileSearchDAL = profileSearchDAL;
         }
 
+
         //[AuthorizationFilter] // actions can be filtered to only those that are logged in
         [AuthorizationFilter("Admin", "Author", "Manager", "User")]  //<-- or filtered to only those that have a certain role
         [HttpGet]
@@ -42,14 +43,17 @@ namespace WebApplication.Web.Controllers
             var container = profileDAO.GetProfile(userProfile.Username);
 
             AllInformationModel AllInfo = new AllInformationModel();
-            
-            AllInfo.AllUsers = profileSearchDAL.GetMatches();
-            AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
-            profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
-            container.TopThree = AllInfo.GetTopThree(profile.MatchStrength);
+            if (container.GameTitles.Count != 0 && container.GenreNames.Count != 0)
+            {
+                AllInfo.AllUsers = profileSearchDAL.GetMatches();
+                AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
+                profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+                container.TopThree = AllInfo.GetTopThree(profile.MatchStrength);
+            }
             return View(container);
         }
 
+       
         [HttpGet]
         public IActionResult Login()
         {
