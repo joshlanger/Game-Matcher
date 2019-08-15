@@ -5,28 +5,28 @@
     ViewData["Title"] = "Register";
 }
 <div class="col-md-12" >
-    <form class="col-md-pull-1 container border-color" asp-controller="account" asp-action="register" method="post">
+    <form id="container" class="col-md-pull-1 container border-color" asp-controller="account" asp-action="register" method="post">
         <div class="row">
             <h2 id="header" class="col-md-pull-1 h2 font-color">Register</h2>
         </div>
         <div class="row">
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Username">Username:</label>*@
             <div class="col-md-4">
-                <input id="fields" asp-for="Username" required placeholder=" Username required"/>
+                <input id="fields" asp-for="Username" required placeholder=" Username required" />
                 <span asp-validation-for="Username" style="color: deepskyblue"></span>
             </div>
         </div>
         <div class="row">
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Email">Email:</label>*@
             <div class="col-md-4">
-                <input id="fields" type="email" asp-for="Email" required placeholder=" Email required"/>
+                <input id="fields" type="email" asp-for="Email" required placeholder=" Email required" />
                 <span asp-validation-for="Email" style="color: deepskyblue"></span>
             </div>
         </div>
         <div class="row">
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Password">Password:</label>*@
             <div class="col-md-4">
-                <input id="fields" type="password"  asp-for="Password" required placeholder=" Password required"/>
+                <input id="fields" type="password" asp-for="Password" required placeholder=" Password required" />
                 <span asp-validation-for="Password" style="color: deepskyblue"></span>
             </div>
         </div>
@@ -55,14 +55,19 @@
             <div class="col-md-4">
                 <input id="fields" type="submit" value="Register" class="btn btn-default, button" />
             </div>
-
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button asp-area="" id="fields" class="btn btn-default, button" asp-controller="Home" asp-action="Help">Help!</button>
+            </div>
         </div>
     </form>
 </div>
 
 <style scoped>
     .col-md-4 {
-        margin-left: 25px;
+        margin-left: 28px;
+    } 
     }
     .navbar {
         display: none
@@ -85,10 +90,10 @@
         border: ridge;
         border-color: #00f6ed;
     }
-    .container {
+    #container {
         margin-top: 35px;
         background-color: rgba(72, 61, 139, 0.50);
-        width: 25%;
+        width: 275px;
         height: auto;
         box-shadow: 05px 05px 05px purple;
     }
@@ -102,7 +107,7 @@
         color: magenta;
         margin-top: 100px;
         background-color: darkslateblue;
-        width: 50%;
+        width: 275px;
         height: 75%;
         box-shadow: 05px 05px 05px purple;
     }

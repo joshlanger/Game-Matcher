@@ -39,18 +39,29 @@ namespace WebApplication.Web.Controllers
             //userProfile.Username = user.Username;
             //profile.UserId = user.Id;
             //profile.Username = user.Username;
+            //ProfileViewModel profile = new ProfileViewModel();
+            var user = authProvider.GetCurrentUser();
+            //userProfile.Email = user.Email;
+            //userProfile.Username = user.Username;
+            //profile.UserId = user.Id;
+            //profile.Username = user.Username;
 
-            
+     
+            var container = profileDAL.GetProfile(user.Username);
 
             var profile = profileSearchDAL.GetProfile(id);
-            profile = profileDAL.GetProfile(profile.Username);
+            container = profileDAL.GetProfile(profile.Username);
             AllInformationModel AllInfo = new AllInformationModel();
-            var user = authProvider.GetCurrentUser();
-            AllInfo.AllUsers = profileSearchDAL.GetMatches();
-            AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
-            profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+            if(container.GameTitles.Count != 0 && container.GenreNames.Count != 0)
+            {
+                AllInfo.AllUsers = profileSearchDAL.GetMatches();
+                AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
+                profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+            }
+        
              
             return View(profile);
+
         }
 
         [HttpGet]
