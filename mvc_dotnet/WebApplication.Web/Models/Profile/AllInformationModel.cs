@@ -180,6 +180,7 @@ namespace WebApplication.Web.Models.Profile
             return CurrentGamer;
         }
 
+
         public List<MatchStrengthModel> GetTopThree(List<MatchStrengthModel> allUsers)
         {
             List<MatchStrengthModel> TopThree = new List<MatchStrengthModel>();
