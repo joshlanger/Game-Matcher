@@ -77,30 +77,47 @@
                         <li data-target="#section2" data-slide-to="2"></li>
                     </ol>
                     <div class="col-md-offset-4 carousel-inner">
+                        @if (Model.TopThree != null)
+                        {
                         @if (Model.TopThree.Count == 3)
                         {
-                        <div class="item active">
-                            <a href="href=" @Url.Action("GamerProfile", "Profile")?id=@Model.TopThree[0].ProfileId>
-                                <img src="~/images/@(Model.TopThree[0].ProfileId % 10).jpg" />
-                            </a>
-                        </div>
-                        <div class="item">
-                            <a href="href=" @Url.Action("GamerProfile", "Profile")?id=@Model.TopThree[1].ProfileId>
-                                <img src="~/images/@(Model.TopThree[1].ProfileId % 10).jpg" />
-                             </a>
-                        </div>
-                        <div class="item">
-                            <a href="href=" @Url.Action("GamerProfile", "Profile")?id=@Model.TopThree[2].ProfileId>
-                                <img src="~/images/@(Model.TopThree[2].ProfileId % 10).jpg" />
-                             </a>
-                        </div>
-                        }else
+                            <div class="item active">
+                                <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[0].ProfileId>
+                                    <img src="~/images/@(Model.TopThree[0].ProfileId % 10).jpg" />
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[1].ProfileId>
+                                    <img src="~/images/@(Model.TopThree[1].ProfileId % 10).jpg" />
+                                </a>
+                            </div>
+                            <div class="item">
+                                <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[2].ProfileId>
+                                    <img src="~/images/@(Model.TopThree[2].ProfileId % 10).jpg" />
+                                </a>
+                            </div>
+                        }
+                        @if (Model.TopThree.Count == 2)
                         {
                         <div class="item active">
-                            <a href="href=" @Url.Action("GamerProfile", "Profile")?id=@Model.TopThree[0].ProfileId>
+                            <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[0].ProfileId>
                                 <img src="~/images/@(Model.TopThree[0].ProfileId % 10).jpg" />
                             </a>
                         </div>
+                        <div class="item">
+                            <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[1].ProfileId>
+                                <img src="~/images/@(Model.TopThree[1].ProfileId % 10).jpg" />
+                            </a>
+                        </div>
+                        }
+                        @if (Model.TopThree.Count == 1)
+                        {
+                        <div class="item active">
+                            <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[0].ProfileId>
+                                <img src="~/images/@(Model.TopThree[0].ProfileId % 10).jpg" />
+                            </a>
+                        </div>
+                        }
                         }
                     </div>
                     <a class="left carousel-control" href="#section2" data-slide="prev">
