@@ -42,7 +42,7 @@
             <div class="col-md-12 container-fluid">
 
                 <div id="section1" class="carousel slide" data-ride="carousel">
-                    
+
                     <h1 class="col-md-offset-5">My Games</h1>
                     <ol class="carousel-indicators">
                         <li data-target="#section1" data-slide-to="0"></li>
@@ -64,7 +64,7 @@
                         }
                         else
                         {
-                            <div>
+                            <div class="item active">
                                 <h3>No Games Selected.  Add your favorite games to your profile!</h3>
                                 <h3><a href="@Url.Action("Profileedit", "Account")">Click Here!</a></h3>
                             </div>
@@ -124,17 +124,17 @@
                             @if (Model.TopThree.Count == 3)
                             {
                                 <div class="item active">
-                                    <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[0].ProfileId>
+                                    <a href="@Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[0].ProfileId">
                                         <img src="~/images/@(Model.TopThree[0].ProfileId % 10).jpg" />
                                     </a>
                                 </div>
                                 <div class="item">
-                                    <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[1].ProfileId>
+                                    <a href="@Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[1].ProfileId">
                                         <img src="~/images/@(Model.TopThree[1].ProfileId % 10).jpg" />
                                     </a>
                                 </div>
                                 <div class="item">
-                                    <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[2].ProfileId>
+                                    <a href="@Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[2].ProfileId">
                                         <img src="~/images/@(Model.TopThree[2].ProfileId % 10).jpg" />
                                     </a>
                                 </div>
@@ -142,12 +142,12 @@
                             @if (Model.TopThree.Count == 2)
                             {
                                 <div class="item active">
-                                    <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[0].ProfileId>
+                                    <a href="@Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[0].ProfileId">
                                         <img src="~/images/@(Model.TopThree[0].ProfileId % 10).jpg" />
                                     </a>
                                 </div>
                                 <div class="item">
-                                    <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[1].ProfileId>
+                                    <a href="@Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[1].ProfileId">
                                         <img src="~/images/@(Model.TopThree[1].ProfileId % 10).jpg" />
                                     </a>
                                 </div>
@@ -155,7 +155,7 @@
                             @if (Model.TopThree.Count == 1)
                             {
                                 <div class="item active">
-                                    <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[0].ProfileId>
+                                    <a href="@Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[0].ProfileId">
                                         <img src="~/images/@(Model.TopThree[0].ProfileId % 10).jpg" />
                                     </a>
                                 </div>
@@ -164,11 +164,10 @@
                         }
                         else
                         {
-                            <div >
-                                <h3>Add your favorite games and genres to your profile to see matches!</h3>
-                                <h3><a href="@Url.Action("Profileedit", "Account")">Click Here!</a></h3>
+                            <div class="item active">
+                                <h3 >Add your favorite games and genres to your profile to see matches!</h3>
+                                <h3 class="col-md-offset-4"><a href="@Url.Action("Profileedit", "Account")">Click Here!</a></h3>
                             </div>
-                            <p></p>
                         }
                     </div>
                     <a class="left carousel-control" href="#section2" data-slide="prev">
