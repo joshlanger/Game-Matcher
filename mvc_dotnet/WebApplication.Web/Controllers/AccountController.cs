@@ -33,22 +33,24 @@ namespace WebApplication.Web.Controllers
         [HttpGet]
         public IActionResult Index(User userProfile)
         {
-            ProfileViewModel profile = new ProfileViewModel();
+            //ProfileViewModel profile = new ProfileViewModel();
             var user = authProvider.GetCurrentUser();
-            userProfile.Email = user.Email;
-            userProfile.Username = user.Username;
-            profile.UserId = user.Id;
-            profile.Username = user.Username;
+            //userProfile.Email = user.Email;
+            //userProfile.Username = user.Username;
+            //profile.UserId = user.Id;
+            //profile.Username = user.Username;
 
-            var container = profileDAO.GetProfile(userProfile.Username);
+            var container = profileDAO.GetProfile(user.Username);
 
             AllInformationModel AllInfo = new AllInformationModel();
             if (container.GameTitles.Count != 0 && container.GenreNames.Count != 0)
             {
                 AllInfo.AllUsers = profileSearchDAL.GetMatches();
                 AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
-                profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
-                container.TopThree = AllInfo.GetTopThree(profile.MatchStrength);
+                container.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+                container.MatchStrength = AllInfo.RemoveCurrentGamer(container.MatchStrength, user.Username);
+                //AllInfo.GamerMatchStrength= AllInfo.GetTopThree(container.MatchStrength, user.Username);
+                container.TopThree = AllInfo.GetTopThree(container.MatchStrength);
             }
             return View(container);
         }
