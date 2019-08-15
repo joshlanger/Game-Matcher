@@ -125,22 +125,12 @@ namespace WebApplication.Web.Controllers
         [HttpGet]
         public IActionResult ProfileCreate(User editUserProfile)
         {
-            ProfileViewModel profile = new ProfileViewModel();
+            ProfileViewModel profileEdit = new ProfileViewModel();
             var user = authProvider.GetCurrentUser();
-            editUserProfile.Email = user.Email;
-            userDAO.GetUser(user.Email);
-            editUserProfile.Id = user.Id;
-            profile.UserId = editUserProfile.Id;
-
+            editUserProfile.Username = user.Username;
             var container = profileDAO.GetProfile(editUserProfile.Username);
-            profile.ProfileId = container.ProfileId;
-            profileDAO.SaveGameOptions(profile, profile.GamesSelected);
-            profileDAO.GameNames(profile);
-            profileDAO.SaveGenreOptions(profile, profile.GenresSelected);
-            profileDAO.GenreNames(profile);
-            profileDAO.UpdatedProfile(profile);
-
-            return View(profile);
+            container.AvatarName = editUserProfile.Id.ToString();
+            return View(container);
         }
 
         [HttpPost]
