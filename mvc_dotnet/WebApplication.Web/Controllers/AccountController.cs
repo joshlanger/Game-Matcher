@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using WebApplication.Web.DAL;
 using WebApplication.Web.Models;
 using WebApplication.Web.Models.Account;
+using WebApplication.Web.Models.Profile;
 using WebApplication.Web.Providers.Auth;
 
 namespace WebApplication.Web.Controllers
@@ -16,13 +17,16 @@ namespace WebApplication.Web.Controllers
         private IUserDAL userDAO;
         private IProfileDAL profileDAO;
         private readonly IAuthProvider authProvider;
+        private IProfileSearchDAL profileSearchDAL;
 
-        public AccountController(IAuthProvider authProvider, IUserDAL userDAO, IProfileDAL profileDAO)
+        public AccountController(IAuthProvider authProvider, IUserDAL userDAO, IProfileDAL profileDAO, IProfileSearchDAL profileSearchDAL)
         {
             this.authProvider = authProvider;
             this.userDAO = userDAO;
             this.profileDAO = profileDAO;
+            this.profileSearchDAL = profileSearchDAL;
         }
+
 
         //[AuthorizationFilter] // actions can be filtered to only those that are logged in
         [AuthorizationFilter("Admin", "Author", "Manager", "User")]  //<-- or filtered to only those that have a certain role
@@ -37,9 +41,19 @@ namespace WebApplication.Web.Controllers
             profile.Username = user.Username;
 
             var container = profileDAO.GetProfile(userProfile.Username);
+
+            AllInformationModel AllInfo = new AllInformationModel();
+            if (container.GameTitles.Count != 0 && container.GenreNames.Count != 0)
+            {
+                AllInfo.AllUsers = profileSearchDAL.GetMatches();
+                AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
+                profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+                container.TopThree = AllInfo.GetTopThree(profile.MatchStrength);
+            }
             return View(container);
         }
 
+       
         [HttpGet]
         public IActionResult Login()
         {
