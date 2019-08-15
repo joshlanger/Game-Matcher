@@ -92,7 +92,7 @@
                     <div class="col-md-offset-4 carousel-inner">
                         @if (Model.TopThree != null)
                         {
-                        @if (Model.TopThree.Count == 3)
+                        @if (Model.TopThree.Count >= 3)
                         {
                         <div class="item active">
                             <h3>@Model.TopThree[0].Username</h3>
@@ -137,7 +137,7 @@
                         }
                         else
                         {
-                            <div class="item active">
+                            <div>
                                 <h3>Add your favorite games and genres to your profile to see matches!</h3>
                                 <h3 class="col-md-offset-4"><a href="@Url.Action("Profileedit", "Account")">Click Here!</a></h3>
                             </div>
@@ -152,6 +152,10 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+                <br />
+                <br />
+                <br />
+                <br />
                 @*<div id="section3" class="carousel slide" data-ride="carousel">
                     <h1 class="col-md-offset-5">My Friends</h1>
                     <ol class="carousel-indicators">
