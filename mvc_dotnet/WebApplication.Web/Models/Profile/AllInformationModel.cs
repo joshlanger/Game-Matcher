@@ -68,7 +68,7 @@ namespace WebApplication.Web.Models.Profile
                             {
                                 titleCount++;
                                 title = allUsers[j].Title;
-                            }//added the last && statement
+                            }
                             if (currentUser[i].Genre == allUsers[j].Genre && genreBlocker == allUsers[j].Title && currentUser[0].Title == currentUser[i].Title)
                             {
                                 genreCount++;
@@ -115,8 +115,10 @@ namespace WebApplication.Web.Models.Profile
                         }
                         else
                         {
-                            allUsers[j - 1].MatchStrength = Math.Round(matchStrength, 2);
-                            Matches.Add(allUsers[j - 1]);
+                            
+                            
+                                allUsers[j - 1].MatchStrength = Math.Round(matchStrength, 2);
+                                Matches.Add(allUsers[j - 1]);
                             
                         }
                         name = allUsers[j].Username;
@@ -158,9 +160,13 @@ namespace WebApplication.Web.Models.Profile
                     //{
                     //    totalTitles++;
                     //}
-                    
+
                     //totalTitles++;
                     //totalGenres++;
+                }
+                else
+                {
+                    allUsers.Remove(allUsers[j]);
                 }
             }
 
@@ -176,6 +182,7 @@ namespace WebApplication.Web.Models.Profile
                 {
                     CurrentGamer.Add(user);
                 }
+
             }
             return CurrentGamer;
         }
