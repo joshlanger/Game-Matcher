@@ -13,74 +13,49 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Theme Made By www.w3schools.com - No Copyright -->
-    <title>Bootstrap Theme Simply Me</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/93cdb99303.js"></script>
-</head>
-<body>
 
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
+
+    <div class="col-md-offset-1">
+        <a asp-area="" class="font-color" asp-controller="Account" asp-action="ProfileCreate"><i class="far fa-edit pull-left img-rounded"></i> Create New Profile</a>
+    </div>
+    <div class="col-md-offset-1">
+        <a asp-area="" class="font-color"asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit Existing Profile</a>
     </div>
 
-    <div>
-        <a asp-area="" asp-controller="Account" asp-action="ProfileCreate"><i class="far fa-edit pull-left img-rounded"></i> Create New Profile</a>
-    </div>
-    <div>
-        <a asp-area="" asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit Existing Profile</a>
-    </div>
-
-    <form class="form-horizontal" asp-controller="Account" asp-action="ProfileCreate" method="post">
+    <form class="form-horizontal col-md-offset-1" asp-controller="Account" asp-action="ProfileCreate" method="post">
         <div>
             <input type="hidden" asp-for="UserId" />
-        </div>
-        <div>
             <input type="hidden" asp-for="Username" />
-        </div>
-        <div>
             <input type="hidden" asp-for="AvatarName" />
         </div>
-        <div class="form-group container-fluid bg-1 text-center">
-            <h3 class="margin"><label class="control-label col-sm-5" asp-for="UserBio">Bio: </label></h3>
-            <input asp-for="UserBio" />
+        <div class="form-group container bg-1 text-center">
+            <h3 class="margin"><label asp-for="UserBio">Bio: </label></h3>
+            <textarea type="text" class="form-control margin" rows="3" asp-for="UserBio"></textarea>
+            
         </div>
-        <div class="form-group container-fluid bg-1 text-center">
-            <h3 class="margin"><label class="control-label col-sm-5" asp-for="GamingExperience">Gaming Experience: </label></h3>
-            <select asp-for="GamingExperience" asp-items="ProfileViewModel.ExperienceLevel"></select>
+        <div class="form-group container bg-1 text-center">
+            <h3 class="margin"><label asp-for="GamingExperience">Gaming Experience: </label></h3>
+            <select asp-for="GamingExperience" class="form-control margin" asp-items="ProfileViewModel.ExperienceLevel"></select>
         </div>
-        <div class="form-group container-fluid bg-1 text-center">
-            <h3 class="margin"><label class="control-label col-sm-5" asp-for="Games">Games I Play: </label></h3>
+        <div class="form-group container bg-1 text-center">
+            <h3 class="margin"><label asp-for="Games">Games I Play: </label></h3>
             <partial name="_GamesListView" model="Model" />
         </div>
-        <div class="form-group container-fluid bg-1 text-center">
-            <h3 class="margin"><label class="control-label col-sm-5" asp-for="Genres">Genres I Like: </label></h3>
+        <div class="form-group container bg-1 text-center">
+            <h3 class="margin"><label asp-for="Genres">Genres I Like: </label></h3>
             <partial name="_GenresListView" model="Model" />
         </div>
-        <div class="form-group container-fluid bg-1 text-center">
-            <h3 class="margin"><label class="control-label col-sm-5" asp-for="ContactPreference">Contact Preference: </label></h3>
-            <input asp-for="ContactPreference" />
+        <div class="form-group container bg-1 text-center">
+            <h3 class="margin"><label asp-for="ContactPreference">Contact Preference: </label></h3>
+            <input class="form-control margin" asp-for="ContactPreference" />
         </div>
-        <div class="form-group container-fluid bg-1 text-center">
-            <h3 class="margin"><label class="control-label col-sm-5" asp-for="OtherInterests">Other Interests: </label></h3>
-            <input asp-for="OtherInterests" />
+        <div class="form-group container bg-1 text-center">
+            <h3 class="margin"><label  asp-for="OtherInterests">Other Interests: </label></h3>
+            <input class="form-control margin" asp-for="OtherInterests" />
         </div>
-        <div class="form-group container-fluid bg-1 text-center">
+        <div class="form-group container bg-1 text-center">
             <h3 class="margin"><label class="control-label col-sm-5" asp-for="IsPrivate">Make Profile Private: </label></h3>
-            <input asp-for="IsPrivate" />
+            <input class="form-control margin" asp-for="IsPrivate" />
         </div>
         <div class="form-group">
             <div class="col-sm-offset-5 col-sm-10">
@@ -89,39 +64,11 @@
         </div>
     </form>
 
-    <!-- Second Container -->
-    <div class="container-fluid bg-2 text-center">
-        <h3 class="margin">About Me</h3>
-        <p>Location: Somewhere, PA</p>
-        <p>30 Friends</p>
-    </div>
-
-    <!-- Third Container (Grid) -->
-    <div class="container-fluid bg-3 text-center">
-        <h3 class="margin">Top 3 Games</h3><br>
-        <div class="row">
-            <div class="col-sm-4">
-                <p>Lorem Ipsum</p>
-                @*<img src="birds1.jpg" class="img-responsive margin" style="width:100%" alt="Image">*@
-                <img src="~/images/game1.jpg" class="img-responsive margin" style="width:100%" alt="Image">
-            </div>
-            <div class="col-sm-4">
-                <p>Aamet Consectetu</p>
-                @*<img src="birds2.jpg" class="img-responsive margin" style="width:100%" alt="Image">*@
-                <img src="~/images/game2.jpg" class="img-responsive margin" style="width:100%" alt="Image">
-            </div>
-            <div class="col-sm-4">
-                <p>Elit Sed Tempor</p>
-                @*<img src="birds3.jpg" class="img-responsive margin" style="width:100%" alt="Image">*@
-                <img src="~/images/game3.jpg" class="img-responsive margin" style="width:100%" alt="Image">
-            </div>
-        </div>
-    </div>
-
-</body>
-</html>
-
 <style>
+    .font-color {
+        color: deepskyblue;
+        font-weight: 600;
+    }
     body {
         font: 20px Montserrat, sans-serif;
         line-height: 1.8;
@@ -133,7 +80,7 @@
     }
 
     .margin {
-        margin-bottom: 45px;
+        margin-bottom: 10px;
     }
 
     .bg-1 {
