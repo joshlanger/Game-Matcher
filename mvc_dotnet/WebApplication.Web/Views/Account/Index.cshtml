@@ -88,37 +88,49 @@
                     </ol>
                     <div class="col-md-offset-4 carousel-inner">
                         @if (Model.TopThree != null)
-                        { }
+                        {
                         @if (Model.TopThree.Count == 3)
                         {
-                            <div class="item active">
-                                <a href="@Url.Action("GamerProfile", "Profile")?id=@Model.TopThree[0].ProfileId">
-                                    <img src="~/images/@(Model.TopThree[0].ProfileId % 10).jpg" />
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a href="@Url.Action("GamerProfile", "Profile")?id=@Model.TopThree[1].ProfileId">
-                                    <img src="~/images/@(Model.TopThree[1].ProfileId % 10).jpg" />
-                                </a>
-                            </div>
-                            <div class="item">
-                                <a href="@Url.Action("GamerProfile", "Profile")?id=@Model.TopThree[2].ProfileId">
-                                    <img src="~/images/@(Model.TopThree[2].ProfileId % 10).jpg" />
-                                </a>
-                            </div>
+                        <div class="item active">
+                            <h3>@Model.TopThree[0].Username</h3>
+                            <a href="@Url.Action("GamerProfile", "Profile")?id=@Model.TopThree[0].ProfileId">
+                                <img src="~/images/@(Model.TopThree[0].ProfileId % 10).jpg" />
+                            </a>
+                            <p>Match Strength: @Model.TopThree[0].MatchStrength</p>
+
+                        </div>
+                        <div class="item">
+                            <h3>@Model.TopThree[1].Username</h3>
+                            <a href="@Url.Action("GamerProfile", "Profile")?id=@Model.TopThree[1].ProfileId">
+                                <img src="~/images/@(Model.TopThree[1].ProfileId % 10).jpg" />
+                            </a>
+                            <p>Match Strength: @Model.TopThree[1].MatchStrength</p>
+                        </div>
+                        <div class="item">
+                            <h3>@Model.TopThree[2].Username</h3>
+                            <a href="@Url.Action("GamerProfile", "Profile")?id=@Model.TopThree[2].ProfileId">
+                                <img src="~/images/@(Model.TopThree[2].ProfileId % 10).jpg" />
+                            </a>
+                            <p>Match Strength: @Model.TopThree[2].MatchStrength</p>
+                        </div>
                         }
                         @if (Model.TopThree.Count == 2)
                         {
                         <div class="item active">
+                            <h3>@Model.TopThree[0].Username</h3>
                             <a href=@Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[0].ProfileId>
                                 <img src="~/images/@(Model.TopThree[0].ProfileId % 10).jpg" />
                             </a>
+                            <p>Match Strength: @Model.TopThree[0].MatchStrength</p>
                         </div>
                         <div class="item">
-                            <a href= @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[1].ProfileId>
+                            <h3>@Model.TopThree[1].Username</h3>
+                            <a href=@Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[1].ProfileId>
                                 <img src="~/images/@(Model.TopThree[1].ProfileId % 10).jpg" />
                             </a>
+                            <p>Match Strength: @Model.TopThree[1].MatchStrength</p>
                         </div>
+                            }
                         }
                         else
                         {
