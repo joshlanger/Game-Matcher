@@ -88,7 +88,7 @@
                     </ol>
                     <div class="col-md-offset-4 carousel-inner">
                         @if (Model.TopThree != null)
-                        {
+                        { }
                         @if (Model.TopThree.Count == 3)
                         {
                             <div class="item active">
@@ -110,12 +110,12 @@
                         @if (Model.TopThree.Count == 2)
                         {
                         <div class="item active">
-                            <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[0].ProfileId>
+                            <a href=@Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[0].ProfileId>
                                 <img src="~/images/@(Model.TopThree[0].ProfileId % 10).jpg" />
                             </a>
                         </div>
                         <div class="item">
-                            <a href="href=" @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[1].ProfileId>
+                            <a href= @Url.Action("GamerProfile", "Profile") ?id=@Model.TopThree[1].ProfileId>
                                 <img src="~/images/@(Model.TopThree[1].ProfileId % 10).jpg" />
                             </a>
                         </div>
