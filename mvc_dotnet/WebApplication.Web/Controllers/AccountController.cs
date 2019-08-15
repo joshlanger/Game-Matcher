@@ -41,7 +41,7 @@ namespace WebApplication.Web.Controllers
             profile.Username = user.Username;
             profile.ZipCode = user.ZipCode;
 
-            var container = profileDAO.GetProfile(userProfile.Username);
+            var container = profileDAO.GetProfile(user.Username);
 
             AllInformationModel AllInfo = new AllInformationModel();
             if (AllInfo.CurrentUser != null)
@@ -53,6 +53,12 @@ namespace WebApplication.Web.Controllers
                     profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
                     container.TopThree = AllInfo.GetTopThree(profile.MatchStrength);
                 }
+                AllInfo.AllUsers = profileSearchDAL.GetMatches();
+                AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
+                container.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+                container.MatchStrength = AllInfo.RemoveCurrentGamer(container.MatchStrength, user.Username);
+                //AllInfo.GamerMatchStrength= AllInfo.GetTopThree(container.MatchStrength, user.Username);
+                container.TopThree = AllInfo.GetTopThree(container.MatchStrength);
             }
             return View(container);
         }
