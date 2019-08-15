@@ -58,6 +58,8 @@ namespace WebApplication.Web.Models.Account
 
         public List<Genre> GenreNames { get; set; }
 
+        public List<MatchStrengthModel> MatchStrength { get; set; }
+
         public List<MatchStrengthModel> TopThree { get; set; }
 
         public static List<SelectListItem> ExperienceLevel = new List<SelectListItem>()

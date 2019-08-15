@@ -16,11 +16,13 @@ namespace WebApplication.Web.Controllers
         private IProfileSearchDAL profileSearchDAL;
         private IUserDAL userDAL;
         private readonly IAuthProvider authProvider;
-        public ProfileController(IProfileSearchDAL profileSearchDAL, IUserDAL userDAL, IAuthProvider authProvider)
+        private IProfileDAL profileDAL;
+        public ProfileController(IProfileSearchDAL profileSearchDAL, IUserDAL userDAL, IAuthProvider authProvider, IProfileDAL profileDAL)
         {
             this.profileSearchDAL = profileSearchDAL;
             this.userDAL = userDAL;
             this.authProvider = authProvider;
+            this.profileDAL = profileDAL;
         }
 
         public IActionResult Search()
@@ -31,12 +33,23 @@ namespace WebApplication.Web.Controllers
         [HttpGet]
         public IActionResult GamerProfile(int id)
         {
+            //ProfileViewModel profile = new ProfileViewModel();
+            //var user = authProvider.GetCurrentUser();
+            //userProfile.Email = user.Email;
+            //userProfile.Username = user.Username;
+            //profile.UserId = user.Id;
+            //profile.Username = user.Username;
+
+            
+
             var profile = profileSearchDAL.GetProfile(id);
+            profile = profileDAL.GetProfile(profile.Username);
             AllInformationModel AllInfo = new AllInformationModel();
             var user = authProvider.GetCurrentUser();
             AllInfo.AllUsers = profileSearchDAL.GetMatches();
             AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
-            profile.TopThree = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+            profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+             
             return View(profile);
         }
 

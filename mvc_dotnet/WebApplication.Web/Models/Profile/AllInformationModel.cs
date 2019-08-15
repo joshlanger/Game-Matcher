@@ -97,7 +97,7 @@ namespace WebApplication.Web.Models.Profile
                                 titleCount++;
                                 title = allUsers[j].Title;
                             }//added the last && statement
-                            if (currentUser[i].Genre == allUsers[j].Genre && genreBlocker == CurrentUser[0].Title && currentUser[0].Title == currentUser[i].Title)
+                            if (currentUser[i].Genre == allUsers[j].Genre && genreBlocker == allUsers[j].Title && currentUser[0].Title == currentUser[i].Title)
                             {
                                 genreCount++;
                             }
@@ -108,8 +108,17 @@ namespace WebApplication.Web.Models.Profile
                     {
 
                         double matchStrength = ((titleCount + experience + genreCount) / (totalTitles + totalGenres + 1.00)) * 100.00;
-                        allUsers[j-1].MatchStrength = Math.Round(matchStrength, 2);
-                        Matches.Add(allUsers[j-1]);
+                        if(j == 0)
+                        {
+                            //allUsers[j].MatchStrength = Math.Round(matchStrength, 2);
+                            //Matches.Add(allUsers[j]);
+                        }
+                        else
+                        {
+                            allUsers[j - 1].MatchStrength = Math.Round(matchStrength, 2);
+                            Matches.Add(allUsers[j - 1]);
+                            
+                        }
                         name = allUsers[j].Username;
                         titleCount = 0;
                         experience = 0;
@@ -132,7 +141,7 @@ namespace WebApplication.Web.Models.Profile
                             {
                                 titleCount++;
                             }//added the last && statement
-                            if (currentUser[i].Genre == allUsers[j].Genre && genreBlocker == CurrentUser[0].Title && currentUser[0].Title == currentUser[i].Title)
+                            if (currentUser[i].Genre == allUsers[j].Genre && genreBlocker == allUsers[j].Title && currentUser[0].Title == currentUser[i].Title)
                             {
                                 genreCount++;
                             }
@@ -170,6 +179,7 @@ namespace WebApplication.Web.Models.Profile
             }
             return CurrentGamer;
         }
+
 
         public List<MatchStrengthModel> GetTopThree(List<MatchStrengthModel> allUsers)
         {
