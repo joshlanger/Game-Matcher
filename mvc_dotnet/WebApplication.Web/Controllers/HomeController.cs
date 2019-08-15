@@ -30,7 +30,12 @@ namespace WebApplication.Web.Controllers
 
             return View();
         }
+        public IActionResult Help()
+        {
+            ViewData["Message"] = "Please see below a list of frequently asked questions.";
 
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
