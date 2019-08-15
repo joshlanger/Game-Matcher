@@ -33,8 +33,8 @@
         <div class="row">
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="ConfirmPassword">Confirm Password:</label>*@
             <div class="col-md-4">
-                <input id="fields" type="password" asp-for="ConfirmPassword" required placeholder=" Cofirm password required" />
-                <span asp-validation-for="ConfirmPassword" style="color: deepskyblue"></span>
+                <input id="fields" type="password" asp-for="ConfirmPassword" required placeholder=" Confirm password required" />
+                <span hidden asp-validation-for="ConfirmPassword" style="color: deepskyblue"></span>
             </div>
         </div>
         <div>
@@ -62,7 +62,7 @@
 
 <style scoped>
     .col-md-4 {
-        margin-left: 20px;
+        margin-left: 25px;
     }
     .navbar {
         display: none
