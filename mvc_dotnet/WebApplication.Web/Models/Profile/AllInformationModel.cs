@@ -11,7 +11,7 @@ namespace WebApplication.Web.Models.Profile
         public List<MatchStrengthModel> AllUsers { get; set;}
         public List<MatchStrengthModel> GamerMatchStrength { get; set; }
 
-        //style is getting weighted more than title.
+        
         public List<MatchStrengthModel> Matches (List<MatchStrengthModel> allUsers, List<MatchStrengthModel> currentUser)
         {
             List<MatchStrengthModel> Matches = new List<MatchStrengthModel>();
@@ -43,7 +43,7 @@ namespace WebApplication.Web.Models.Profile
             }
             genreCountFinder = "";
             titleCountFinder = "a";
-            //NOTE THAT YOU HAD TOTALTITLES = 0 IN THE METHOD. TAKING THAT OUT MAY FIX IT WITHOUT THE && STATEMENTS YOU ADDED
+            
             for(int j = 0; j < allUsers.Count; j++)
             {
                 if (allUsers[j].Username != name)
@@ -59,16 +59,12 @@ namespace WebApplication.Web.Models.Profile
                         
                         for (int i = 0; i < currentUser.Count; i++)
                         {
-                            //if (allUsers[j].Username != name)
-                            //{
-                            //    genreBlocker = CurrentUser[0].Title;
-                            //}
 
                             if (currentUser[i].Title == allUsers[j].Title && title != allUsers[j].Title)
                             {
                                 titleCount++;
                                 title = allUsers[j].Title;
-                            }//added the last && statement
+                            }
                             if (currentUser[i].Genre == allUsers[j].Genre && genreBlocker == allUsers[j].Title && currentUser[0].Title == currentUser[i].Title)
                             {
                                 genreCount++;
@@ -79,11 +75,7 @@ namespace WebApplication.Web.Models.Profile
 
                     if (name == "")
                     {
-                        //if (allUsers[j].Username != name)
-                        //{
-                        //    genreBlocker = CurrentUser[0].Title;
-                        //}
-                        //name = allUsers[j].Username;
+                       
 
                         
                         for(int i = 0; i < currentUser.Count; i++)
@@ -96,42 +88,51 @@ namespace WebApplication.Web.Models.Profile
                             {
                                 titleCount++;
                                 title = allUsers[j].Title;
-                            }//added the last && statement
+                            }
                             if (currentUser[i].Genre == allUsers[j].Genre && genreBlocker == allUsers[j].Title && currentUser[0].Title == currentUser[i].Title)
                             {
                                 genreCount++;
                             }
                         }
-                        
+                        name = allUsers[j].Username;
                     }
                     if(name != allUsers[j].Username)
                     {
 
                         double matchStrength = ((titleCount + experience + genreCount) / (totalTitles + totalGenres + 1.00)) * 100.00;
-                        if(j == 0)
-                        {
-                            //allUsers[j].MatchStrength = Math.Round(matchStrength, 2);
-                            //Matches.Add(allUsers[j]);
-                        }
-                        else
-                        {
-                            allUsers[j - 1].MatchStrength = Math.Round(matchStrength, 2);
-                            Matches.Add(allUsers[j - 1]);
-                            
-                        }
+                        //if (j == 0)
+                        //{
+                        //    //allUsers[j].MatchStrength = Math.Round(matchStrength, 2);
+                        //    //Matches.Add(allUsers[j]);
+                        //}
+                        //else
+                        //{
+                        //    titleCount = 0;
+                        //    experience = 0;
+                        //    genreCount = 0;
+
+                        //    allUsers[j - 1].MatchStrength = Math.Round(matchStrength, 2);
+                        //    Matches.Add(allUsers[j - 1]);
+
+                        //}
+                        
+
+                        //adds the gamer from the previous stack of data rows to the matches list.  the change of the username is the
+                        //indication that there is no more info about the gamer to evaluate.
+                        allUsers[j - 1].MatchStrength = Math.Round(matchStrength, 2);
+                        Matches.Add(allUsers[j - 1]);
+
                         name = allUsers[j].Username;
+
+                        //resets the count of matches now that a new username has been encountered
                         titleCount = 0;
                         experience = 0;
                         genreCount = 0;
-                        
-                       
+
+
 
                         for (int i = 0; i < currentUser.Count; i++)
                         {
-                            //if (allUsers[j].Username != name)
-                            //{
-                            //    genreBlocker = CurrentUser[0].Title;
-                            //}
 
                             if (currentUser[0].Experience == allUsers[j].Experience && i == 0)
                             {
@@ -140,7 +141,7 @@ namespace WebApplication.Web.Models.Profile
                             if (currentUser[i].Title == allUsers[j].Title && title != allUsers[j].Title)
                             {
                                 titleCount++;
-                            }//added the last && statement
+                            }
                             if (currentUser[i].Genre == allUsers[j].Genre && genreBlocker == allUsers[j].Title && currentUser[0].Title == currentUser[i].Title)
                             {
                                 genreCount++;
@@ -148,20 +149,16 @@ namespace WebApplication.Web.Models.Profile
                         }
 
                     }
+                    //this is to deal with the last item in the list, since objects are added to the matches only after username changes.
                     if(j == allUsers.Count-1)
                     {
                         double matchStrength = ((titleCount + experience + genreCount) / (totalTitles + totalGenres + 1.00)) *100.00;
                         allUsers[allUsers.Count - 1].MatchStrength = Math.Round(matchStrength, 2);
                         Matches.Add(allUsers[allUsers.Count - 1]);
                     }
-                    //if (title != allUsers[j].Title)
-                    //{
-                    //    totalTitles++;
-                    //}
                     
-                    //totalTitles++;
-                    //totalGenres++;
                 }
+                
             }
 
             return Matches;
@@ -176,11 +173,32 @@ namespace WebApplication.Web.Models.Profile
                 {
                     CurrentGamer.Add(user);
                 }
+
             }
             return CurrentGamer;
         }
 
-
+        //remove the current user from the list
+        public List<MatchStrengthModel> RemoveCurrentGamer(List<MatchStrengthModel> matches, string username)
+        {
+            int userIndex = 0;
+            bool exists = false;
+            for(int i = 0; i< matches.Count; i++)
+            {
+                if(matches[i].Username == username)
+                {
+                    userIndex = i;
+                    exists = true;
+                }
+            }
+           
+            if(exists)
+            {
+                matches.Remove(matches[userIndex]);
+            }
+            return matches;
+        }
+       
         public List<MatchStrengthModel> GetTopThree(List<MatchStrengthModel> allUsers)
         {
             List<MatchStrengthModel> TopThree = new List<MatchStrengthModel>();
@@ -192,9 +210,10 @@ namespace WebApplication.Web.Models.Profile
             double thirdPlace = 0;
             string thirdName = "";
 
+           
             for (int i = 0; i < allUsers.Count; i++)
-            {
-                if(allUsers[i].MatchStrength > topMatch)
+            {              
+                if (allUsers[i].MatchStrength > topMatch)
                 {
                     topMatch = allUsers[i].MatchStrength;
                     topUserName = allUsers[i].Username;
@@ -202,7 +221,7 @@ namespace WebApplication.Web.Models.Profile
             }
             for (int i = 0; i < allUsers.Count; i++)
             {
-                if(allUsers[i].MatchStrength > secondPlace && allUsers[i].MatchStrength < topMatch)
+                if(allUsers[i].MatchStrength > secondPlace && allUsers[i].Username != topUserName)
                 {
                     secondPlace = allUsers[i].MatchStrength;
                     secondName = allUsers[i].Username;
@@ -210,7 +229,7 @@ namespace WebApplication.Web.Models.Profile
             }
             for(int i = 0; i < allUsers.Count; i++)
             {
-                if(allUsers[i].MatchStrength > thirdPlace && allUsers[i].MatchStrength < secondPlace)
+                if(allUsers[i].MatchStrength > thirdPlace && allUsers[i].Username != topUserName && allUsers[i].Username != secondName)
                 {
                     thirdPlace = allUsers[i].MatchStrength;
                     thirdName = allUsers[i].Username;
