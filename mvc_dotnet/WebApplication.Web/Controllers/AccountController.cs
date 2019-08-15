@@ -43,12 +43,15 @@ namespace WebApplication.Web.Controllers
             var container = profileDAO.GetProfile(userProfile.Username);
 
             AllInformationModel AllInfo = new AllInformationModel();
-            if (container.GameTitles.Count != 0 && container.GenreNames.Count != 0)
+            if (AllInfo.CurrentUser != null)
             {
-                AllInfo.AllUsers = profileSearchDAL.GetMatches();
-                AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
-                profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
-                container.TopThree = AllInfo.GetTopThree(profile.MatchStrength);
+                if (container.GameTitles.Count != 0 && container.GenreNames.Count != 0)
+                {
+                    AllInfo.AllUsers = profileSearchDAL.GetMatches();
+                    AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
+                    profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+                    container.TopThree = AllInfo.GetTopThree(profile.MatchStrength);
+                }
             }
             return View(container);
         }
