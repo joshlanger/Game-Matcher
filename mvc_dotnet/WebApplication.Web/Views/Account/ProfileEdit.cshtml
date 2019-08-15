@@ -15,42 +15,42 @@
 
 
 <div>
-    <a asp-area="" asp-controller="Account" asp-action="ProfileCreate"><i class="far fa-edit pull-left img-rounded"></i> Create New Profile</a>
+    <a asp-area="" class="font-color col-md-offset-2" asp-controller="Account" asp-action="ProfileCreate"><i class="far fa-edit pull-left img-rounded"></i> Create New Profile</a>
 </div>
 <div>
-    <a asp-area="" asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit Existing Profile</a>
+    <a asp-area="" class="font-color col-md-offset-2" asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit Existing Profile</a>
 </div>
-<form id="container" class="col-md-12 border-color" asp-controller="Account" asp-action="ProfileEdit" method="post">
+<form id="container" class="col-md-offset-2 border-color" asp-controller="Account" asp-action="ProfileEdit" method="post">
             <input type="hidden" asp-for="UserId" />
             <input type="hidden" asp-for="Username" />
             <input type="hidden" asp-for="AvatarName" />
        
         <div class="form-group">
                 <label class="margin font-color" asp-for="UserBio">Bio: </label>
-                <input type="text" class="form-control" asp-for="UserBio" />
+                <textarea type="text" class="form-control" rows="3" asp-for="UserBio"></textarea>
+                
         </div>
         <div class="form-group">
             <label class="margin font-color" asp-for="GamingExperience">Gaming Experience: </label>
-            <select asp-for="GamingExperience" asp-items="ProfileViewModel.ExperienceLevel"></select>
+            <select asp-for="GamingExperience" class="form-control" asp-items="ProfileViewModel.ExperienceLevel"></select>
         </div>
         <div class="form-group">
             <label class="margin font-color" asp-for="GamesSelected">Games I Play: </label>
-            <partial name="_GamesListView" model="Model" />
-        </div>
-        <div class="form-group">
+            <partial name="_GamesListView" class="col-md-1" model="Model" />
             <label class="margin font-color" asp-for="GenresSelected">Genres I Like: </label>
-            <partial name="_GenresListView" model="Model" />
+            <partial name="_GenresListView" class="form-control" model="Model"/> 
         </div>
+      
         <div class="form-group">
             <label class="margin font-color"asp-for="ContactPreference">Contact Preference: </label>
-            <input asp-for="ContactPreference"/>
+            <input class="form-control" asp-for="ContactPreference"/>
         </div>
         <div>
             <label class="margin font-color"asp-for="OtherInterests">Other Interests: </label>
-            <input asp-for="OtherInterests"/>
+            <input class="form-control" asp-for="OtherInterests"/>
         </div>
         <div class="form-group">
-            <label class="margin col-md-4 font-color" asp-for="IsPrivate">Make Profile Private: </label>
+            <label class="margin font-color" asp-for="IsPrivate">Make Profile Private: </label>
             <input asp-for="IsPrivate"/>
         </div>
         <div>
@@ -67,9 +67,11 @@
     p {
         font-size: 16px;
     }
-
+    .margin1{
+        margin: 05px;
+    }
     .margin {
-        margin-bottom: 45px;
+        margin-bottom: 10px;
     }
     .font-color {
         color: deepskyblue;
@@ -84,7 +86,7 @@
         padding-bottom: 5%;
         margin-top: 35px;
         background-color: purple;
-        width: 65%;
+        width: 68%;
         height: auto;
         box-shadow: 05px 05px 05px purple;
     }
