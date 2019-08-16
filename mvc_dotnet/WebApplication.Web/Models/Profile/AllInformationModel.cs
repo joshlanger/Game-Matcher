@@ -149,7 +149,7 @@ namespace WebApplication.Web.Models.Profile
                         }
 
                     }
-                    //this is to deal with the last item in the list, since objects are added to the matches only after username changes.
+                    //this is to deal with the last item in the list, since objects are added to the matches list only after username changes.
                     if(j == allUsers.Count-1)
                     {
                         double matchStrength = ((titleCount + experience + genreCount) / (totalTitles + totalGenres + 1.00)) *100.00;
