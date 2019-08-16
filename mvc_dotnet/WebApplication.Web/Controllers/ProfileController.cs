@@ -35,7 +35,7 @@ namespace WebApplication.Web.Controllers
         {
 
             var profile = profileSearchDAL.GetProfile(id);
-            profile = profileDAL.GetProfile(profile.Username);
+            container = profileDAL.GetProfile(profile.Username);
             AllInformationModel AllInfo = new AllInformationModel();
             var user = authProvider.GetCurrentUser();
             var currentUser = profileDAL.GetProfile(user.Username);
@@ -48,6 +48,7 @@ namespace WebApplication.Web.Controllers
                 profile.IsPopulated = true;
             }
             return View(profile);
+
         }
 
         [HttpGet]

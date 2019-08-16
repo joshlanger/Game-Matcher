@@ -20,10 +20,10 @@
     <div class="container-fluid">
         <div class="row content">
             <div class="col-md-12 sidenav">
-                <h4 class="col-md-offset-5 font-color">@Model.Username</h4>
+                <h3 class="font-color margin-username">@Model.Username</h3>
                 <img src="~/images/@(Model.UserId % 10).jpg" class="col-md-offset-5 img-circle" height="250" width="250" alt="Avatar">
                 <br><br>
-                <nav class="col-md-offset-4 row" id="myScrollspy">
+                <nav class="col-md-offset-5 row" id="myScrollspy">
                     <ul class="col-md-12 nav nav-pills nav-inline">
                         <li><a href="#section1" class="btn btn-default, button">My Games</a></li>
                         @*<li><a href="#section2" class="btn btn-default, button">My Friends</a></li>*@
@@ -44,32 +44,34 @@
                 <div id="section1" class="carousel slide" data-ride="carousel">
 
                     <h1 class="col-md-offset-5">My Games</h1>
-                    <ol class="carousel-indicators">
+                    @*<ol class="carousel-indicators">
                         <li data-target="#section1" data-slide-to="0"></li>
                         <li data-target="#section1" data-slide-to="1"></li>
                         <li data-target="#section1" data-slide-to="2"></li>
-                    </ol>
-             
+                    </ol>*@
+
                     @if (Model.GameTitles.Count != 0)
                     {
-                       
+
                         <div class="col-md-offset-4 carousel-inner child">
                             <div class="item active">
                                 <img src="~/images/@Model.GameTitles[0].image">
                             </div>
                             <div class="item">
-                                <img src="~/images/@Model.GameTitles[1].image"/>
+                                <img src="~/images/@Model.GameTitles[1].image" />
                             </div>
                             <div class="item">
-                                <img src="~/images/@Model.GameTitles[2].image"/>
+                                <img src="~/images/@Model.GameTitles[2].image" />
                             </div>
                         </div>
                     }
                     else
                     {
-                        <div class="item active">
+                        <div class="col-md-offset-3 item active">
                             <h3>No Games Selected.  Add your favorite games to your profile!</h3>
-                            <h3><a href="@Url.Action("Profileedit", "Account")">Click Here!</a></h3>
+                        </div>
+                        <div>
+                        <h3><a class="col-md-offset-4" href="@Url.Action("Profileedit", "Account")">Click Here!</a></h3>
                         </div>
                     }
 
@@ -84,11 +86,11 @@
                 </div>
                 <div id="section2" class="carousel slide" data-ride="carousel">
                     <h1 class="col-md-offset-5">My Matches</h1> @*here!*@
-                    <ol class="carousel-indicators">
+                    @*<ol class="carousel-indicators">
                         <li data-target="#section2" data-slide-to="0"></li>
                         <li data-target="#section2" data-slide-to="1"></li>
                         <li data-target="#section2" data-slide-to="2"></li>
-                    </ol>
+                    </ol>*@
                     <div class="col-md-offset-4 carousel-inner">
                         @if (Model.TopThree != null)
                         {
@@ -138,8 +140,11 @@
                         else
                         {
                             <div>
-                                <h3>Add your favorite games and genres to your profile to see matches!</h3>
-                                <h3 class="col-md-offset-4"><a href="@Url.Action("Profileedit", "Account")">Click Here!</a></h3>
+                                <h3 col-md-offset-2>Add your favorite games and genres to your profile to see matches!</h3>
+                                
+                            </div>
+                            <div>
+                                <h3 ><a class="col-md-offset-3" href="@Url.Action("Profileedit", "Account")">Click Here!</a></h3>
                             </div>
                         }
                     </div>
@@ -270,7 +275,9 @@
         color: #fff;
         background-color: rgba(9, 9, 128, 0.50);
     }
-
+    .margin-username{
+        text-align: center;
+    }
     /*/*810px previously*/
     /*media screen and (max-width:810px) {
 
