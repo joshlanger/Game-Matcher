@@ -33,11 +33,13 @@ namespace WebApplication.Web.Controllers
         {
             var user = authProvider.GetCurrentUser();
             zip1 = user.ZipCode;
+            string zipA = user.ZipCode.ToString();
             var gamerProfile = profileSearchDAL.GetProfile(profile.ProfileId);
             zip2 = gamerProfile.ZipCode;
+            string zipB = user.ZipCode.ToString();
 
             WebClient webClient = new WebClient();
-            string host = "https://www.zipcodeapi.com/rest/4Gfn1Q4ds8zgjzvAO9vCIk3R1ovzdHOZw3wOOazm04Tb21YjVK3tB1iVRcbrRCyK/distance.json/" + zip1 + "/" + zip2 + "/mile";
+            string host = "https://www.zipcodeapi.com/rest/4Gfn1Q4ds8zgjzvAO9vCIk3R1ovzdHOZw3wOOazm04Tb21YjVK3tB1iVRcbrRCyK/distance.json/" + zipA + "/" + zipB + "/mile";
             var webResult = webClient.DownloadString(host);
             int index = webResult.IndexOf(":") + 1;
             return webResult.Substring(index, webResult.Length - 1 - index);

@@ -25,6 +25,6 @@
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    callZipCodeAPI(15222, 15201);
+    callZipCodeAPI(zip1, zip2);
 
 });

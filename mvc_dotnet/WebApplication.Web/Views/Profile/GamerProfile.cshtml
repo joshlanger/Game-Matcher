@@ -5,7 +5,8 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">git 
+<html lang="en">
+git
 @**@
 <head>
     <!-- Theme Made By www.w3schools.com - No Copyright -->
@@ -53,16 +54,16 @@
             {
                 @genre.genre<br />
             }
-<div id="container" class="container-fluid border-color">
-    <h2 class="h2 font-color">GamerProfile</h2>
-    <div style="color:white">
-        @*<p>
-            @Model.Username
-        </p>
-        @*<img src="~/images/@(Model.UserId % 10).jpg" class="img-responsive img-circle margin" style="display:inline" alt="Avatar" width="100" height="100">*@
-        @*<p>
-            @Model.UserBio
-        </p>*@
+            <div id="container" class="container-fluid border-color">
+                <h2 class="h2 font-color">GamerProfile</h2>
+                <div style="color:white">
+                    @*<p>
+                        @Model.Username
+                    </p>
+                    @*<img src="~/images/@(Model.UserId % 10).jpg" class="img-responsive img-circle margin" style="display:inline" alt="Avatar" width="100" height="100">*@
+                    @*<p>
+                        @Model.UserBio
+                    </p>*@
         <p>
             @Model.GamingExperience
         </p>
@@ -75,9 +76,15 @@
         </p>
         <p class="col-sm-4">I like other things, too: @Model.OtherInterests</p>
         <p class="col-sm-4">Private Profile: @Model.IsPrivate</p>
-        <p class="col-sm-4">Location: Somewhere, PA</p>
-        <p class="col-sm-4">30 Friends</p>
-    </div>
+        <p class="col-sm-4">Location: @Model.ZipCode</p>
+
+        @*<form id="container" class="container border-color" asp-controller="Zip" asp-action="GetZipDistance" method="get" style="justify-content:center">
+            <label asp-for="@Model.ZipCode" class="font-color">Search</label>
+            <input id="fields" type="submit" value="Calculate Distance" class="btn btn-default, button" />
+        </form>
+        <a asp-area="" class="font-color col-md-offset-2" asp-controller="Zip" asp-action="GetZipDistance">Calculate Distance</a>
+        <a asp-controller="Zip" asp-action="GetZipDistance" asp-route="@Model.ZipCode">Calculate Distance</a>
+    </div>*@
 
     <!-- Third Container (Grid) -->
     <div class="container-fluid bg-3 text-center">
@@ -100,6 +107,8 @@
 
 </body>
 </html>
+
+<script src="~/js/site.js"></script>
 
 @*<style>
         .visibility {
