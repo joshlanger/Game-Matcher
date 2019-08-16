@@ -25,66 +25,69 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/93cdb99303.js"></script>
 </head>
-<body>
 
-
-
-    <div>
-        <a asp-area="" asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit Existing Profile</a>
-    </div>
-
-    <!-- First Container -->
-    <div class="container-fluid bg-1 text-center">
-        <h3 class="margin">@Model.Username</h3>
-        <img src="~/images/@(Model.UserId % 10).jpg" class="img-responsive img-circle margin" style="display:inline" alt="Avatar" width="250" height="250">
-    </div>
-
-    <!-- Second Container -->
-    <div class="container-fluid bg-2 text-center">
-        <h3 class="margin">@Model.Username's Infomania</h3>
-        <p class="col-sm-4">Stuff about me: @Model.UserBio</p>
-        <p class="col-sm-4">Get a hold of me: @Model.ContactPreference</p>
-        <p class="col-sm-4">Level of Gaming Experience: @Model.GamingExperience</p>
-        <p class="col-sm-4">Preferred Genres: <br />
-            @foreach (Genre genre in Model.GenreNames)
-            {
-                @genre.genre<br />
-            }
-        </p>
-        <p class="col-sm-4">Games I Play: <br />
-        @foreach (Game game in Model.GameTitles)
-        {
-            @game.title<br />
-        }
-        </p>
-        <p class="col-sm-4">I like other things, too: @Model.OtherInterests</p>
-        <p class="col-sm-4">Private Profile: @Model.IsPrivate</p>
-        <p class="col-sm-4">Location: ZIP CODE</p>
-    </div>
-
-    <!-- Third Container (Grid) -->
-    <div class="container-fluid bg-3 text-center">
-        <h3 class="margin">Top 3 Games</h3><br>
-        <div class="row">
-            @if (Model.GameTitles.Count != 0)
-            {
-                <div class="col-sm-4">
-                    <p>@Model.GameTitles[0].title</p>
-                    <img src="~/images/@Model.GameTitles[0].image" class="img-responsive margin" style="width:100%" alt="Image">
+    <body>
+        <div class="container-fluid bg-2 text-center">
+            <a class="pull-left" asp-area="" asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit Existing Profile</a>
+            <h3>@Model.Username's Infomania</h3>
+            <br /><br />
+            <div class="container-fluid center-block col-sm-12">
+                <div>
+                    <div class="center-block col-lg-2">
+                        <h3 class="margin">@Model.Username</h3>
+                        <img src="~/images/@(Model.UserId % 10).jpg" class="img-responsive img-circle margin pull-right" style="display:inline" alt="Avatar" width="250" height="250">
+                    </div>
+                    <div class="col-sm-3 bio-sections">FYI: <br />@Model.UserBio</div>
+                    <div class="col-sm-3 bio-sections">Contact: <br />@Model.ContactPreference</div>
+                    <div class="col-sm-3 bio-sections">Exp. in Top Games: <br />@Model.GamingExperience</div>
+                    <div class="col-sm-1 bio-sections">
+                        Preferred Genres: <br />
+                        @foreach (Genre genre in Model.GenreNames)
+                        {
+                            @genre.genre<br />
+                        }
+                    </div>
                 </div>
-                <div class="col-sm-4">
-                    <p>@Model.GameTitles[1].title</p>
-                    <img src="~/images/@Model.GameTitles[1].image" class="img-responsive margin" style="width:100%" alt="Image">
+            </div>
+
+            <div class="container center-block col-sm-12">
+                <div>
+                    <div class="col-sm-3 bio-sections pull-right">
+                        Games I Play: <br />
+                        @foreach (Game game in Model.GameTitles)
+                        {
+                            @game.title<br />
+                        }
+                    </div><br />
+                    <div class="col-sm-3 bio-sections">Outside Interests: <br />@Model.OtherInterests</div>
+                    <div class="col-sm-3 bio-sections">Private Profile:<br /> @Model.IsPrivate</div>
+                    <div class="col-sm-3 bio-sections">Location: <br />@Model.ZipCode</div>
                 </div>
-                <div class="col-sm-4">
-                    <p>@Model.GameTitles[2].title</p>
-                    <img src="~/images/@Model.GameTitles[2].image" class="img-responsive margin" style="width:100%" alt="Image">
-                </div>
-            }
+            </div>
         </div>
-    </div>
 
-</body>
+        <div class="container-fluid bg-3 text-center">
+            <h3 class="margin">Top 3 Games</h3><br>
+            <div class="row">
+                @if (Model.GameTitles.Count != 0)
+                {
+                    <div class="col-md-4">
+                        <p>@Model.GameTitles[0].title</p>
+                        <img src="~/images/@Model.GameTitles[0].image" class="img-responsive margin" style= width: 100%; height: auto;" alt="Image">
+                    </div>
+                    <div class="col-md-4">
+                        <p>@Model.GameTitles[1].title</p>
+                        <img src="~/images/@Model.GameTitles[1].image" class="img-responsive margin" style= width: 100%; height: auto;" alt="Image">
+                    </div>
+                    <div class="col-md-4">
+                        <p>@Model.GameTitles[2].title</p>
+                        <img src="~/images/@Model.GameTitles[2].image" class="img-responsive margin" style= width: 100%; height: auto;" alt="Image">
+                    </div>
+                }
+            </div>
+        </div>
+
+    </body>
 </html>
 
 <style>
@@ -95,12 +98,12 @@
         color: #0F1108;
     }
 
-    p {
-        font-size: 16px;
+    .bio-sections {
+        font-size: 20px;
     }
 
     .margin {
-        margin-bottom: 45px;
+        margin-bottom: 5%;
     }
 
     .bg-1 {

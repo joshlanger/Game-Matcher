@@ -44,6 +44,8 @@ namespace WebApplication.Web.Models.Account
         [Required]
         public bool IsPrivate { get; set; }
 
+        public int ZipCode { get; set; }
+
         public IList<SelectListItem> Games { get; set; }
 
         public int[] GamesSelected { get; set; }

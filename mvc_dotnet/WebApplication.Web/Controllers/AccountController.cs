@@ -39,18 +39,21 @@ namespace WebApplication.Web.Controllers
             //userProfile.Username = user.Username;
             //profile.UserId = user.Id;
             //profile.Username = user.Username;
+            //profile.ZipCode = user.ZipCode;
 
             var container = profileDAO.GetProfile(user.Username);
 
             AllInformationModel AllInfo = new AllInformationModel();
             if (container.GameTitles.Count != 0 && container.GenreNames.Count != 0)
             {
-                AllInfo.AllUsers = profileSearchDAL.GetMatches();
-                AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
-                container.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
-                container.MatchStrength = AllInfo.RemoveCurrentGamer(container.MatchStrength, user.Username);
-                //AllInfo.GamerMatchStrength= AllInfo.GetTopThree(container.MatchStrength, user.Username);
-                container.TopThree = AllInfo.GetTopThree(container.MatchStrength);
+                if (container.GameTitles.Count != 0 && container.GenreNames.Count != 0)
+                {
+                    AllInfo.AllUsers = profileSearchDAL.GetMatches();
+                    AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
+                    container.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+                    container.MatchStrength = AllInfo.RemoveCurrentGamer(container.MatchStrength, user.Username);
+                    container.TopThree = AllInfo.GetTopThree(container.MatchStrength);
+                }
             }
             return View(container);
         }
@@ -135,6 +138,7 @@ namespace WebApplication.Web.Controllers
             profile.Username = user.Username;
 
             var container = profileDAO.GetProfile(userProfile.Username);
+            container.ZipCode = user.ZipCode;
             return View(container);
         }
 
@@ -179,13 +183,14 @@ namespace WebApplication.Web.Controllers
             var container = profileDAO.GetProfile(userTemp.Username);
             profileDAO.UpdatedProfile(profileEdit);
             profileEdit.ProfileId = container.ProfileId;
+            profileEdit.AvatarName = container.AvatarName;
             profileDAO.SaveGameOptions(profileEdit, profileEdit.GamesSelected);
             profileDAO.GameNames(profileEdit);
             profileDAO.SaveGenreOptions(profileEdit, profileEdit.GenresSelected);
             profileDAO.GenreNames(profileEdit);
             profileDAO.UpdatedProfile(profileEdit);
 
-            return View(profileEdit);
+            return RedirectToAction("Profile", "Account");
         }
 
         [HttpGet]
