@@ -33,23 +33,20 @@ namespace WebApplication.Web.Controllers
         [HttpGet]
         public IActionResult GamerProfile(int id)
         {
-            //ProfileViewModel profile = new ProfileViewModel();
-            //var user = authProvider.GetCurrentUser();
-            //userProfile.Email = user.Email;
-            //userProfile.Username = user.Username;
-            //profile.UserId = user.Id;
-            //profile.Username = user.Username;
-
-            
 
             var profile = profileSearchDAL.GetProfile(id);
             profile = profileDAL.GetProfile(profile.Username);
             AllInformationModel AllInfo = new AllInformationModel();
             var user = authProvider.GetCurrentUser();
-            AllInfo.AllUsers = profileSearchDAL.GetMatches();
-            AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
-            profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
-             
+            var currentUser = profileDAL.GetProfile(user.Username);
+            profile.IsPopulated = false;
+            if (currentUser.GameTitles.Count != 0 && currentUser.GenreNames.Count != 0)
+            {
+                AllInfo.AllUsers = profileSearchDAL.GetMatches();
+                AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, profile.Username);
+                profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+                profile.IsPopulated = true;
+            }
             return View(profile);
         }
 
