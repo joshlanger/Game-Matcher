@@ -33,33 +33,20 @@ namespace WebApplication.Web.Controllers
         [HttpGet]
         public IActionResult GamerProfile(int id)
         {
-            //ProfileViewModel profile = new ProfileViewModel();
-            //var user = authProvider.GetCurrentUser();
-            //userProfile.Email = user.Email;
-            //userProfile.Username = user.Username;
-            //profile.UserId = user.Id;
-            //profile.Username = user.Username;
-            //ProfileViewModel profile = new ProfileViewModel();
-            var user = authProvider.GetCurrentUser();
-            //userProfile.Email = user.Email;
-            //userProfile.Username = user.Username;
-            //profile.UserId = user.Id;
-            //profile.Username = user.Username;
-
-     
-            var container = profileDAL.GetProfile(user.Username);
 
             var profile = profileSearchDAL.GetProfile(id);
-            container = profileDAL.GetProfile(profile.Username);
+            profile = profileDAL.GetProfile(profile.Username);
             AllInformationModel AllInfo = new AllInformationModel();
-            if(container.GameTitles.Count != 0 && container.GenreNames.Count != 0)
+            var user = authProvider.GetCurrentUser();
+            var currentUser = profileDAL.GetProfile(user.Username);
+            profile.IsPopulated = false;
+            if (currentUser.GameTitles.Count != 0 && currentUser.GenreNames.Count != 0)
             {
                 AllInfo.AllUsers = profileSearchDAL.GetMatches();
-                AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
+                AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, profile.Username);
                 profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
+                profile.IsPopulated = true;
             }
-        
-             
             return View(profile);
 
         }

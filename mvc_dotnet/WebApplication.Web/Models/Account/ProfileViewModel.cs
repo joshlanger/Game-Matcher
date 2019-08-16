@@ -66,6 +66,8 @@ namespace WebApplication.Web.Models.Account
 
         public List<MatchStrengthModel> TopThree { get; set; }
 
+        public bool IsPopulated { get; set; }
+
         public static List<SelectListItem> ExperienceLevel = new List<SelectListItem>()
         {
             new SelectListItem() { Text = "Novice" },
