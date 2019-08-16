@@ -9,8 +9,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebApplication.Web.Controllers;
 using WebApplication.Web.DAL;
 using WebApplication.Web.Providers.Auth;
+using System.Web.Http;
 
 namespace WebApplication.Web
 {
@@ -45,7 +47,13 @@ namespace WebApplication.Web
 
             // Connection String
             string connectionString = Configuration.GetConnectionString("Database");
-           
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+
             // Dependency Injection
             // For Authentication
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -55,6 +63,17 @@ namespace WebApplication.Web
             services.AddTransient<IProfileSearchDAL>(m => new ProfileSearchSqlDAL(connectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+        }
+
+        public static void Register(HttpConfiguration config)
+        {
+            config.EnableCors();
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
