@@ -26,8 +26,8 @@
                 <nav class="col-md-offset-5 row" id="myScrollspy">
                     <ul class="col-md-12 nav nav-pills nav-inline">
                         <li><a href="#section1" class="btn btn-default, button">My Games</a></li>
-                        @*<li><a href="#section2" class="btn btn-default, button">My Friends</a></li>*@
-                        <li><a href="#section3" class="btn btn-default, button">My Matches</a></li>
+                        <li><a href="#section2" class="btn btn-default, button">My Matches</a></li>
+                        @*<li><a href="#section3" class="btn btn-default, button">My Matches</a></li>*@
                         <li>
                             @*<input type="text" placeholder="Search...">
                             <span class="input-group-btn">
@@ -53,17 +53,32 @@
                     @if (Model.GameTitles.Count != 0)
                     {
 
-                        <div class="col-md-offset-4 carousel-inner child">
-                            <div class="item active">
-                                <img src="~/images/@Model.GameTitles[0].image">
-                            </div>
-                            <div class="item">
-                                <img src="~/images/@Model.GameTitles[1].image" />
-                            </div>
-                            <div class="item">
-                                <img src="~/images/@Model.GameTitles[2].image" />
-                            </div>
+                    <div class="col-md-offset-4 carousel-inner child">
+                        <div class="item active">
+                            <img src="~/images/@Model.GameTitles[0].image">
                         </div>
+                        @if (Model.GameTitles.Count > 1)
+                        {
+                            @for (int i = 1; i < Model.GameTitles.Count; i++)
+                            {
+                                <div class="item">
+                                    <img src="~/images/@Model.GameTitles[i].image" />
+                                </div>
+                            }
+
+                        }
+
+
+                        @*<div class="item active">
+            <img src="~/images/@Model.GameTitles[0].image">
+        </div>
+        <div class="item">
+            <img src="~/images/@Model.GameTitles[1].image" />
+        </div>
+        <div class="item">
+            <img src="~/images/@Model.GameTitles[2].image" />
+        </div>*@
+                    </div>
                     }
                     else
                     {
