@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Web.DAL;
+using WebApplication.Web.Models.Account;
 using WebApplication.Web.Providers.Auth;
 
 namespace WebApplication.Web.Controllers
@@ -28,15 +29,12 @@ namespace WebApplication.Web.Controllers
         }
 
         [HttpGet("zipDistance")]
-        public string GetZipDistance(double zip1, double zip2)
+        public string GetZipDistance(ProfileViewModel profile, double zip1, double zip2)
         {
             var user = authProvider.GetCurrentUser();
-            //var container = profileSearchDAL.
-            //userProfile.Email = user.Email;
-            //userProfile.Username = user.Username;
-            //profile.UserId = user.Id;
-            //profile.Username = user.Username;
-            //profile.ZipCode = user.ZipCode;
+            zip1 = user.ZipCode;
+            var gamerProfile = profileSearchDAL.GetProfile(profile.ProfileId);
+            zip2 = gamerProfile.ZipCode;
 
             WebClient webClient = new WebClient();
             string host = "https://www.zipcodeapi.com/rest/4Gfn1Q4ds8zgjzvAO9vCIk3R1ovzdHOZw3wOOazm04Tb21YjVK3tB1iVRcbrRCyK/distance.json/" + zip1 + "/" + zip2 + "/mile";
