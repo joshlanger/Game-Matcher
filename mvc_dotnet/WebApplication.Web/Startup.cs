@@ -45,7 +45,24 @@ namespace WebApplication.Web
 
             // Connection String
             string connectionString = Configuration.GetConnectionString("Database");
-           
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+
+            public static void Register(HttpConfiguration config)
+            {
+                config.EnableCors();
+
+                config.Routes.MapHttpRoute(
+                    name: "DefaultApi",
+                    routeTemplate: "api/{controller}/{id}",
+                    defaults: new { id = RouteParameter.Optional }
+                    );
+            }
+
             // Dependency Injection
             // For Authentication
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

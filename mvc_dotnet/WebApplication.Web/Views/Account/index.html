@@ -1,0 +1,49 @@
+
+
+
+AccountController
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using WebApplication.Web.DAL;
+using WebApplication.Web.Models;
+using WebApplication.Web.Models.Account;
+using WebApplication.Web.Models.Profile;
+using WebApplication.Web.Providers.Auth;
+using System.Web.Http.Cors;
+
+namespace WebApplication.Web.Controllers
+{
+    [EnableCors(origins: "localhost", headers: "*", methods: "*")]
+
+
+    ZipController
+    using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace WebApplication.Web.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ZipController : ControllerBase
+    {
+        [HttpGet("zipDistance")]
+        public string GetZipDistance(double zip1, double zip2)
+        {
+            double result = 0.0;
+            WebClient webClient = new WebClient();
+            string host = "https://www.zipcodeapi.com/rest/4Gfn1Q4ds8zgjzvAO9vCIk3R1ovzdHOZw3wOOazm04Tb21YjVK3tB1iVRcbrRCyK/distance.json/" + zip1 + "/" + zip2 + "/mile";
+            var webResult = webClient.DownloadString(host);
+            int index = webResult.IndexOf(":") + 1;
+            return webResult.Substring(index,webResult.Length-1-index);
+;        }
+    }
+}
