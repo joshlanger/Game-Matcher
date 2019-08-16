@@ -9,9 +9,13 @@ using WebApplication.Web.Models;
 using WebApplication.Web.Models.Account;
 using WebApplication.Web.Models.Profile;
 using WebApplication.Web.Providers.Auth;
+using System.Web.Http.Cors;
 
 namespace WebApplication.Web.Controllers
 {
+    [EnableCors(origins: "localhost", headers: "*", methods: "*")]
+
+
     public class AccountController : Controller
     {
         private IUserDAL userDAO;

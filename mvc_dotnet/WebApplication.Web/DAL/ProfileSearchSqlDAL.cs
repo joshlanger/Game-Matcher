@@ -55,7 +55,7 @@ namespace WebApplication.Web.DAL
 
         public ProfileViewModel GetProfile(int profileId)
         {
-            ProfileViewModel Profile = new ProfileViewModel();
+            ProfileViewModel profile = new ProfileViewModel();
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -69,10 +69,15 @@ namespace WebApplication.Web.DAL
 
                     if (reader.Read())
                     {
-                        Profile = MapRowToProfile(reader);
+                        profile = MapRowToProfile(reader);
                     }
 
-                    return Profile;
+                    if (profile.Games == null && profile.Genres == null)
+                    {
+                        return profile;
+                    }
+
+                    return profile;
                 }
             }
             catch (SqlException ex)
