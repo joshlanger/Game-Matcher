@@ -35,7 +35,7 @@ namespace WebApplication.Web.Controllers
         {
 
             var profile = profileSearchDAL.GetProfile(id);
-            container = profileDAL.GetProfile(profile.Username);
+            profile = profileDAL.GetProfile(profile.Username);
             AllInformationModel AllInfo = new AllInformationModel();
             var user = authProvider.GetCurrentUser();
             var currentUser = profileDAL.GetProfile(user.Username);
