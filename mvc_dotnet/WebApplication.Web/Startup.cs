@@ -9,8 +9,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebApplication.Web.Controllers;
 using WebApplication.Web.DAL;
 using WebApplication.Web.Providers.Auth;
+using System.Web.Http;
 
 namespace WebApplication.Web
 {
@@ -63,16 +65,16 @@ namespace WebApplication.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
-        //public static void Register(HttpConfiguration config)
-        //{
-        //    config.EnableCors();
+        public static void Register(HttpConfiguration config)
+        {
+            config.EnableCors();
 
-        //    config.Routes.MapHttpRoute(
-        //        name: "DefaultApi",
-        //        routeTemplate: "api/{controller}/{id}",
-        //        defaults: new { id = RouteParameter.Optional }
-        //        );
-        //}
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+                );
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

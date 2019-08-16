@@ -19,15 +19,6 @@
     <script src="https://kit.fontawesome.com/93cdb99303.js"></script>
 </head>
 <body>
-
-
-    <div>
-        <a asp-area="" asp-controller="Account" asp-action="ProfileCreate"><i class="far fa-edit pull-left img-rounded"></i> Create New Profile</a>
-    </div>
-    <div>
-        <a asp-area="" asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit Existing Profile</a>
-    </div>
-
     <!-- First Container -->
     <div class="container-fluid bg-1 text-center">
         <h3 class="margin">@Model.Username</h3>
@@ -43,7 +34,6 @@
            % Match
         </h3>
         <img src="~/images/@(Model.UserId % 10).jpg" class="img-responsive img-circle margin" style="display:inline" alt="Avatar" width="250" height="250">
-        <!-- merge conflict -->
     </div>
 
     <!-- Second Container -->
