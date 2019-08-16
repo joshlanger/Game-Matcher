@@ -71,18 +71,15 @@
             <div class="row">
                 @if (Model.GameTitles.Count != 0)
                 {
-                    <div class="col-md-4">
-                        <p>@Model.GameTitles[0].title</p>
-                        <img src="~/images/@Model.GameTitles[0].image" class="img-responsive margin" style= width: 100%; height: auto;" alt="Image">
-                    </div>
-                    <div class="col-md-4">
-                        <p>@Model.GameTitles[1].title</p>
-                        <img src="~/images/@Model.GameTitles[1].image" class="img-responsive margin" style= width: 100%; height: auto;" alt="Image">
-                    </div>
-                    <div class="col-md-4">
-                        <p>@Model.GameTitles[2].title</p>
-                        <img src="~/images/@Model.GameTitles[2].image" class="img-responsive margin" style= width: 100%; height: auto;" alt="Image">
-                    </div>
+                    for (int i = 0; i < Model.GameTitles.Count; i++)
+                    {
+                        <div class="col-md-4">
+                            <p>@Model.GameTitles[i].title</p>
+                            <img src="~/images/@Model.GameTitles[i].image" class="img-responsive margin" style=width: 100%; height: auto;" alt="Image">
+                        </div>
+                    }
+
+
                 }
             </div>
         </div>

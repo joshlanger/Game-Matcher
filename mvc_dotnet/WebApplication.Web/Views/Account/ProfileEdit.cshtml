@@ -13,11 +13,6 @@
 }
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> bb3e4d156ccb5362725af2fcc75392a70f8167f3
 <div>
     <a asp-area="" class="font-color col-md-offset-2" asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit Existing Profile</a>
 </div>
@@ -25,11 +20,11 @@
             <input type="hidden" asp-for="UserId" />
             <input type="hidden" asp-for="Username" />
             <input type="hidden" asp-for="AvatarName" />
-       
+
         <div class="form-group">
                 <label class="margin font-color" asp-for="UserBio">Bio: </label>
                 <textarea type="text" class="form-control" rows="3" asp-for="UserBio"></textarea>
-                
+
         </div>
         <div class="form-group">
             <label class="margin font-color" asp-for="GamingExperience">Gaming Experience: </label>
@@ -39,9 +34,9 @@
             <label class="margin font-color" asp-for="GamesSelected">Games I Play: </label>
             <partial name="_GamesListView" class="col-md-1" model="Model" />
             <label class="margin font-color" asp-for="GenresSelected">Genres I Like: </label>
-            <partial name="_GenresListView" class="form-control" model="Model"/> 
+            <partial name="_GenresListView" class="form-control" model="Model"/>
         </div>
-      
+
         <div class="form-group">
             <label class="margin font-color"asp-for="ContactPreference">Contact Preference: </label>
             <input class="form-control" asp-for="ContactPreference"/>

@@ -91,7 +91,7 @@ namespace WebApplication.Web.DAL
                     cmd.Parameters.AddWithValue("@user_id", profile.UserId);
                     cmd.Parameters.AddWithValue("@profile_id", profile.ProfileId);
                     cmd.Parameters.AddWithValue("@user_name", profile.Username);
-                    cmd.Parameters.AddWithValue("@avatar_name", profile.AvatarName);
+                    //cmd.Parameters.AddWithValue("@avatar_name", profile.AvatarName);
                     cmd.Parameters.AddWithValue("@user_bio", profile.UserBio);
                     cmd.Parameters.AddWithValue("@gaming_experience", profile.GamingExperience);
                     cmd.Parameters.AddWithValue("@contact_preference", profile.ContactPreference);

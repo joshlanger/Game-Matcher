@@ -239,6 +239,7 @@ namespace WebApplication.Web.Controllers
             }
         }
 
+        //PROGRAM IS CRASHING AT LINE "USER.EMAIL..."
         [HttpGet]
         public IActionResult Confirmation(User user)
         {
