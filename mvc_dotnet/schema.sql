@@ -8,10 +8,6 @@ IF EXISTS(select * from sys.databases where name='GameMatcher')
 DROP DATABASE GameMatcher;
 GO
 
-CREATE DATABASE GameMatcher
-( EDITION = 'Standard', SERVICE_OBJECTIVE = 'S3' );
-GO
-
 -- Create a new DemoDB Database
 CREATE DATABASE GameMatcher;
 GO
@@ -83,7 +79,7 @@ image		varchar(50) null,
 
 foreign key (games_id)	references profile_game(games_id)
 );
-COMMIT TRANSACTION;
+--COMMIT TRANSACTION;
 
 CREATE TABLE game_library(
 games_id	int			not null,

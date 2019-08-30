@@ -61,7 +61,7 @@ namespace WebApplication.Web.DAL
                     conn.Open();
                     string query = @"delete from profile_genre where profile_id= @profile_id;
                                     delete from profile_game where profile_id = @profile_id;
-                                    delete from friend_list where profile_id = @profile_id;
+                                    delete from friends_list where profile_id = @profile_id;
                                     delete from profile where profile_id = @profile_id;
                                     delete from users where user_id = @user_id;";
 
