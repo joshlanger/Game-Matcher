@@ -26,8 +26,7 @@ namespace WebApplication.Web.DAL
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    //changed emailaddress to email in sql statement and param
+                {                   
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("INSERT INTO users VALUES (@username, @email, @password, @salt, @role, @zipcode); INSERT INTO profile VALUES ((SELECT scope_identity()), @username, '0', '', '', '', '', 0);", conn);
                     cmd.Parameters.AddWithValue("@username", user.Username);
@@ -61,7 +60,6 @@ namespace WebApplication.Web.DAL
                     conn.Open();
                     string query = @"delete from profile_genre where profile_id= @profile_id;
                                     delete from profile_game where profile_id = @profile_id;
-                                    delete from friends_list where profile_id = @profile_id;
                                     delete from profile where profile_id = @profile_id;
                                     delete from users where user_id = @user_id;";
 
