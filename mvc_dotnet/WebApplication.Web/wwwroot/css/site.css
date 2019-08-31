@@ -62,6 +62,12 @@ body {
     background-color: dodgerblue;
     color: white;
 }
+
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 /*Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {...}
 

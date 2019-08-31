@@ -33,6 +33,7 @@ namespace WebApplication.Web.Models.Account
         public string Role { get; set; }
 
         [Required]
+        //[Range(5, 6, ErrorMessage = "Zipcode must be 5 digits")]
         [DataType(DataType.PostalCode)]
         [Display(Name = "Zipcode")]
         public int Zipcode { get; set; }
