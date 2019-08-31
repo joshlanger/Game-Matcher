@@ -28,7 +28,7 @@
 
     <body>
         <div class="container-fluid bg-2 text-center">
-            <a class="pull-left" asp-area="" asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit Existing Profile</a>
+            <a class="pull-left" asp-area="" asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit Profile</a>
             <h3>@Model.Username's Infomania</h3>
             <br /><br />
             <div class="container-fluid center-block col-sm-12">
@@ -71,10 +71,10 @@
             <div class="row">
                 @if (Model.GameTitles.Count != 0)
                 {
-                    for (int i = 0; i < Model.GameTitles.Count; i++)
+                    for (int i = 0; i < Model.GameTitles.Count && i < 3; i++)
                     {
                         <div class="col-md-4">
-                            <p>@Model.GameTitles[i].title</p>
+                            
                             <img src="~/images/@Model.GameTitles[i].image" class="img-responsive margin" style=width: 100%; height: auto;" alt="Image">
                         </div>
                     }
