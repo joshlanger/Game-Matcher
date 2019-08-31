@@ -9,15 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication.Tests", "Web
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{3D57A6DD-443D-472D-A2C0-01CF9A678AE3}"
 	ProjectSection(SolutionItems) = preProject
-		data.sql = data.sql
-		README.md = README.md
-		schema.sql = schema.sql
+		EmptyDatabase.sql = EmptyDatabase.sql
+		PopulatedDatabase.sql = PopulatedDatabase.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6A3DDD10-EBA8-4126-B2C3-D5A3F3CBAD20}"
-	ProjectSection(SolutionItems) = preProject
-		IgnoreMe.txt = IgnoreMe.txt
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

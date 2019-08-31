@@ -9,9 +9,9 @@ namespace WebApplication.Web.Models.Account
 {
     public class RegisterViewModel
     {
-        //[Required(ErrorMessage ="*")]
+        [Required]
         [DataType(DataType.Text)]
-        [StringLength(50, MinimumLength = 7)]
+        [StringLength(25, MinimumLength = 7)]
         public string Username { get; set; }
 
         [Required]
@@ -20,11 +20,11 @@ namespace WebApplication.Web.Models.Account
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, MinimumLength = 6)]
+        [StringLength(30, MinimumLength = 6)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        //[Required(ErrorMessage ="*")]
+        [Required]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 

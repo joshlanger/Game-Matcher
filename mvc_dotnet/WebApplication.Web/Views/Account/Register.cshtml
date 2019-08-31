@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = "Register";
 }
+<form id="getHelp" asp-controller="home" asp-action="help" method="get"></form>
 <div class="col-md-12" >
     <form id="container" class="col-md-pull-1 container border-color" asp-controller="account" asp-action="register" method="post">
         <div class="row">
@@ -12,28 +13,28 @@
         <div class="row">
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Username">Username:</label>*@
             <div class="col-md-4">
-                <input id="fields" asp-for="Username" required placeholder=" Username required" />
+                <input id="fields" asp-for="Username" pattern=".{7,25}" required title="7 to 25 characters" placeholder=" Username" />
                 <span asp-validation-for="Username" style="color: deepskyblue"></span>
             </div>
         </div>
         <div class="row">
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Email">Email:</label>*@
             <div class="col-md-4">
-                <input id="fields" type="email" asp-for="Email" required placeholder=" Email required" />
+                <input id="fields" type="email" asp-for="Email" required placeholder=" Email" />
                 <span asp-validation-for="Email" style="color: deepskyblue"></span>
             </div>
         </div>
         <div class="row">
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Password">Password:</label>*@
             <div class="col-md-4">
-                <input id="fields" type="password" asp-for="Password" required placeholder=" Password required" />
+                <input id="fields" type="password" asp-for="Password" required title="6 to 30 characters" pattern=".{6,30}" placeholder=" Password" />
                 <span asp-validation-for="Password" style="color: deepskyblue"></span>
             </div>
         </div>
         <div class="row">
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="ConfirmPassword">Confirm Password:</label>*@
             <div class="col-md-4">
-                <input id="fields" type="password" asp-for="ConfirmPassword" required placeholder=" Confirm password required" />
+                <input id="fields" type="password" asp-for="ConfirmPassword" required placeholder=" Confirm password" />
                 <span hidden asp-validation-for="ConfirmPassword" style="color: deepskyblue"></span>
             </div>
         </div>
@@ -47,7 +48,7 @@
 
             @*<label id="labels" class="col-sm-3 col-md-3 col-lg-3 control-label font-color" asp-for="Zipcode">Zip Code:</label>*@
             <div class="col-md-4">
-                <input id="fields" asp-for="Zipcode" placeholder=" Zip code" />
+                <input id="fields" asp-for="Zipcode"  pattern="[0-9]{5}" required title="5 digits" placeholder=" Zip code" />
                 <span asp-validation-for="Zipcode" style="color: deepskyblue"></span>
             </div>
         </div>
@@ -58,7 +59,8 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <button asp-area="" id="fields" class="btn btn-default, button" asp-controller="Home" asp-action="Help">Help!</button>
+                <input id="fields" type="submit" form="getHelp" class="btn btn-default, button" value="Help" />
+                @*<button asp-area="" id="fields" class="btn btn-default, button" asp-controller="Home" asp-action="Help">Help!</button>*@
             </div>
         </div>
     </form>
