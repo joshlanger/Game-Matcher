@@ -148,6 +148,7 @@ namespace WebApplication.Web.DAL
                 {
 
                     conn.Open();
+
                     SqlCommand cmd = new SqlCommand(@"select profile.profile_id, profile.user_name, genre_library.genre, game_library.title, profile.gaming_experience from board_game  
                         full join profile_game on profile_game.games_id = board_game.games_id
                         full join game_library on game_library.games_id = profile_game.games_id
@@ -155,8 +156,17 @@ namespace WebApplication.Web.DAL
                         full join profile_genre on profile_genre.profile_id = profile.profile_id
                         full join genre_library on profile_genre.genre_id = genre_library.genre_id
                         full join users on profile.user_id = users.user_id
-                        where profile.is_Private = 'false' and game_library.title IS NOT NULL and profile.is_Private = 'false'
+                        where profile.is_Private = 'false' and game_library.title IS NOT NULL
                         ORDER BY profile.user_name", conn);
+
+                    //SqlCommand cmd = new SqlCommand(@"select profile.profile_id, profile.user_name, genre_library.genre, game_library.title, profile.gaming_experience from board_game  
+                    //    full join profile_game on profile_game.games_id = board_game.games_id
+                    //    full join game_library on game_library.games_id = profile_game.games_id
+                    //    full join profile on profile.profile_id = profile_game.profile_id
+                    //    full join profile_genre on profile_genre.profile_id = profile.profile_id
+                    //    full join genre_library on profile_genre.genre_id = genre_library.genre_id
+                    //    full join users on profile.user_id = users.user_id
+                    //    where profile.profile_id = 46 or profile.profile_id=58 and game_library.title IS NOT NULL", conn);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 

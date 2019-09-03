@@ -98,7 +98,8 @@ namespace WebApplication.Web.Models.Profile
                     }
                     if(name != allUsers[j].Username)
                     {
-
+                        //there is an error with this logic statement.  you shouldn't be using total titles/genres in the divisor
+                        //this is giving the match strength of the compared gamer to the current user rather than the user to the gamer
                         double matchStrength = ((titleCount + experience + genreCount) / (totalTitles + totalGenres + 1.00)) * 100.00;
                         //if (j == 0)
                         //{

@@ -12,9 +12,7 @@
     };
 }
 
-<div>
-    <a asp-area="" class="font-color col-md-offset-2" asp-controller="Account" asp-action="ProfileEdit"><i class="far fa-edit pull-left img-rounded"></i> Edit Existing Profile</a>
-</div>
+
 <form id="container" class="col-md-offset-2 border-color" asp-controller="Account" asp-action="ProfileEdit" method="post">
             <input type="hidden" asp-for="UserId" />
             <input type="hidden" asp-for="Username" />
@@ -49,7 +47,7 @@
             <input asp-for="IsPrivate"/>
         </div>
         <div>
-            <div>
+            <div class="h2">
                 <input type="submit" value="Publish Profile" class="btn btn-default, button" />
             </div>
         </div>
@@ -79,6 +77,8 @@
     #container{
         padding-top: 5%;
         padding-bottom: 5%;
+        padding-left: 5%;
+        padding-right: 5%;
         margin-top: 35px;
         background-color: purple;
         width: 68%;
