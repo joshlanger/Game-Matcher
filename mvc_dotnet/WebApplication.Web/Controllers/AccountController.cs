@@ -31,23 +31,16 @@ namespace WebApplication.Web.Controllers
             this.profileSearchDAL = profileSearchDAL;
         }
 
-
         //[AuthorizationFilter] // actions can be filtered to only those that are logged in
         [AuthorizationFilter("Admin", "Author", "Manager", "User")]  //<-- or filtered to only those that have a certain role
         [HttpGet]
         public IActionResult Index(User userProfile)
         {
-            //ProfileViewModel profile = new ProfileViewModel();
+            
             var user = authProvider.GetCurrentUser();
-            //userProfile.Email = user.Email;
-            //userProfile.Username = user.Username;
-            //profile.UserId = user.Id;
-            //profile.Username = user.Username;
-            //profile.ZipCode = user.ZipCode;
-
             var container = profileDAO.GetProfile(user.Username);
-
             AllInformationModel AllInfo = new AllInformationModel();
+
             if (container.GameTitles.Count != 0 && container.GenreNames.Count != 0)
             {
                 if (container.GameTitles.Count != 0 && container.GenreNames.Count != 0)
@@ -61,8 +54,7 @@ namespace WebApplication.Web.Controllers
             }
             return View(container);
         }
-
-       
+      
         [HttpGet]
         public IActionResult Login()
         {
@@ -108,22 +100,21 @@ namespace WebApplication.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Register(RegisterViewModel registerViewModel)
         {
-            //var userCheck = userDAO.GetUser(registerViewModel.Email);
-            //bool isTaken = false;
-            //if(userCheck.Email != null)
-            //{
-            //    isTaken = true;
-            //}
+            //prevents duplicate registrations with the same email
+            var userCheck = userDAO.GetUser(registerViewModel.Email);
+            bool isTaken = false;
+            if (userCheck.Email != null)
+            {
+                isTaken = true;
+            }
 
-            if (ModelState.IsValid /*&& !isTaken*/)
+            if (ModelState.IsValid && !isTaken)
             {
                 // Register them as a new user (and set default role)
                 // When a user registers they need to be given a role. If you don't need anything special
                 // just give them "User".
                 authProvider.Register(registerViewModel.Username, registerViewModel.Email, registerViewModel.Password, registerViewModel.Salt, registerViewModel.Zipcode, role: "User");
 
-                // Redirect the user where you want them to go after registering
-                //this should be good. merge conflicts suck.
                 TempData["Status"] = "Congratulations, you have successfully registered for a new account!";
                 return RedirectToAction("Login", "Account");
             }
@@ -201,11 +192,8 @@ namespace WebApplication.Web.Controllers
         public IActionResult UpdateInfo()
         {
             User updateinfo = new User();
-
-            //get the current user info
             var user = authProvider.GetCurrentUser();
 
-            //pass info to view.  existing info will be form field defaults
             return View(user);
         }
 

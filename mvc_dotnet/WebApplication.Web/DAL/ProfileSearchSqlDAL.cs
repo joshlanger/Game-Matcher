@@ -134,11 +134,9 @@ namespace WebApplication.Web.DAL
             catch (SqlException ex)
             {
                 throw ex;
-            }
-           
+            }        
         }
 
-        //TODO Check this, please Josh
         public List<MatchStrengthModel> GetMatches()
         {
             List<MatchStrengthModel> Matches = new List<MatchStrengthModel>();
@@ -158,6 +156,8 @@ namespace WebApplication.Web.DAL
                         full join users on profile.user_id = users.user_id
                         where profile.is_Private = 'false' and game_library.title IS NOT NULL
                         ORDER BY profile.user_name", conn);
+
+                    //sql statement for testing:
 
                     //SqlCommand cmd = new SqlCommand(@"select profile.profile_id, profile.user_name, genre_library.genre, game_library.title, profile.gaming_experience from board_game  
                     //    full join profile_game on profile_game.games_id = board_game.games_id
@@ -191,10 +191,7 @@ namespace WebApplication.Web.DAL
             {
                 throw ex;
             }
-
         }
-
-
 
         private ProfileViewModel MapRowToProfile(SqlDataReader reader)
         {
@@ -224,51 +221,5 @@ namespace WebApplication.Web.DAL
             }
             return Container;
         }
-
-        //int i = 0;
-        //int j = 0;
-        //string thisUser = "";
-        //string title = "";
-        //string style = "";
-        //            while (reader.Read())
-        //            {
-        //                MatchStrengthModel Container = new MatchStrengthModel();
-
-        //                if (thisUser == Container.Username)
-        //                {
-        //                    Matches[j].Title.Add(Convert.ToString(reader["title"]));
-        //                    Matches[j].Style.Add(Convert.ToString(reader["style"]));
-        //                    i++;
-        //                }
-        //                if (thisUser == "")
-        //                {
-        //                    Container.ProfileId = Convert.ToInt32(reader["profile_id"]);
-        //                    Container.Username = Convert.ToString(reader["user_name"]);
-        //                    title = Convert.ToString(reader["title"]);
-        //                    Container.Title.Add(title);
-        //                    Container.Experience = Convert.ToString(reader["profile.gaming_experience"]);
-        //                    style = Convert.ToString(reader["style"]);
-        //                    Container.Style.Add(style);
-        //                    thisUser = Container.Username;
-        //                    Matches.Add(Container);
-        //                    i++;
-        //                    j++;
-        //                }
-        //                if (thisUser != Container.Username)
-        //                {
-        //                    i = 0;
-        //                    Container.ProfileId = Convert.ToInt32(reader["profile_id"]);
-        //                    Container.Username = Convert.ToString(reader["user_name"]);
-        //                    Container.Title[i] = Convert.ToString(reader["title"]);
-        //                    Container.Experience = Convert.ToString(reader["profile.gaming_experience"]);
-        //                    Container.Style[i] = Convert.ToString(reader["style"]);
-        //                    thisUser = Container.Username;
-        //                    Matches.Add(Container);
-        //                    j++;
-        //                }
-
-        //            }
-        //            return Matches;
-        //        }
     }
 }

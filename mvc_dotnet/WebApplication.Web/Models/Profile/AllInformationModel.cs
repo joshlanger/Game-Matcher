@@ -28,6 +28,7 @@ namespace WebApplication.Web.Models.Profile
             string genreCountFinder = currentUser[0].Title;
             string titleCountFinder = "";
 
+            
             for (int k = 0; k < currentUser.Count; k++)
             {
                 
@@ -75,9 +76,7 @@ namespace WebApplication.Web.Models.Profile
 
                     if (name == "")
                     {
-                       
-
-                        
+                                             
                         for(int i = 0; i < currentUser.Count; i++)
                         {
                             if(currentUser[0].Experience == allUsers[j].Experience && i == 0)
@@ -98,26 +97,9 @@ namespace WebApplication.Web.Models.Profile
                     }
                     if(name != allUsers[j].Username)
                     {
-                        //there is an error with this logic statement.  you shouldn't be using total titles/genres in the divisor
-                        //this is giving the match strength of the compared gamer to the current user rather than the user to the gamer
+                        //calculates match strength with the current gamer
                         double matchStrength = ((titleCount + experience + genreCount) / (totalTitles + totalGenres + 1.00)) * 100.00;
-                        //if (j == 0)
-                        //{
-                        //    //allUsers[j].MatchStrength = Math.Round(matchStrength, 2);
-                        //    //Matches.Add(allUsers[j]);
-                        //}
-                        //else
-                        //{
-                        //    titleCount = 0;
-                        //    experience = 0;
-                        //    genreCount = 0;
-
-                        //    allUsers[j - 1].MatchStrength = Math.Round(matchStrength, 2);
-                        //    Matches.Add(allUsers[j - 1]);
-
-                        //}
                         
-
                         //adds the gamer from the previous stack of data rows to the matches list.  the change of the username is the
                         //indication that there is no more info about the gamer to evaluate.
                         allUsers[j - 1].MatchStrength = Math.Round(matchStrength, 2);
@@ -150,7 +132,7 @@ namespace WebApplication.Web.Models.Profile
                         }
 
                     }
-                    //this is to deal with the last item in the list, since objects are added to the matches list only after username changes.
+                    //this deals with the last item in the allUsers list, since objects are added to the matches list only after username changes.
                     if(j == allUsers.Count-1)
                     {
                         double matchStrength = ((titleCount + experience + genreCount) / (totalTitles + totalGenres + 1.00)) *100.00;
@@ -159,7 +141,22 @@ namespace WebApplication.Web.Models.Profile
                     }
                     
                 }
-                
+                //this block addresses cases where the current user is last in the allUsers list.
+                if(allUsers[j].Username == currentUser[0].Username && j == allUsers.Count-1)
+                {
+                    double matchStrength = ((titleCount + experience + genreCount) / (totalTitles + totalGenres + 1.00)) * 100.00;
+                    foreach(var user in allUsers)
+                    {
+                        if(user.Username == name)
+                        {
+                            user.MatchStrength = Math.Round(matchStrength, 2);
+                            Matches.Add(user);
+                            break;
+                        }
+                    }
+                    
+                }
+
             }
 
             return Matches;
@@ -179,7 +176,7 @@ namespace WebApplication.Web.Models.Profile
             return CurrentGamer;
         }
 
-        //remove the current user from the list
+        //remove the current user from the matches list
         public List<MatchStrengthModel> RemoveCurrentGamer(List<MatchStrengthModel> matches, string username)
         {
             int userIndex = 0;

@@ -52,19 +52,8 @@
             {
                 @genre.genre<br />
             }
-            @*<div id="container" class="container-fluid border-color">
-                <h2 class="h2 font-color">GamerProfile</h2>
-                <div style="color:white">
-                    @*<p>
-                        @Model.Username
-                    </p>
-                    <img src="~/images/@(Model.UserId % 10).jpg" class="img-responsive img-circle margin" style="display:inline" alt="Avatar" width="100" height="100">
-                    <p>
-                        @Model.UserBio
-                    </p>
-        <p>
-            @Model.GamingExperience
-        </p>*@
+           
+        </p>
         <p class="col-sm-4">
             Games I Play: <br />
             @foreach (Game game in Model.GameTitles)
@@ -104,12 +93,6 @@
 </html>
 
 <script src="~/js/site.js"></script>
-
-@*<style>
-        .visibility {
-            color:deeppink
-        }
-    </style>*@
 
 <style>
     body {

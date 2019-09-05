@@ -43,7 +43,7 @@ namespace WebApplication.Web.Controllers
             if (currentUser.GameTitles.Count != 0 && currentUser.GenreNames.Count != 0)
             {
                 AllInfo.AllUsers = profileSearchDAL.GetMatches();
-                AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, profile.Username);
+                AllInfo.CurrentUser = AllInfo.GetCurrentGamer(AllInfo.AllUsers, user.Username);
                 profile.MatchStrength = AllInfo.Matches(AllInfo.AllUsers, AllInfo.CurrentUser);
                 profile.IsPopulated = true;
             }

@@ -52,14 +52,12 @@ namespace WebApplication.Web.Models.Account
 
         public int GamesId { get; set; }
 
-        //GameTitles is for the user's selected games
         public List<Game> GameTitles { get; set; }
 
         public IList<SelectListItem> Genres { get; set; }
 
         public int[] GenresSelected { get; set; }
-        
-        //Genre names is where the user's selected genres are stored
+       
         public List<Genre> GenreNames { get; set; }
 
         public List<MatchStrengthModel> MatchStrength { get; set; }
